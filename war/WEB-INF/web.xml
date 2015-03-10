@@ -4,16 +4,9 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	<servlet>
-		<servlet-name>Es_upm_dit_isst_labreserve</servlet-name>
-		<servlet-class>es.upm.dit.isst.labreserve.Es_upm_dit_isst_labreserveServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Es_upm_dit_isst_labreserve</servlet-name>
-		<url-pattern>/es_upm_dit_isst_labreserve</url-pattern>
-	</servlet-mapping>
+
 	<welcome-file-list>
-		<welcome-file>ResourceApplication.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
@@ -24,20 +17,57 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Main</servlet-name>
 		<url-pattern>/main</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>CreateResource</servlet-name>
 		<servlet-class>es.upm.dit.isst.labreserve.CreateResourceServlet</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateResource</servlet-name>
+		<url-pattern>/new</url-pattern>
+	</servlet-mapping>
+	
+	
 	<servlet>
 		<servlet-name>RemoveResource</servlet-name>
 		<servlet-class>es.upm.dit.isst.labreserve.RemoveResourceServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RemoveResource</servlet-name>
-		<url-pattern>/done</url-pattern>
+		<url-pattern>/remove</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ModifyResource</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.ModifyResourceServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>CreateResource</servlet-name>
-		<url-pattern>/new</url-pattern>
+		<servlet-name>ModifyResource</servlet-name>
+		<url-pattern>/modify</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>ReserveResource</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.ReserveResourceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReserveResource</servlet-name>
+		<url-pattern>/reserve</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+<!--	<security-constraint>
+<web-resource-collection>
+<web-resource-name>CreateResource</web-resource-name>
+<url-pattern>/new</url-pattern>
+</web-resource-collection>
+
+ <auth-constraint>
+<role-name>admin</role-name>
+</auth-constraint> 
+
+</security-constraint> -->
 </web-app>

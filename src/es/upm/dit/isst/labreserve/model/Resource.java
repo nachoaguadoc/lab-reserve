@@ -16,18 +16,15 @@ public class Resource implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String finalDate;
+	private String description; 
 	private String state;
-	boolean reserved;
-	String reservedBy;
 
 
-	public Resource(String name, String state) {
+	public Resource(String name, String state, String description) {
 		this.name = name;
 		this.state = state;
-//		finalDate = null;
-		reserved = false;
-		reservedBy = null;
+		this.description = description;
+
 	}
 
 	public Long getId() {
@@ -42,12 +39,12 @@ public class Resource implements Serializable {
 		this.name = name;
 	}
 
-	public String getFinalDate() {
-		return finalDate;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setFinalDate(String finalDate) {
-		this.finalDate = finalDate;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getState() {
@@ -56,16 +53,6 @@ public class Resource implements Serializable {
 
 	public void  setState (String state) {
 		this.state = state;
-	}
-
-
-
-	public boolean isReserved() {
-		return reserved;
-	}
-
-	public void setReserved(boolean reserved) {
-		this.reserved = reserved;
 	}
 
 } 

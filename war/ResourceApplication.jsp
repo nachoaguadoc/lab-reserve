@@ -36,7 +36,7 @@
 			<tr>
 				<th>Name</th>
 				<th>State</th>
-				<th>Reserved</th>
+				<th>Description</th>
 				
 			</tr>
 	
@@ -44,10 +44,20 @@
 				<tr>
 					<td><c:out value="${resource.name}" /></td>
 					<td><c:out value="${resource.state}" /></td>
-					<td><c:out value="${resource.reserved}" /></td>
+					<td><c:out value="${resource.description}" /></td>
 					
-			<%--		<td><a class="reserved"
-						href="<c:url value="/done?id=${todo.id}" />">Done</a></td> --%>
+					<td>
+						<a class="remove" href="<c:url value="/remove?id=${resource.id}" />">Borrar</a>
+					</td>
+					
+					<a href="new"> New resource </a>
+					
+<!--					<td>
+						<a class="remove" href="<c:url value="/modify?id=${resource.id}" />">Modificar</a>
+					</td> -->
+					
+					<!--	<td><a class="remove"
+						href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a></td> -->
 				</tr>
 			</c:forEach>
 		</table>
@@ -55,36 +65,5 @@
 	
 		<hr />
 	
-		<div class="main">
-	
-			<div class="headline">New resource</div>
-	
-			<c:choose>
-				<c:when test="${user != null}">
-					<form action="/new" method="post" accept-charset="utf-8">
-						<table>
-							<tr>
-								<td><label for="name">Name</label></td>
-								<td><input type="text" name="name" id="name" size="65" /></td>
-							</tr>
-							<tr>
-								<td valign="state"><label for="state">State</label></td>
-								<td><textarea rows="4" cols="50" name="state"
-										id="state"></textarea></td>
-							</tr>
-						
-							<tr>
-								<td colspan="2" align="right"><input type="submit"
-									value="Create" /></td>
-							</tr>
-						</table>
-					</form>
-				</c:when>
-				<c:otherwise>
-	
-	Please login with your Google account
-				</c:otherwise>
-			</c:choose>
-		</div>
 	</body>
 </html>

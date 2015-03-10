@@ -30,24 +30,34 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public void add(String name, String state) {
+	public void add(String name, String state, String description) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Resource resource = new Resource(name, state);
+			Resource resource = new Resource(name, state, description);
 			em.persist(resource);
 			em.close();
 		}
 	}
+	
+	@Override
+	public void update(long id, String name, String state, String description) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Resource resource = em.find(Resource.class, id);
+		resource.setName(name);
+		resource.setState(state);
+		resource.setDescription(description);
+		em.merge(resource);
+		em.close();
+	}
 
 	@Override
-	public List<Resource> getResources(String userId) {
+	public Resource getResource(long id) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Query q = em
-				.createQuery("select r from Resource r where r.reservedBy = :userId");
-		q.setParameter("userId", userId);
-		List<Resource> resources = q.getResultList();
-		return resources;
+		Resource resource = em.find(Resource.class, id);
+		System.out.println("****" + resource);
+		return resource;
 	}
+	
 
 	@Override
 	public void remove(long id) {
@@ -68,6 +78,15 @@ public class ResourceDAOImpl implements ResourceDAO {
 		List<String> users = q.getResultList();
 		return users;
 	}
+	
+//	@Override
+//	public void reserve(long id) {
+//		EntityManager em = EMFService.get().createEntityManager();
+//			Resource resource = em.find(Resource.class, id);
+//			resource.setReserved(true);
+//			em.merge(resource);
+//			em.close();
+//	}
 	
 }
 
