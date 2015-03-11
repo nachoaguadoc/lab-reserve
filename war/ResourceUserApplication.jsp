@@ -31,7 +31,7 @@
 		<div style="clear: both;" />
 		You have a total number of <c:out value="${fn:length(resources)}" />
 		Resources.
-	
+		<a href="new"> New resource </a>
 		<table>
 			<tr>
 				<th>Name</th>
@@ -45,16 +45,7 @@
 					<td><c:out value="${resource.name}" /></td>
 					<td><c:out value="${resource.state}" /></td>
 					<td><c:out value="${resource.description}" /></td>
-					
-					<td>
-						<a class="remove" href="<c:url value="/remove?id=${resource.id}" />">Borrar</a>
-					</td>
-					
-					<a href="new"> New resource </a>
-					
-<!--					<td>
-						<a class="remove" href="<c:url value="/modify?id=${resource.id}" />">Modificar</a>
-					</td> -->
+				
 					
 					<!--	<td><a class="remove"
 						href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a></td> -->
