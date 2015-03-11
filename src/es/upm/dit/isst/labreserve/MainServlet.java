@@ -38,14 +38,29 @@ public class MainServlet extends HttpServlet {
 		    urlLinktext = "Logout";
 		    resources = dao.listResources();
 		}
-		
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		
-		RequestDispatcher view = req.getRequestDispatcher("ResourceApplication.jsp");
-        view.forward(req, resp);
+		
+		try {
+			boolean admin = userService.isUserAdmin();
+			if (admin) {
+				RequestDispatcher view = req.getRequestDispatcher("ResourceAdminApplication.jsp");
+		        view.forward(req, resp);
+			}
+			else {
+				RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
+		        view.forward(req, resp);
+			}
+		} catch (IllegalStateException e){
+			System.out.println("User is not logged in");
+			RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
+	        view.forward(req, resp);
+		}
+		
+
 		
 	}
 
