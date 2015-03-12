@@ -25,7 +25,7 @@
 		<div style="width: 100%;">
 			<div class="line"></div>
 			<div class="topLine">
-				<div style="float: left;" class="headline">Reserve Resource</div>
+				<div style="float: left;" class="headline">Modify Reserve</div>
 				<div style="float: right;">
 					<a
 						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
@@ -38,9 +38,10 @@
 	
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8">
+					<form action="/update?id=${reserve.id}" method="post" accept-charset="utf-8">
 						<table>
-							<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" /></td>
+							<input type="hidden" name="resourceID" id="resourceID" value="${reserve.resourceID}" /></td>	
+                			<input type="hidden" name="resourceName" id="resourceName" value="${reserve.resourceName}" /></td>
                 			<input id="initDate" type="text" name="initDate">
 
 
@@ -103,7 +104,7 @@
                 			
 	                		<tr>
 								<td colspan="2" align="right"><input type="submit"
-									value="Reserve" /></td>
+									value="Modify" /></td>
 							</tr>
 						</table>
 					</form>
@@ -116,6 +117,7 @@
 			</c:choose>
 			<div>						${message}
 			</div>
+
 		</div>
 	</body>
 </html>

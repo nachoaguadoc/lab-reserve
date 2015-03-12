@@ -45,6 +45,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>CancelReserve</servlet-name>
 		<url-pattern>/cancel</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ModifyReserve</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.ModifyReserveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModifyReserve</servlet-name>
+		<url-pattern>/update</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>ModifyResource</servlet-name>
