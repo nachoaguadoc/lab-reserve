@@ -54,6 +54,10 @@
 						<a class="remove" href="<c:url value="/modify?id=${resource.id}" />">Modificar</a>
 					</td>
 					
+					<td>
+						<a class="remove" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
+					</td>
+					
 					<!--	<td><a class="remove"
 						href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a></td> -->
 				</tr>

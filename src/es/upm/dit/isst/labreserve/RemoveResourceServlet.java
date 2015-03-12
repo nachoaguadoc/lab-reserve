@@ -10,7 +10,7 @@ import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 
 public class RemoveResourceServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+  private static final Long serialVersionUID = 1L;
 
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
   throws IOException {

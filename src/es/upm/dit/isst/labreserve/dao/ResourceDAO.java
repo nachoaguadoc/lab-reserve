@@ -10,14 +10,12 @@ public interface ResourceDAO {
 	
 	public void add (String name, String state, String description);
 	
-	public void update (long id, String name, String state, String description);
+	public void update (Long id, String name, String state, String description);
 	
-	public Resource getResource(long userId);
+	public Resource getResource(Long userId);
 
-	public void remove (long id);
-	
-	public List<String> getUsers();
-	
-//	public void reserve (long id);
+	public void remove (Long id);
+		
+//	public void reserve (Long id);
 	
 }

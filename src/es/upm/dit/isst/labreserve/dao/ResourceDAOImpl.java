@@ -40,7 +40,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 	
 	@Override
-	public void update(long id, String name, String state, String description) {
+	public void update(Long id, String name, String state, String description) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Resource resource = em.find(Resource.class, id);
 		resource.setName(name);
@@ -51,16 +51,15 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	@Override
-	public Resource getResource(long id) {
+	public Resource getResource(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Resource resource = em.find(Resource.class, id);
-		System.out.println("****" + resource);
 		return resource;
 	}
 	
 
 	@Override
-	public void remove(long id) {
+	public void remove(Long id) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
 			Resource resource = em.find(Resource.class, id);
@@ -70,23 +69,6 @@ public class ResourceDAOImpl implements ResourceDAO {
 		}
 	}
 
-	@Override
-	public List<String> getUsers() {
-		EntityManager em = EMFService.get().createEntityManager();
-		Query q = em
-				.createQuery("select distinct t.reservedBy from Resource r");
-		List<String> users = q.getResultList();
-		return users;
-	}
-	
-//	@Override
-//	public void reserve(long id) {
-//		EntityManager em = EMFService.get().createEntityManager();
-//			Resource resource = em.find(Resource.class, id);
-//			resource.setReserved(true);
-//			em.merge(resource);
-//			em.close();
-//	}
 	
 }
 
