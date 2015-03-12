@@ -12,60 +12,46 @@
 	<head>
 		<title>Resources</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<script src="js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 	</head>
-	<body>
+	<body class="main2">
 	
-		<div style="width: 100%;">
-			<div class="line"></div>
-			<div class="topLine">
-				<div style="float: left;" class="headline">Resources</div>
-				<div style="float: right;">
-					<a
-						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
+		 <div class="container">
+			<div>
+				<h1>Resources</h1>
+				<div>
+					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
 					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
 				</div>
-			</div>
-		</div>
 	
-		<div style="clear: both;" />
-		You have a total number of <c:out value="${fn:length(resources)}" />
-		Resources.
-		<a href="new"> New resource </a>
-		<table>
-			<tr>
-				<th>Name</th>
-				<th>State</th>
-				<th>Description</th>
-				
-			</tr>
-	
+		<p>You have a total number of <c:out value="${fn:length(resources)}" />
+		Resources available.</p> 
+	    <span class="new">
+		<a href="new" class="btn btn-default btn-round btn-border-w"> New resource </a></button>
+		</span>	
+			<div class="container row">
 			<c:forEach items="${resources}" var="resource">
-				<tr>
-					<td><c:out value="${resource.name}" /></td>
-					<td><c:out value="${resource.state}" /></td>
-					<td><c:out value="${resource.description}" /></td>
-					
-					<td>
-						<a class="remove" href="<c:url value="/remove?id=${resource.id}" />">Borrar</a>
-					</td>
+				<div class="container col-md-3 resource">
+					<h4><c:out value="${resource.name}" /></h4>
+					<h5><c:out value="${resource.state}" /></h5>
+					<p><c:out value="${resource.description}" /></p>
+					<span>
+						<a class="btn btn-default" href="<c:url value="/remove?id=${resource.id}" />">Borrar</a>
+					</span>
 										
-					<td>
-						<a class="remove" href="<c:url value="/modify?id=${resource.id}" />">Modificar</a>
-					</td>
+					<span>
+						<a class="btn btn-default" href="<c:url value="/modify?id=${resource.id}" />">Modificar</a>
+					</span>
 					
-					<td>
-						<a class="remove" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
-					</td>
-					
-					<!--	<td><a class="remove"
-						href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a></td> -->
-				</tr>
+					<span>
+						<a class="btn btn-default" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
+					</span>
+				</div>
 			</c:forEach>
-		</table>
-	
-	
-		<hr />
-	
+		</div>
+	</div>
+</div>
 	</body>
 </html>

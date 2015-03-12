@@ -22,11 +22,11 @@
   			<div class="row vertical-center-row">
         <div class="col-lg-12">
             <div class="row ">
-                <div class="col-xs-4 col-xs-offset-4 title"><h1 class="t1">LabReserve </h1><h4 class="t2">Gestor de puestos científicos</h4>
+                <div class="title col-md-offset-2 col-md-8"><h1 class="t1">LabReserve </h1><h4 class="t2">Gestor de puestos científicos</h4>
                 <div id="login" class="row">
-					<button type="button" class="btn btn-default"><a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
+					<a class="btn btn-border-w btn-round" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/>
 					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
-					</button>
+					</a>
 				</div>
                 </div>
             </div>
