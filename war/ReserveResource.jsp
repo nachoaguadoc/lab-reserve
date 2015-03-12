@@ -34,7 +34,7 @@
 		</div>
 			
 		<div class="main">
-		
+	
 			<c:choose>
 				<c:when test="${user != null}">
 					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8">
@@ -113,6 +113,8 @@
 	Please login with your Google account
 				</c:otherwise>
 			</c:choose>
+			<div>						${message}
+			</div>
 		</div>
 	</body>
 </html>

@@ -30,6 +30,9 @@
 					<h4><c:out value="${resource.name}" /></h4>
 					<h5><c:out value="${resource.state}" /></h5>
 					<p><c:out value="${resource.description}" /></p>
+					<span>
+						<a class="btn btn-default" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
+					</span>
 				</div></a>
 			</c:forEach>
 			</div>

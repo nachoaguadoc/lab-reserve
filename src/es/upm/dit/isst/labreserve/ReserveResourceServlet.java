@@ -57,8 +57,7 @@ public class ReserveResourceServlet extends HttpServlet {
 		
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
-		System.out.println("Reserving resource ");
+			throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -74,9 +73,16 @@ public class ReserveResourceServlet extends HttpServlet {
 		String initHour = checkNull(req.getParameter("initTime"));
 		String finalHour = checkNull(req.getParameter("finalTime"));
 		ReserveDAO resDao = ReserveDAOImpl.getInstance();
-		resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-		System.out.println(resourceID + " " + date + " " + initHour + " " + finalHour);
-		resp.sendRedirect("/main");
+		
+		if (resDao.isResourceReserved(resourceID, date, initHour, finalHour) ){
+			System.out.println("Resource busy");
+			req.getSession().setAttribute("message", "Resource busy");
+			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+	        view.forward(req, resp);
+		} else {
+			resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
+			resp.sendRedirect("/main");
+		}
 	}
 	private String checkNull(String s) {
 		if (s == null) {

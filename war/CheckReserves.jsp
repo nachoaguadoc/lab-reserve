@@ -35,7 +35,9 @@
 					<p><c:out value="${reserve.date}" /></p>
 					<p><c:out value="${reserve.initHour}" /></p>
 					<p><c:out value="${reserve.finalHour}" /></p>
-				
+					<span>
+						<a class="btn btn-default" href="<c:url value="/cancel?id=${reserve.id}" />">Cancelar</a>
+					</span>
 				</div></a>
 			</c:forEach>
 			</div>
