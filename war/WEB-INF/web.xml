@@ -55,6 +55,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/reserve</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>CheckReservesResource</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.CheckReservesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckReservesResource</servlet-name>
+		<url-pattern>/myreserves</url-pattern>
+	</servlet-mapping>
+	
 	
 	
 	

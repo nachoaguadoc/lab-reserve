@@ -19,14 +19,18 @@ public class Reserve implements Serializable {
 	private String author;
 	private Long resourceID;
 	String date;
+	String initHour;
+	String finalHour;
+	String resourceName;
 
 
-
-	public Reserve(String author, Long resourceID, String date) {
+	public Reserve(String author, String resourceName, Long resourceID, String date, String initHour, String finalHour) {
 		this.author = author;
 		this.resourceID= resourceID;
 		this.date = date;
-
+		this.initHour = initHour;
+		this.finalHour = finalHour;
+		this.resourceName = resourceName;
 	}
 
 	public Long getId() {
@@ -48,6 +52,14 @@ public class Reserve implements Serializable {
 	public void setResourceID(Long resourceID) {
 		this.resourceID = resourceID;
 	}
+	
+	public String getResourceName() {
+		return resourceName;
+	}
+
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
+	}
 
 	public String getDate() {
 		return date;
@@ -57,5 +69,19 @@ public class Reserve implements Serializable {
 		this.date = date;
 	}
 	
+	public String getInitHour() {
+		return initHour;
+	}
 
+	public void  setInitHour (String initHour) {
+		this.initHour = initHour;
+	}
+	
+	public String getFinalHour() {
+		return finalHour;
+	}
+
+	public void  setFinalHour (String finalHour) {
+		this.finalHour = finalHour;
+	}
 } 

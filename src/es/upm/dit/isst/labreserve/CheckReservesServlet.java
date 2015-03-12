@@ -27,13 +27,12 @@ import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
 
-public class ReserveResourceServlet extends HttpServlet {
+public class CheckReservesServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
-		ReserveDAO resDao = ReserveDAOImpl.getInstance();
+		ReserveDAO dao = ReserveDAOImpl.getInstance();
 		
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
@@ -45,39 +44,18 @@ public class ReserveResourceServlet extends HttpServlet {
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
 		}
-	    Long id = Long.parseLong(req.getParameter("id"));
-		Resource resource = dao.getResource(id);
 
+		List<Reserve> reserves = dao.listAuthorReserves(user.getUserId());
+		req.getSession().setAttribute("reserves", new ArrayList<Reserve>(reserves));
 		req.getSession().setAttribute("user", user);
-		req.getSession().setAttribute("resource", resource);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
-		RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+		
+		RequestDispatcher view = req.getRequestDispatcher("CheckReserves.jsp");
         view.forward(req, resp);
 		
 	}
-	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
-		System.out.println("Reserving resource ");
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
-		User user = (User) req.getAttribute("user");
-		if (user == null) {
-			UserService userService = UserServiceFactory.getUserService();
-			user = userService.getCurrentUser();
-		}
-	    Long resourceID = Long.parseLong(req.getParameter("resourceID"));
-	    String resourceName = dao.getResource(resourceID).getName();
 
-	    
-		String date = checkNull(req.getParameter("initDate"));
-//		String finalDate = checkNull(req.getParameter("finalDate"));
-		String initHour = checkNull(req.getParameter("initTime"));
-		String finalHour = checkNull(req.getParameter("finalTime"));
-		ReserveDAO resDao = ReserveDAOImpl.getInstance();
-		resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-		System.out.println(resourceID + " " + date + " " + initHour + " " + finalHour);
-		resp.sendRedirect("/main");
-	}
 	private String checkNull(String s) {
 		if (s == null) {
 			return "";

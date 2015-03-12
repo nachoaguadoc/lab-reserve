@@ -1,5 +1,9 @@
 package es.upm.dit.isst.labreserve.dao;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,10 +36,10 @@ public class ReserveDAOImpl implements ReserveDAO {
 	}
 
 	@Override
-	public void add(String author, Long resourceID, String date) {
+	public void add(String author, String resourceName, Long resourceID, String date, String initHour, String finalHour) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Reserve reserve = new Reserve(author, resourceID, date);
+			Reserve reserve = new Reserve(author, resourceName, resourceID, date, initHour, finalHour);
 			em.persist(reserve);
 			em.close();
 		}
@@ -43,11 +47,13 @@ public class ReserveDAOImpl implements ReserveDAO {
 	}
 
 	@Override
-	public void update(Long id, Long resourceID, String Date) {
+	public void update(Long id, String resourceName, Long resourceID, String date, String initHour, String finalHour) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Reserve reserve = em.find(Reserve.class, id);
 		reserve.setResourceID(resourceID);
-		reserve.setDate(Date);
+		reserve.setDate(date);
+		reserve.setInitHour(initHour);
+		reserve.setFinalHour(finalHour);
 
 		em.merge(reserve);
 		em.close();
@@ -80,6 +86,62 @@ public class ReserveDAOImpl implements ReserveDAO {
 		q.setParameter("author", author);
 		List<Reserve> reserves = q.getResultList();
 		return reserves;
+	}
+
+	public List<Reserve> listResourceReserves(Long resourceID){
+		
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select r from Reserve r where r.resourceID = :resourceID");
+		q.setParameter("resourceID", resourceID);
+		List<Reserve> reserves = q.getResultList();
+		return reserves;
+	}
+	public List<Reserve> listResourceAuthorReserves(Long resourceID, String author){
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select r from Reserve r where r.resourceID = :resourceID and r.author = :author");
+		q.setParameter("resourceID", resourceID);
+		q.setParameter("author", author);
+
+		List<Reserve> reserves = q.getResultList();
+		return reserves;
+	}
+	
+	public boolean isResourceReserved(Long resourceID, String date, String initHour, String finalHour){
+		
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select r from Reserve r where r.resourceID = :resourceID");
+		q.setParameter("resourceID", resourceID);
+		List<Reserve> reserves = q.getResultList();
+		for (Reserve r : reserves) {
+			String stringDate = r.getDate();
+			String initString = r.getInitHour();
+			String finalString = r.getFinalHour();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+			boolean reservedDate = true;
+			boolean reservedTime = true;
+			try {
+				
+				reservedDate = sdf.parse(stringDate).equals(sdf.parse(date));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			SimpleDateFormat sd = new SimpleDateFormat("HH:mm");
+			try {
+				reservedTime = (sd.parse(finalHour).after(sd.parse(initString)) && sd.parse(finalHour).before(sd.parse(finalString))) || 
+						(sd.parse(initHour).before(sd.parse(finalString)) &&  !sd.parse(initHour).before(sd.parse(initString)));
+
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (reservedTime && reservedDate) return true;
+		}
+		return false;
+	
+
+
 	}
 
 }
