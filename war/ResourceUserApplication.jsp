@@ -21,6 +21,7 @@
 					<a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
 					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
 				</div>
+		<a class="btn btn-default" href="<c:url value="/myreserves" />">Mis reservas</a>
 	
 		<p>You have a total number of <c:out value="${fn:length(resources)}" />
 		Resources available.</p> 

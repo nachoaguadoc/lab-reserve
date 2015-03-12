@@ -26,7 +26,7 @@
 				</div>
 	
 		<p>You have a total number of <c:out value="${fn:length(reserves)}" />
-		Resources available.</p> 
+		Reserves.</p> 
 		<div class="container row">
 		
 			<c:forEach items="${reserves}" var="reserve">
