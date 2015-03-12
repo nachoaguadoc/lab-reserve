@@ -14,7 +14,8 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		
+				<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<script src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.css"/ >
 		<script src="js/jquery.datetimepicker.js"></script>
 		
@@ -115,6 +116,15 @@
 			</c:choose>
 			<div>						${message}
 			</div>
+			
+			<table data-toggle="table" data-height="299">
+    <thead>
+        <tr>
+            <th data-field="Horario">Horario ID</th>
+
+        </tr>
+    </thead>
+</table>
 		</div>
 	</body>
 </html>
