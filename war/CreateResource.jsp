@@ -5,6 +5,7 @@
 
 <%@page isELIgnored="false"%>
 
+
 <!DOCTYPE html>
 
 
@@ -12,28 +13,25 @@
 	<head>
 		<title>Resources</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<script src="js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 	</head>
 	<body>
 	
-		<div style="width: 100%;">
-			<div class="line"></div>
-			<div class="topLine">
-				<div style="float: left;" class="headline">New Resource</div>
-				<div style="float: right;">
-					<a
-						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
+		<div class="container">
+				<h1>New Resource</h1>
+				<div>
+					<a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
 					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
 				</div>
-			</div>
-		</div>
-			
-		<div class="main">
+				
+		<div class="container row col-md-6 col-md-offset-3">
 		
 			<c:choose>
 				<c:when test="${user != null}">
 					<form action="/new" method="post" accept-charset="utf-8">
-						<table>
+						<table class="table table-hover">
 							<tr>
 								<td><label for="name">Name</label></td>
 								<td><input type="text" name="name" id="name" size="65" /></td>
@@ -62,5 +60,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+	</div>
 	</body>
 </html>
