@@ -20,7 +20,7 @@ import es.upm.dit.isst.labreserve.model.Resource;
 
 public class ModifyResourceServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -30,7 +30,7 @@ public class ModifyResourceServlet extends HttpServlet {
 			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
 		}
-	    long id = Long.parseLong(req.getParameter("id"));
+	    Long id = Long.parseLong(req.getParameter("id"));
 		String name = checkNull(req.getParameter("name"));
 		String state = checkNull(req.getParameter("state"));
 		String description = checkNull(req.getParameter("description"));

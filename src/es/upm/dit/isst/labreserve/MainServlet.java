@@ -20,7 +20,7 @@ import es.upm.dit.isst.labreserve.model.Resource;
 
 public class MainServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
@@ -56,7 +56,7 @@ public class MainServlet extends HttpServlet {
 			}
 		} catch (IllegalStateException e){
 			System.out.println("User is not logged in");
-			RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
+			RequestDispatcher view = req.getRequestDispatcher("home.jsp");
 	        view.forward(req, resp);
 		}
 		

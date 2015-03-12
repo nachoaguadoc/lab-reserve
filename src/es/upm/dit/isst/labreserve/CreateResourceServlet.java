@@ -37,7 +37,6 @@ public class CreateResourceServlet extends HttpServlet {
 
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
-		System.out.println("*********" + description);
 		dao.add(name, state, description);
 
 		resp.sendRedirect("/main");

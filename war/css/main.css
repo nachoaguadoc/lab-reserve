@@ -58,4 +58,8 @@ table tr {
 
 form td {
   font-size: smaller;
-} 
+}
+
+.main {
+	background-image: url('img/bg.jpg');
+}
