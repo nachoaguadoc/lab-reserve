@@ -6,35 +6,47 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Resources</title>
+		<title>Recursos</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		
+		
 		<meta charset="utf-8">
 	</head>
 	<body class="main2">
 	 <div class="container">
-			<div>
-				<h1>Resources</h1>
-				<div>
-					<a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
-					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
+				<h1>Recursos</h1>
+			<div class="top-1">
+				<div class="dropdown ">
+			    <a class="dropdown-toggle" 
+				data-toggle="dropdown">
+				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if></strong>
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+					
+				    </ul>
 				</div>
-		<a class="btn btn-default" href="<c:url value="/myreserves" />">Mis reservas</a>
+			</div>		
 	
-		<p>You have a total number of <c:out value="${fn:length(resources)}" />
-		Resources available.</p> 
+		<p>Hay un total de  <c:out value="${fn:length(resources)}" />
+		recursos disponibles.</p> 
 		<div class="container row">
 			<c:forEach items="${resources}" var="resource">
-				<a><div class="container col-md-3 resource">
+				<div class="container col-md-3 resource">
 					<h4><c:out value="${resource.name}" /></h4>
-					<h5><c:out value="${resource.state}" /></h5>
+					<hr>
 					<p><c:out value="${resource.description}" /></p>
+					<h5><c:out value="${resource.state}" /></h5>
 					<span>
-						<a class="btn btn-default" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
+						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
 					</span>
-				</div></a>
+				</div>
 			</c:forEach>
 			</div>
 		</div>

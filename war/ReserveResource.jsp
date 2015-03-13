@@ -14,36 +14,27 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-				<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<script src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.css"/ >
 		<script src="js/jquery.datetimepicker.js"></script>
 		
 	</head>
-	<body>
-	
-		<div style="width: 100%;">
-			<div class="line"></div>
-			<div class="topLine">
-				<div style="float: left;" class="headline">Reserve Resource</div>
-				<div style="float: right;">
-					<a
-						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
+	<body class="main2">
+	<div class="container">
+	<h1>Reserva de recursos</h1>
+		<div>
+					<a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
 					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
 				</div>
-			</div>
-		</div>
-			
-		<div class="main">
-	
+		
+		<div>
 			<c:choose>
 				<c:when test="${user != null}">
 					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8">
-						<table>
+						<table class="table">
 							<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" /></td>
                 			<input id="initDate" type="text" name="initDate">
-
-
 							<select id="initTime" name="initTime">
 							  <option value="00:00">00:00</option>
 							  <option value="01:00">01:00</option>
@@ -107,7 +98,6 @@
 							</tr>
 						</table>
 					</form>
-
 				</c:when>
 				<c:otherwise>
 	
@@ -117,6 +107,7 @@
 			<div>						${message}
 			</div>
 		</div>
+	</div>
 	</body>
 </html>
 <script>

@@ -13,6 +13,11 @@ hr {
 a {
 	text-decoration:none;
 }
+
+a:link {
+    text-decoration: none;
+	color: #00a;
+}
 a:hover {
 	text-decoration:none;
 }
@@ -83,27 +88,34 @@ html, body, .container {
 
 .resource {
 	height: 30%;
-	border: 1px solid rgba(86,61,124,.2);
+	border: 1px solid #C5C5C5;
+	padding: 0 5px 3px;
 	text-align: center;
 	margin: 5px; 
 	display: block;
+	background: rgba(0, 0, 40, 0.1);
 }
 
 .resource:hover{
-	border: border: 1.5px solid rgba(51,51,255,.5);
-
+	border: 2px solid #000066;
 }
 
 .btn.btn-border-w:hover, .btn.btn-border-w:focus{
-	background: #222;
+	background: #000066;
 	border-color: transparent;
 	color: #fff;
 }
 
-.btn.btn-border-w {
+.btn.btn-border-w, .btn.btn-border-p {
 background: transparent;
 border: 1px solid rgba(2, 2, 2, .75);
 color: #222;
+}
+
+.btn.btn-border-p:hover, .btn.btn-border-p:focus{
+	background: #222;
+	border-color: transparent;
+	color: #fff;
 }
 
 .col-md-2 {
@@ -112,4 +124,11 @@ color: #222;
 .col-md-3 {
 	margin: 20px !important;
 	height: 180px;
+}
+
+.top-1{
+	align: right;
+}
+.state-free{
+background: 00CC66;
 }

@@ -9,7 +9,7 @@
 
 <html>
 	<head>
-		<title>Resources</title>
+		<title>Resources - New resource </title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<script src="js/bootstrap.min.js"></script>
@@ -28,32 +28,26 @@
 		
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/new" method="post" accept-charset="utf-8">
-						<table class="table table-hover">
-							<tr>
-								<td><label for="name">Name</label></td>
-								<td><input type="text" name="name" id="name" size="65" /></td>
-							</tr>
-							<tr>
-								<td valign="description"><label for="description">Description</label></td>
-								<td><textarea rows="4" cols="50" name="description"
-										id="description"></textarea></td>
-							</tr>
-							<tr>
-								<td valign="state"><label for="state">State</label></td>
-								<td><textarea rows="1" cols="50" name="state"
-										id="state"></textarea></td>
-							</tr>
+					<form action="/new" method="post" accept-charset="utf-8" class="form">
+						<div class="form-group">
+							
+								<label for="name">Nombre</label>
+								<input type="text" class="form-control" name="name" id="name" placeholder="Nombre del recurso"/>
+					
 						
-							<tr>
-								<td colspan="2" align="right"><input type="submit"
-									value="Create" class="btn btn-rounded" /></td>
-							</tr>
-						</table>
+								<label for="description">Descripción</label>
+								<textarea class="form-control" rows="3" name="description"
+										id="description" placeholder="Breve descripción del recurso"></textarea>
+										
+							   <label for="state">Estado</label>
+								<textarea rows="1" class="form-control" name="state"
+										id="state" placeholder="Estado actual"></textarea>
+							    <br>
+								<input type="submit" value="Create" class="btn btn-rounded btn-border-w" />
+						</div>
 					</form>
 				</c:when>
 				<c:otherwise>
-	
 	Please login with your Google account
 				</c:otherwise>
 			</c:choose>

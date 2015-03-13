@@ -8,49 +8,51 @@
 	<head>
 		<title>Resources</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<script src="js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 	</head>
 	<body class="main2">
 	
-		<div>
-				<div><h1>Modify Resource</h1>
-				<div style="float: right;">
-					<a
-						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
-					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
+		 <div class="container">
+				<h1> Modificar Recurso</h1>
+			<div class="top-1">
+				<div class="dropdown ">
+			    <a class="dropdown-toggle" 
+				data-toggle="dropdown">
+				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/> (admin)</c:if></strong>
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li role="presentation"><a role="menuitem" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+				    </ul>
 				</div>
-			</div>
-		</div>
-			
-		<div class="main">
-		
+			</div>	
+				
+		<div class="container row col-md-6 col-md-offset-3">
 			<c:choose>
 				<c:when test="${user != null}">
 					<form action="/modify?id=${resource.id}" method="post" accept-charset="utf-8">
-						<table class="table table-hover">
-							<tr>
-								<td><label for="name">Name</label></td>
-								<td><input type="text" name="name" id="name" value="${resource.name}" "size="65" /></td>
-							</tr>
-							<tr>
-								<td valign="description"><label for="description">Description</label></td>
-								<td><textarea rows="4" cols="50" name="description" 
-										id="description">${resource.description}</textarea></td>
-							</tr>
-							<tr>
-								<td valign="state"><label for="state">State</label></td>
-								<td><textarea rows="1" cols="50" name="state"
-										id="state">${resource.state}</textarea></td>
-							</tr>
-						
-							<tr>
-								<td colspan="2" align="right"><input type="submit"
-									value="Create" /></td>
-							</tr>
-						</table>
+						<div class="form-group">
+							
+								<label for="name">Nombre</label>
+								<input type="text" class="form-control" name="name" id="name" value="${resource.name}" /></td>
+							
+							
+								<label for="description">Descripción</label>
+								<textarea rows="3" class="form-control" name="description" 
+										id="description">${resource.description}</textarea>
+							
+							
+								<label for="state">Estado</label></td>
+								<textarea rows="1" class="form-control" name="state"
+										id="state">${resource.state}</textarea>
+								<br>
+								<input type="submit"
+								 value="Modificar" class="btn btn-rounded btn-border-w"/>
+							
+						</div>
 					</form>
 				</c:when>
 				<c:otherwise>
@@ -59,5 +61,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+	</div>
 	</body>
 </html>
