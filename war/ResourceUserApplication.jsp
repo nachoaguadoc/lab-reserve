@@ -33,11 +33,11 @@
 				    </ul>
 				</div>
 			</div>	
-						<c:if test="${message != null}">
+						<c:if test="${success != null}">
 			<div class="alert alert-success" role="alert">
 			  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 			  <span class="sr-only">Error:</span>
-			  ${message}
+			  ${success}
 			</div></c:if>	
 	
 		<p>Hay un total de  <c:out value="${fn:length(resources)}" />

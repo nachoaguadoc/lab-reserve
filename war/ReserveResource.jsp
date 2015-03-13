@@ -35,9 +35,7 @@
 			<span class="caret"></span>
 		</a>
 			<ul class="dropdown-menu">
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
-			
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>			
 		    </ul>
 		</div>
 	</div>
@@ -57,13 +55,13 @@
 							  
 							  <input type="text" name="initDate" id="initDate" class="form-control" placeholder="Select Date" aria-describedby="sizing-addon2">
 									<select class="selectpicker" data-style="size: auto" id="initTime" name="initTime">
-									  <option value="00:00">00:00</option>
+								 <!-- <option value="00:00">00:00</option>
 									  <option value="01:00">01:00</option>
 									  <option value="02:00">02:00</option>
 									  <option value="03:00">03:00</option>
 									  <option value="04:00">04:00</option>
 									  <option value="05:00">05:00</option>
-									  <option value="06:00">06:00</option>
+									  <option value="06:00">06:00</option> -->
 									  <option value="07:00">07:00</option>
 									  <option value="08:00">08:00</option>
 									  <option value="09:00">09:00</option>
@@ -79,21 +77,21 @@
 									  <option value="19:00">19:00</option>
 									  <option value="20:00">20:00</option>
 									  <option value="21:00">21:00</option>
-									  <option value="22:00">22:00</option>
-									  <option value="23:00">23:00</option>
+									  <!--<option value="22:00">22:00</option>
+									  <option value="23:00">23:00</option> -->
 		
 									</select>                			
 		                			<!-- <input id="finalDate" type="text" name="finalDate"> -->
 		                			
 		                			<select id="finalTime" name="finalTime" class="selectpicker">
-									  <option value="00:00">00:00</option>
+									  <!-- <option value="00:00">00:00</option>
 									  <option value="01:00">01:00</option>
 									  <option value="02:00">02:00</option>
 									  <option value="03:00">03:00</option>
 									  <option value="04:00">04:00</option>
 									  <option value="05:00">05:00</option>
 									  <option value="06:00">06:00</option>
-									  <option value="07:00">07:00</option>
+									  <option value="07:00">07:00</option> -->
 									  <option value="08:00">08:00</option>
 									  <option value="09:00">09:00</option>
 									  <option value="10:00">10:00</option>
@@ -109,7 +107,7 @@
 									  <option value="20:00">20:00</option>
 									  <option value="21:00">21:00</option>
 									  <option value="22:00">22:00</option>
-									  <option value="23:00">23:00</option>
+								<!--  <option value="23:00">23:00</option> -->
 									</select>
 							<td colspan="2" align="center"><input class="btn btn-default btn-round btn-border-w" type="submit"
 									value="Reserve" /> </td>
@@ -123,11 +121,11 @@
 	Please login with your Google account
 				</c:otherwise>
 			</c:choose>
-			<c:if test="${message != null}">
+			<c:if test="${error != null}">
 			<div class="alert alert-danger" role="alert">
 			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 			  <span class="sr-only">Error:</span>
-			  ${message}
+			  ${error}
 			</div></c:if>
 					</div>
 	</div>
