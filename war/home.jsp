@@ -13,7 +13,7 @@
 		<title>LabReserve</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Oswald:700|Plaster' rel='stylesheet' type='text/css'>
 		<script src="js/bootstrap.min.js"></script>
 		<meta charset="utf-8">

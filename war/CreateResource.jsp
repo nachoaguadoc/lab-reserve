@@ -11,6 +11,7 @@
 	<head>
 		<title>Resources - New resource </title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>		
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<script src="js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
@@ -18,11 +19,23 @@
 	<body class="main2">
 	
 		<div class="container">
-				<h1>New Resource</h1>
-				<div>
-					<a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
-					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
+				<h1>New Resource</h1>				
+			<div class="top-1">
+				<div class="dropdown ">
+			    <a class="dropdown-toggle" 
+				data-toggle="dropdown">
+				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if></strong>
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+					
+				    </ul>
 				</div>
+			</div>
+				<a style="float: right;" href="<c:url value="/main" />">Home</a>
+			
 				
 		<div class="container row col-md-6 col-md-offset-3">
 		

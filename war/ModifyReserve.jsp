@@ -13,7 +13,7 @@
 		<title>Resources</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 				<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<script src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.css"/ >
@@ -24,14 +24,22 @@
 	
 		<div style="width: 100%;">
 			<div class="line"></div>
-			<div class="topLine">
-				<div style="float: left;" class="headline">Modify Reserve</div>
-				<div style="float: right;">
-					<a
-						href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
-					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
+			<div class="top-1">
+				<div class="dropdown ">
+			    <a class="dropdown-toggle" 
+				data-toggle="dropdown">
+				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if></strong>
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+					
+				    </ul>
 				</div>
 			</div>
+			<a style="float: right;" href="<c:url value="/main" />">Home</a>
+			
 		</div>
 			
 		<div class="main">

@@ -13,17 +13,30 @@
 		<title>Resources</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 	</head>
-	<body>
+	<body class="main2">
 	 <div class="container">
 			<div>
-				<h1>Resources</h1>
-				<div>
-					<a href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a>
-					<c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if>
+				<h1>Mis reservas</h1>				
+			<div class="top-1">
+				<div class="dropdown ">
+			    <a class="dropdown-toggle" 
+				data-toggle="dropdown">
+				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if></strong>
+					<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+					
+				    </ul>
 				</div>
+			</div>
+			<a style="float: right;" href="<c:url value="/main" />">Home</a>
+			
 	
 		<p>You have a total number of <c:out value="${fn:length(reserves)}" />
 		Reserves.</p> 

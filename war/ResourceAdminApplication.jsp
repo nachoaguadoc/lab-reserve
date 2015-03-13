@@ -22,17 +22,19 @@
 		 <div class="container">
 				<h1>Recursos</h1>
 			<div class="top-1">
-				<div class="dropdown">
+				<div class="dropdown ">
 			    <a class="dropdown-toggle" 
 				data-toggle="dropdown">
-				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/> (admin)</c:if></strong>
+				<strong><c:if test="${user != null}"><c:out value="${user.nickname}"/></c:if></strong>
 					<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li role="presentation"><a role="menuitem" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="${url}"/>"><c:out value="${urlLinktext}"/></a></li>
+					
 				    </ul>
 				</div>
-			</div>		
+			</div>
 	
 		<p>Hay un total de  <c:out value="${fn:length(resources)}" />
 		recursos disponibles.</p> 

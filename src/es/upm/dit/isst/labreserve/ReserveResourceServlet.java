@@ -47,7 +47,7 @@ public class ReserveResourceServlet extends HttpServlet {
 		}
 	    Long id = Long.parseLong(req.getParameter("id"));
 		Resource resource = dao.getResource(id);
-
+		req.getSession().setAttribute("message", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resource", resource);
 		req.getSession().setAttribute("url", url);
@@ -76,11 +76,12 @@ public class ReserveResourceServlet extends HttpServlet {
 		
 		if (resDao.isResourceReserved(resourceID, date, initHour, finalHour) ){
 			System.out.println("Resource busy");
-			req.getSession().setAttribute("message", "Resource busy");
+			req.getSession().setAttribute("message", "Recurso ocupado");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 	        view.forward(req, resp);
 		} else {
 			resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
+			req.getSession().setAttribute("message", "Resource reserved");
 			resp.sendRedirect("/main");
 		}
 	}

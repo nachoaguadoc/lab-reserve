@@ -17,6 +17,7 @@
 	
 		 <div class="container">
 				<h1> Modificar Recurso</h1>
+				
 			<div class="top-1">
 				<div class="dropdown ">
 			    <a class="dropdown-toggle" 
@@ -29,6 +30,8 @@
 				    </ul>
 				</div>
 			</div>	
+			<a style="float: right;" href="<c:url value="/main" />">Home</a>
+			
 				
 		<div class="container row col-md-6 col-md-offset-3">
 			<c:choose>

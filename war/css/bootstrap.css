@@ -3404,6 +3404,7 @@ tbody.collapse.in {
 .dropup,
 .dropdown {
   position: relative;
+  cursor: pointer; !important;
 }
 .dropdown-toggle:focus {
   outline: 0;

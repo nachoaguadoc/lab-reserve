@@ -14,11 +14,11 @@ public class CancelReserveServlet extends HttpServlet {
 
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
   throws IOException {
-		System.out.println("Removing resource ");
+		System.out.println("Canceling reserve ");
 
     String id = req.getParameter("id");
     ReserveDAO dao = ReserveDAOImpl.getInstance();
     dao.remove(Long.parseLong(id));
-    resp.sendRedirect("/main");
+    resp.sendRedirect("/myreserves");
   }
 } 
