@@ -82,7 +82,7 @@ public class ReserveResourceServlet extends HttpServlet {
 	        view.forward(req, resp);
 		} else {
 			resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-			req.getSession().setAttribute("success", "Resource reserved");
+			req.getSession().setAttribute("success", "Recurso reservado");
 			resp.sendRedirect("/main");
 		}
 	}
