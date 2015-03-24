@@ -48,7 +48,7 @@
 					<p>Init time: <c:out value="${reserve.initHour}" /></p>
 					<p>Final time: <c:out value="${reserve.finalHour}" /></p>
 					<span>
-						<a class="btn btn-default" href="<c:url value="/update?id=${reserve.id}" />">Modify</a>
+						<a class="btn btn-default" href="<c:url value="/update?id=${reserve.id}" />">Cambiar</a>
 					</span>
 					<span>
 						<a class="btn btn-default" href="<c:url value="/cancel?id=${reserve.id}" />">Cancelar</a>

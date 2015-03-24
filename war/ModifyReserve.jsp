@@ -111,7 +111,7 @@
                 			
 	                		<tr>
 								<td colspan="2" align="right"><input type="submit"
-									value="Modify" /></td>
+									value="Cambiar" /></td>
 							</tr>
 						</table>
 					</form>

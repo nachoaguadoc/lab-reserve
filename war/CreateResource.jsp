@@ -19,7 +19,7 @@
 	<body class="main2">
 	
 		<div class="container">
-				<h1>New Resource</h1>				
+				<h1>Nuevo Recurso</h1>				
 			<div class="top-1">
 				<div class="dropdown ">
 			    <a class="dropdown-toggle" 

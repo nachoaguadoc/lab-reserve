@@ -89,7 +89,7 @@ html, body, .container {
 .resource {
 	height: 30%;
 	border: 1px solid #C5C5C5;
-	padding: 0 5px 3px;
+	padding: 5px !important;
 	text-align: center;
 	margin: 5px; 
 	display: block;

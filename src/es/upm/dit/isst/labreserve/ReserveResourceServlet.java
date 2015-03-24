@@ -48,7 +48,7 @@ public class ReserveResourceServlet extends HttpServlet {
 	    Long id = Long.parseLong(req.getParameter("id"));
 		Resource resource = dao.getResource(id);
 		req.getSession().setAttribute("error", null);
-		req.getSession().setAttribute("success", null);
+//		req.getSession().setAttribute("success", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resource", resource);
 		req.getSession().setAttribute("url", url);
@@ -82,7 +82,7 @@ public class ReserveResourceServlet extends HttpServlet {
 	        view.forward(req, resp);
 		} else {
 			resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-			req.getSession().setAttribute("success", "Recurso reservado");
+//			req.getSession().setAttribute("success", "Recurso reservado");
 			resp.sendRedirect("/main");
 		}
 	}

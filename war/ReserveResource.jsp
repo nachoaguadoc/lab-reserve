@@ -110,7 +110,7 @@
 								<!--  <option value="23:00">23:00</option> -->
 									</select>
 							<td colspan="2" align="center"><input class="btn btn-default btn-round btn-border-w" type="submit"
-									value="Reserve" /> </td>
+									value="Reservar" /> </td>
 							</div>
 							
      						</table>
