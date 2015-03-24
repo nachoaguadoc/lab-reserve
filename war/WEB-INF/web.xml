@@ -81,6 +81,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/myreserves</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>CreateGroupServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.CreateGroupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateGroupServlet</servlet-name>
+		<url-pattern>/createGroup</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CheckGroupsServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.CheckGroupsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckGroupsServlet</servlet-name>
+		<url-pattern>/groups</url-pattern>
+	</servlet-mapping>
 	
 	
 	

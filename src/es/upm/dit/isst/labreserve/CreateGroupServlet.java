@@ -18,17 +18,40 @@ import es.upm.dit.isst.labreserve.dao.GroupDAO;
 import es.upm.dit.isst.labreserve.dao.GroupDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
-import es.upm.dit.isst.labreserve.model.Group;
 import es.upm.dit.isst.labreserve.model.Resource;
 
-public class MainServlet extends HttpServlet {
+public class CreateGroupServlet extends HttpServlet {
 
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		System.out.println("Creating new group ");
+		User user = (User) req.getAttribute("user");
+		if (user == null) {
+			UserService userService = UserServiceFactory.getUserService();
+			user = userService.getCurrentUser();
+		}
+
+		String name = checkNull(req.getParameter("name"));
+		String[] resources = req.getParameterValues("resources");
+		String description = checkNull(req.getParameter("description"));
+		List<Long> resourcesId = new ArrayList<Long>();
+		for (String res : resources) {
+			Long resId = Long.parseLong(res);
+			resourcesId.add(resId);
+		}
+		GroupDAO dao = GroupDAOImpl.getInstance();
+		dao.add(name, resourcesId, description);
+
+		resp.sendRedirect("/main");
+	}
+	
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
-		GroupDAO groupDAO = GroupDAOImpl.getInstance();
+
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
@@ -41,32 +64,22 @@ public class MainServlet extends HttpServlet {
 		    urlLinktext = "Logout";
 		    resources = dao.listResources();
 		}
-		List<Group> groups = groupDAO.listGroups();
-		req.getSession().setAttribute("groups", new ArrayList<Group>(groups));
+		
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		
-		
-		try {
-			boolean admin = userService.isUserAdmin();
-			if (admin) {
-				RequestDispatcher view = req.getRequestDispatcher("ResourceAdminApplication.jsp");
-		        view.forward(req, resp);
-			}
-			else {
-				RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
-		        view.forward(req, resp);
-			}
-		} catch (IllegalStateException e){
-			System.out.println("User is not logged in");
-			RequestDispatcher view = req.getRequestDispatcher("home.jsp");
-	        view.forward(req, resp);
-		}
-		
-
+		RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+        view.forward(req, resp);
 		
 	}
 
-}
+
+	private String checkNull(String s) {
+		if (s == null) {
+			return "";
+		}
+		return s;
+	}
+} 

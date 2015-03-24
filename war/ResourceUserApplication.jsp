@@ -39,7 +39,27 @@
 			  <span class="sr-only">Error:</span>
 			  ${success}
 			</div></c:if>	 -->
-	
+			
+		<p>Hay un total de  <c:out value="${fn:length(groups)}" />
+		Grupos de recursos.</p> 
+
+			<div class="pre-container row groups">
+		 
+			<c:forEach items="${groups}" var="group">
+				<div class="container col-md-3 resource">
+					<h4>Nombre: <c:out value="${group.name}" /></h4>
+					<hr>
+					<p>Descripción: <c:out value="${group.description}" /></p>
+					<p>Recursos: 
+						<c:forEach items="${group.resources}" var="resource">
+							<c:out value="${resource}" /></p>
+						</c:forEach>
+					
+				</div>
+			</c:forEach>
+		<br>
+		</div>
+		<hr>
 		<p>Hay un total de  <c:out value="${fn:length(resources)}" />
 		recursos disponibles.</p> 
 		<div class="container row">

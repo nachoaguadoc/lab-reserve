@@ -130,5 +130,10 @@ color: #222;
 	align: right;
 }
 .state-free{
-background: 00CC66;
+	background: 00CC66;
+}
+
+.groups {
+	padding-left: 15px;
+	padding-right: 15px;
 }
