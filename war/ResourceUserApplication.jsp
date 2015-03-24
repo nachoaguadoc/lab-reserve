@@ -42,9 +42,7 @@
 			
 				<p>Hay un total de  <c:out value="${fn:length(groups)}" />
 		Grupos de recursos.</p> 
-	    <span class="new">
-		<a href="/createGroup" class="btn btn-default btn-round btn-border-w"> Añadir grupo </a>
-		</span>	
+
 		<div class="pre-container row groups">
 	 
 		<c:forEach items="${groups}" var="group">
