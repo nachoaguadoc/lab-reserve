@@ -42,7 +42,8 @@ public class ModifyGroupServlet extends HttpServlet {
 
 		GroupDAO dao = GroupDAOImpl.getInstance();
 		//dao.update(id, name, state, description);
-
+		FlashMessage flashMessage = new FlashMessage("¡Grupo de recursos modificado!");
+		req.setAttribute("flashMessageSuccess", flashMessage);
 		resp.sendRedirect("/main");
 	}
 	

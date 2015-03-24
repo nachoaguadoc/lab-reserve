@@ -21,6 +21,18 @@
 	
 		 <div class="container">
 				<h1>Recursos</h1>
+				<c:if test="${flashMessageSuccess != null }">
+				<div class="alert alert-success alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <strong>¡Hecho!</strong> ${flashMessageSuccess}
+				</div>
+				</c:if>
+				<c:if test="${flashMessageError != null }">
+				<div class="alert alert-error alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <strong>¡Error!</strong> ${flashMessageError}
+				</div>
+				</c:if>
 			<div class="top-1">
 				<div class="dropdown ">
 			    <a class="dropdown-toggle" 

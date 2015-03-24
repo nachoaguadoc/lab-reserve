@@ -38,7 +38,8 @@ public class ModifyResourceServlet extends HttpServlet {
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		dao.update(id, name, state, description);
-
+		FlashMessage flashMessage = new FlashMessage("¡Recurso modificado!");
+		req.setAttribute("flashMessageSuccess", flashMessage);
 		resp.sendRedirect("/main");
 	}
 	

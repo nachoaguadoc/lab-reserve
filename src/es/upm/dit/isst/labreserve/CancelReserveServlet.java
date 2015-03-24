@@ -19,6 +19,8 @@ public class CancelReserveServlet extends HttpServlet {
     String id = req.getParameter("id");
     ReserveDAO dao = ReserveDAOImpl.getInstance();
     dao.remove(Long.parseLong(id));
+	FlashMessage flashMessage = new FlashMessage("¡Reserva cancelada!");
+	req.setAttribute("flashMessageSuccess", flashMessage);
     resp.sendRedirect("/myreserves");
   }
 } 

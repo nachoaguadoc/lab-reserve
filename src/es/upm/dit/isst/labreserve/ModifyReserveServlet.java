@@ -48,6 +48,8 @@ public class ModifyReserveServlet extends HttpServlet {
 	        view.forward(req, resp);
 		} else {
 			dao.update(id, resourceName, resourceID,  date, initHour, finalHour);
+			FlashMessage flashMessage = new FlashMessage("¡Reserva modificada!");
+			req.setAttribute("flashMessageSuccess", flashMessage);
 			resp.sendRedirect("/main");
 		}
 	}

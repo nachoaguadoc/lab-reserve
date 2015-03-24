@@ -38,7 +38,8 @@ public class CreateResourceServlet extends HttpServlet {
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		dao.add(name, state, description);
-
+		FlashMessage flashMessage = new FlashMessage("¡Recurso creado!");
+		req.setAttribute("flashMessageSuccess", flashMessage);
 		resp.sendRedirect("/main");
 	}
 	

@@ -91,9 +91,12 @@ public class ReserveGroupServlet extends HttpServlet {
 			
 		}
 		if (reserved) {
+			FlashMessage flashMessage = new FlashMessage("¡Grupo de recursos reservados!");
+			req.setAttribute("flashMessageSuccess", flashMessage);
 			resp.sendRedirect("/main");
 		} else {
-			req.getSession().setAttribute("error", "Recurso ocupado");
+			FlashMessage flashMessage = new FlashMessage("Grupo de recursos ocupado");
+			req.setAttribute("flashMessageError", flashMessage);
 			RequestDispatcher view = req.getRequestDispatcher("ReserveGroup.jsp");
 	        view.forward(req, resp);
 		}

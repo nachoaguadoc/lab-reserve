@@ -19,6 +19,8 @@ public class RemoveGroupServlet extends HttpServlet {
     String id = req.getParameter("id");
     GroupDAO dao = GroupDAOImpl.getInstance();
     dao.remove(Long.parseLong(id));
+	FlashMessage flashMessage = new FlashMessage("¡Grupo de recursos borrado!");
+	req.setAttribute("flashMessageSuccess", flashMessage);
     resp.sendRedirect("/main");
   }
 } 

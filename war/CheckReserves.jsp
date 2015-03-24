@@ -20,7 +20,13 @@
 	<body class="main2">
 	 <div class="container">
 			<div>
-				<h1>Mis reservas</h1>				
+				<h1>Mis reservas</h1>
+				<c:if test="${flashMessageSuccess != null }">
+				<div class="alert alert-success alert-dismissible" role="alert">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <strong>¡Hecho!</strong> ${flashMessageSuccess}
+				</div>
+				</c:if>				
 			<div class="top-1">
 				<div class="dropdown ">
 			    <a class="dropdown-toggle" 

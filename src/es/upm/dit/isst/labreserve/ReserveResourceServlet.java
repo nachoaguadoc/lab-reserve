@@ -26,7 +26,6 @@ import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
-
 public class ReserveResourceServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
 
@@ -77,12 +76,14 @@ public class ReserveResourceServlet extends HttpServlet {
 		
 		if (resDao.isResourceReserved(resourceID, date, initHour, finalHour) ){
 			System.out.println("Resource busy");
-			req.getSession().setAttribute("error", "Recurso ocupado");
+			FlashMessage flashMessage = new FlashMessage("Recurso Ocupado");
+			req.setAttribute("flashMessageError", flashMessage);
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 	        view.forward(req, resp);
 		} else {
 			resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-//			req.getSession().setAttribute("success", "Recurso reservado");
+			FlashMessage flashMessage = new FlashMessage("¡Recurso reservado!");
+			req.setAttribute("flashMessageSuccess", flashMessage);
 			resp.sendRedirect("/main");
 		}
 	}
