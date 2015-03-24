@@ -91,12 +91,30 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>CheckGroupsServlet</servlet-name>
-		<servlet-class>es.upm.dit.isst.labreserve.CheckGroupsServlet</servlet-class>
+		<servlet-name>ReserveGroupServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.ReserveGroupServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CheckGroupsServlet</servlet-name>
-		<url-pattern>/groups</url-pattern>
+		<servlet-name>ReserveGroupServlet</servlet-name>
+		<url-pattern>/reserveGroup</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ModifyGroupServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.ModifyGroupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ModifyGroupServlet</servlet-name>
+		<url-pattern>/modifyGroup</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>RemoveGroupServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.RemoveGroupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveGroupServlet</servlet-name>
+		<url-pattern>/removeGroup</url-pattern>
 	</servlet-mapping>
 	
 	

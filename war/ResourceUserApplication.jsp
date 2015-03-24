@@ -40,21 +40,29 @@
 			  ${success}
 			</div></c:if>	 -->
 			
-		<p>Hay un total de  <c:out value="${fn:length(groups)}" />
+				<p>Hay un total de  <c:out value="${fn:length(groups)}" />
 		Grupos de recursos.</p> 
-
+	    <span class="new">
+		<a href="/createGroup" class="btn btn-default btn-round btn-border-w"> Añadir grupo </a>
+		</span>	
 			<div class="pre-container row groups">
 		 
 			<c:forEach items="${groups}" var="group">
-				<div class="container col-md-3 resource">
+				<div class="container col-md-3 resource" data-toggle="popover" data-trigger="hover" title="Recursos" data-placement="bottom" data-content="${group.resources}">
 					<h4>Nombre: <c:out value="${group.name}" /></h4>
 					<hr>
 					<p>Descripción: <c:out value="${group.description}" /></p>
-					<p>Recursos: 
-						<c:forEach items="${group.resources}" var="resource">
-							<c:out value="${resource}" /></p>
-						</c:forEach>
+					<span>
+						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/removeGroup?id=${group.id}" />">Borrar</a>
+					</span>
+										
+					<span>
+						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/modifyGroup?id=${group.id}" />">Modificar</a>
+					</span>
 					
+					<span>
+						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/reserveGroup?id=${group.id}" />">Reservar</a>
+					</span>
 				</div>
 			</c:forEach>
 		<br>
