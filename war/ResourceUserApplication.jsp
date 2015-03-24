@@ -45,26 +45,37 @@
 	    <span class="new">
 		<a href="/createGroup" class="btn btn-default btn-round btn-border-w"> Añadir grupo </a>
 		</span>	
-			<div class="pre-container row groups">
-		 
-			<c:forEach items="${groups}" var="group">
-				<div class="container col-md-3 resource" data-toggle="popover" data-trigger="hover" title="Recursos" data-placement="bottom" data-content="${group.resources}">
-					<h4>Nombre: <c:out value="${group.name}" /></h4>
-					<hr>
-					<p>Descripción: <c:out value="${group.description}" /></p>
-					<span>
-						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/removeGroup?id=${group.id}" />">Borrar</a>
-					</span>
-										
-					<span>
-						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/modifyGroup?id=${group.id}" />">Modificar</a>
-					</span>
-					
-					<span>
-						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/reserveGroup?id=${group.id}" />">Reservar</a>
-					</span>
-				</div>
+		<div class="pre-container row groups">
+	 
+		<c:forEach items="${groups}" var="group">
+		
+			<c:set var="names" value="" />
+			<c:forEach var="res" items="${group.resources}">
+				<c:forEach var="res2" items="${resources}">				
+				  <c:if test="${res eq res2.id}">
+
+				    <c:set var="names" value="${names} ${res2.name} <br />" />
+				  </c:if> 
+				</c:forEach>
 			</c:forEach>
+						
+			<div class="container col-md-3 resource" data-toggle="popover" data-html="true" data-trigger="hover" title="Recursos" data-placement="right" data-content="${names}">
+				<h4><c:out value="${group.name}" /></h4>
+				<hr>
+				<p><c:out value="${group.description}" /></p>
+				<span>
+					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/removeGroup?id=${group.id}" />">Borrar</a>
+				</span>
+									
+				<span>
+					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/modifyGroup?id=${group.id}" />">Modificar</a>
+				</span>
+				
+				<span>
+					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/reserveGroup?id=${group.id}" />">Reservar</a>
+				</span>
+			</div>
+		</c:forEach>
 		<br>
 		</div>
 		<hr>
@@ -87,3 +98,13 @@
 		</div>
 	</body>
 </html>
+
+
+<script>
+
+
+jQuery(function () {
+	  jQuery('[data-toggle="popover"]').popover()
+	})
+
+</script>
