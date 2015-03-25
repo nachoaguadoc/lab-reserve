@@ -85,7 +85,6 @@ public class ReserveGroupServlet extends HttpServlet {
 
 			} else {
 				reserveDao.add(user.getUserId(), res.getName(), id, date, initHour, finalHour );
-//				req.getSession().setAttribute("success", "Recurso reservado");
 			}
 			
 		}

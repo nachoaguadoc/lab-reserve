@@ -116,6 +116,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>RemoveGroupServlet</servlet-name>
 		<url-pattern>/removeGroup</url-pattern>
 	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>ConsultResourceServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.ConsultResourceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConsultResourceServlet</servlet-name>
+		<url-pattern>/consult</url-pattern>
+	</servlet-mapping>
 	
 	
 <security-constraint>

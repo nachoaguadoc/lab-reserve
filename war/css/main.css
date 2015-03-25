@@ -137,3 +137,15 @@ color: #222;
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
+
+
+.free {
+	background-color: #dff0d8;
+}
+.busy {
+	background-color: #f2dede;
+}
+.disabled{
+	background-color: #fcf8e3;
+}

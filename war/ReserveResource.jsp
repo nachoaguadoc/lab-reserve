@@ -20,6 +20,7 @@
       <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
       <script src="http://silviomoreto.github.io/bootstrap-select/javascripts/bootstrap-select.js"></script>
 		<link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.css"/ >
+		
 		<script src="js/jquery.datetimepicker.js"></script>
 		
 	</head>
@@ -52,6 +53,7 @@
 		<br><br><br>
 			<c:choose>
 				<c:when test="${user != null}">
+				
 					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8">
 						<table class="table">
 							<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" /></td>
@@ -127,13 +129,83 @@
 	Please login with your Google account
 				</c:otherwise>
 			</c:choose>
-			<c:if test="${error != null}">
-			<div class="alert alert-danger" role="alert">
-			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			  <span class="sr-only">Error:</span>
-			  ${error}
-			</div></c:if>
+			
+			<!-- Consultar las reservas en un día concreto -->
+			<form action="/consult?id=${resource.id}" method="post" accept-charset="utf-8">
+				<table class="table">
+					<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" /></td>
+					
+					<div class="input-group">
+					  <span class="input-group-addon" id="sizing-addon2"></span>
+					  
+					  <input type="text" name="consultDate" id="consultDate" class="form-control" placeholder="Select Date" value="${dateSelected}" aria-describedby="sizing-addon2">
+
+					<td colspan="2" align="center"><input class="btn btn-default btn-round btn-border-w" type="submit"
+							value="Consultar" /> </td>
 					</div>
+					
+   						</table>
+			</form>
+			
+			<c:if test="${consult != null}">
+				<h2>Consulta para fecha ${dateSelected}</h2>
+				<table class="table table-bordered">
+				<tbody>
+					<c:set var="counter" value="1"/>
+					<c:forEach items="${list}" var="hour" varStatus="status">
+
+							<c:if test="${!consult[hour]}">
+								
+								<td class="free">${hour}</td>								
+							</c:if>
+							<c:if test="${consult[hour]}">
+								<td class="busy">${hour }</td>								
+							</c:if>
+							<c:if test="${counter % 4 == 0 }">
+								</tr>
+								<tr>
+							</c:if>
+							<c:set var="counter" value="${counter + 1}"/>
+					</c:forEach>
+<!-- 				    <tr>
+				      <td class="free">01:00</td>
+				      <td class="busy">02:00</td>
+				      <td class="disabled">03:00</td>
+				      <td>04:00</td>
+				    </tr>
+				    <tr>
+				      <td>05:00</td>
+				      <td>06:00</td>
+				      <td>07:00</td>
+				      <td>08:00</td>
+				    </tr>
+				    <tr>
+				      <td>09:00</td>
+				      <td>10:00</td>
+				      <td>11:00</td>
+				      <td>12:00</td>
+				    </tr>      <tr>
+				      <td>13:00</td>
+				      <td>14:00</td>
+				      <td>15:00</td>
+				      <td>16:00</td>
+				    </tr>      <tr>
+				      <td>17:00</td>
+				      <td>18:00</td>
+				      <td>19:00</td>
+				      <td>20:00</td>
+				    </tr>      <tr>
+				      <td>21:00</td>
+				      <td>22:00</td>
+				      <td>23:00</td>
+				      <td>00:00</td>
+				    </tr> -->
+				  </tbody>
+			  </table>
+			</c:if>
+			
+			</div>
+
 	</div>
 	</body>
 </html>
@@ -141,6 +213,10 @@
 jQuery('#initDate').datetimepicker({ 
 			timepicker:false,
 			 format: 'd/m/y'
+});
+jQuery('#consultDate').datetimepicker({ 
+	timepicker:false,
+	 format: 'd/m/y'
 });
 
 jQuery('#finalDate').datetimepicker({ 

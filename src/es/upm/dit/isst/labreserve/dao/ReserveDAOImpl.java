@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -140,8 +142,17 @@ public class ReserveDAOImpl implements ReserveDAO {
 		}
 		return false;
 	
-
-
+	}
+	
+	@Override
+	public HashMap<String, Boolean> getConsult(Long id, String date){
+		HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
+		List<String> hours = Arrays.asList("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
+		for (int i = 0; i<hours.size()-1; i++){
+			boolean res = isResourceReserved(id, date, hours.get(i), hours.get(i+1));
+			consult.put(hours.get(i), res);
+		}
+		return consult;
 	}
 
 }

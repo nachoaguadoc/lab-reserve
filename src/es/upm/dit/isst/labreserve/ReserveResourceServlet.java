@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -47,11 +48,19 @@ public class ReserveResourceServlet extends HttpServlet {
 		}
 	    Long id = Long.parseLong(req.getParameter("id"));
 		Resource resource = dao.getResource(id);
+		
+		List<String> list = Arrays.asList("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
+		
 		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resource", resource);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
+		req.getSession().setAttribute("consult", null);
+		req.getSession().setAttribute("list", list);
+		req.getSession().setAttribute("dateSelected", null);
+
+
 		RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
         view.forward(req, resp);
 		

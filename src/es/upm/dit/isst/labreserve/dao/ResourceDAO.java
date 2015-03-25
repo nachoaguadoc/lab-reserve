@@ -1,5 +1,6 @@
 package es.upm.dit.isst.labreserve.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.isst.labreserve.model.Resource;
@@ -15,7 +16,5 @@ public interface ResourceDAO {
 	public Resource getResource(Long userId);
 
 	public void remove (Long id);
-		
-//	public void reserve (Long id);
-	
+			
 }

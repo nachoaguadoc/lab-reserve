@@ -1,7 +1,7 @@
 package es.upm.dit.isst.labreserve.dao;
 
+import java.util.HashMap;
 import java.util.List;
-
 
 import es.upm.dit.isst.labreserve.model.Reserve;
 
@@ -25,4 +25,6 @@ public interface ReserveDAO {
 
 	public boolean isResourceReserved(Long id, String date, String initHour, String finalHour);
 	
+	public HashMap<String, Boolean> getConsult(Long id, String date);
+
 }
