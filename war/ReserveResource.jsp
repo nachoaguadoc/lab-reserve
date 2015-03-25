@@ -26,7 +26,7 @@
 	</head>
 	<body class="main2">
 	<div class="container">
-	<h1>Reserva de recursos</h1>
+	<h1>Reserva de recursos - Recurso ${resource.name}</h1>
 		<c:if test="${flashMessageError != null }">
 	<div class="alert alert-error alert-dismissible" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -148,7 +148,7 @@
 			</form>
 			
 			<c:if test="${consult != null}">
-				<h2>Consulta para fecha ${dateSelected}</h2>
+				<h2>Horas libres el ${dateSelected}</h2>
 				<table class="table table-bordered">
 				<tbody>
 					<c:set var="counter" value="1"/>
