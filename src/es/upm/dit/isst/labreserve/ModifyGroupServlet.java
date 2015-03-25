@@ -42,8 +42,7 @@ public class ModifyGroupServlet extends HttpServlet {
 
 		GroupDAO dao = GroupDAOImpl.getInstance();
 		//dao.update(id, name, state, description);
-		FlashMessage flashMessage = new FlashMessage("¡Grupo de recursos modificado!");
-		req.setAttribute("flashMessageSuccess", flashMessage);
+		req.getSession().setAttribute("flashMessageSuccess", "¡Grupo de recursos modificado!");
 		resp.sendRedirect("/main");
 	}
 	
@@ -72,7 +71,7 @@ public class ModifyGroupServlet extends HttpServlet {
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("group", group);
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
-
+		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		

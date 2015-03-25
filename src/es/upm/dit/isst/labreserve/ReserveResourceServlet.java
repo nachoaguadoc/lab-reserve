@@ -31,6 +31,7 @@ public class ReserveResourceServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
+	
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		ReserveDAO resDao = ReserveDAOImpl.getInstance();
 		
@@ -46,8 +47,7 @@ public class ReserveResourceServlet extends HttpServlet {
 		}
 	    Long id = Long.parseLong(req.getParameter("id"));
 		Resource resource = dao.getResource(id);
-		req.getSession().setAttribute("error", null);
-//		req.getSession().setAttribute("success", null);
+		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resource", resource);
 		req.getSession().setAttribute("url", url);
@@ -76,14 +76,12 @@ public class ReserveResourceServlet extends HttpServlet {
 		
 		if (resDao.isResourceReserved(resourceID, date, initHour, finalHour) ){
 			System.out.println("Resource busy");
-			FlashMessage flashMessage = new FlashMessage("Recurso Ocupado");
-			req.setAttribute("flashMessageError", flashMessage);
+			req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 	        view.forward(req, resp);
 		} else {
 			resDao.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-			FlashMessage flashMessage = new FlashMessage("¡Recurso reservado!");
-			req.setAttribute("flashMessageSuccess", flashMessage);
+			req.getSession().setAttribute("flashMessageSuccess", "¡Recurso reservado!");
 			resp.sendRedirect("/main");
 		}
 	}

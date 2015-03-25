@@ -48,8 +48,7 @@ public class ReserveGroupServlet extends HttpServlet {
 		}
 	    Long id = Long.parseLong(req.getParameter("id"));
 		Group group = dao.getGroup(id);
-		req.getSession().setAttribute("error", null);
-//		req.getSession().setAttribute("success", null);
+		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("group", group);
 		req.getSession().setAttribute("url", url);
@@ -91,12 +90,10 @@ public class ReserveGroupServlet extends HttpServlet {
 			
 		}
 		if (reserved) {
-			FlashMessage flashMessage = new FlashMessage("¡Grupo de recursos reservados!");
-			req.setAttribute("flashMessageSuccess", flashMessage);
+			req.getSession().setAttribute("flashMessageSuccess", "¡Grupo de recursos reservados!");
 			resp.sendRedirect("/main");
 		} else {
-			FlashMessage flashMessage = new FlashMessage("Grupo de recursos ocupado");
-			req.setAttribute("flashMessageError", flashMessage);
+			req.getSession().setAttribute("flashMessageError", "Grupo de recursos ocupado");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveGroup.jsp");
 	        view.forward(req, resp);
 		}

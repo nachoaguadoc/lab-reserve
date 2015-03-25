@@ -24,7 +24,8 @@ import es.upm.dit.isst.labreserve.model.Resource;
 public class MainServlet extends HttpServlet {
 
 	private static final Long serialVersionUID = 1L;
-
+	int tries = 2;
+	String lastValue = "aaaaaa";
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
@@ -47,6 +48,23 @@ public class MainServlet extends HttpServlet {
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
+		if (req.getSession().getAttribute("flashMessageSuccess") != null){
+			tries --;
+			if (tries == 0){
+				if (lastValue == req.getSession().getAttribute("flashMessageSuccess").toString()) {
+					lastValue = req.getSession().getAttribute("flashMessageSuccess").toString();
+					req.getSession().setAttribute("flashMessageSuccess", null);
+				} else {
+					lastValue = req.getSession().getAttribute("flashMessageSuccess").toString();
+				}
+				
+				tries = 2;
+			}
+
+
+		}
+
+
 		
 		
 		try {

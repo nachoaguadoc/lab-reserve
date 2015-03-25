@@ -19,8 +19,7 @@ public class RemoveResourceServlet extends HttpServlet {
     String id = req.getParameter("id");
     ResourceDAO dao = ResourceDAOImpl.getInstance();
     dao.remove(Long.parseLong(id));
-	FlashMessage flashMessage = new FlashMessage("¡Recurso borrado!");
-	req.setAttribute("flashMessageSuccess", flashMessage);
+	req.getSession().setAttribute("flashMessageSuccess", "¡Recurso borrado!");
     resp.sendRedirect("/main");
   }
 } 

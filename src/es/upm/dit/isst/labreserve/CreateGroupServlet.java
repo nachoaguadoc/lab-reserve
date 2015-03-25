@@ -43,8 +43,7 @@ public class CreateGroupServlet extends HttpServlet {
 		}
 		GroupDAO dao = GroupDAOImpl.getInstance();
 		dao.add(name, resourcesId, description);
-		FlashMessage flashMessage = new FlashMessage("¡Grupo de recursos creado!");
-		req.setAttribute("flashMessageSuccess", flashMessage);
+		req.getSession().setAttribute("flashMessageSuccess", "¡Grupo de recursos creado!");
 		resp.sendRedirect("/main");
 	}
 	
@@ -70,7 +69,8 @@ public class CreateGroupServlet extends HttpServlet {
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
-		
+		req.getSession().setAttribute("flashMessageError", null);
+
 		RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
         view.forward(req, resp);
 		

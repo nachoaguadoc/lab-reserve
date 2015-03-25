@@ -43,13 +43,13 @@ public class ModifyReserveServlet extends HttpServlet {
 	    
 		if (dao.isResourceReserved(resourceID, date, initHour, finalHour) ){
 			System.out.println("Resource busy");
-			req.getSession().setAttribute("message", "Resource busy");
+			req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
+
 			RequestDispatcher view = req.getRequestDispatcher("ModifyReserve.jsp");
 	        view.forward(req, resp);
 		} else {
 			dao.update(id, resourceName, resourceID,  date, initHour, finalHour);
-			FlashMessage flashMessage = new FlashMessage("¡Reserva modificada!");
-			req.setAttribute("flashMessageSuccess", flashMessage);
+			req.getSession().setAttribute("flashMessageSuccess", "¡Reserva modificada!");
 			resp.sendRedirect("/main");
 		}
 	}
@@ -77,6 +77,8 @@ public class ModifyReserveServlet extends HttpServlet {
 		req.getSession().setAttribute("reserve", reserve);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
+		req.getSession().setAttribute("flashMessageError", null);
+
 		
 		RequestDispatcher view = req.getRequestDispatcher("ModifyReserve.jsp");
         view.forward(req, resp);
