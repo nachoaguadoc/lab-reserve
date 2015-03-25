@@ -68,13 +68,6 @@
 				<h4><c:out value="${group.name}" /></h4>
 				<hr>
 				<p><c:out value="${group.description}" /></p>
-				<span>
-					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/removeGroup?id=${group.id}" />">Borrar</a>
-				</span>
-									
-				<span>
-					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/modifyGroup?id=${group.id}" />">Modificar</a>
-				</span>
 				
 				<span>
 					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/reserveGroup?id=${group.id}" />">Reservar</a>
