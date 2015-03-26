@@ -121,9 +121,12 @@ color: #222;
 .col-md-2 {
 	margin: 30px !important;
 }
-.col-md-3 {
-	margin: 20px !important;
-	height: 180px;
+
+.height {
+		margin: 20px !important;
+	
+		height: 180px;
+	
 }
 
 .top-1{
@@ -148,4 +151,14 @@ color: #222;
 }
 .disabled{
 	background-color: #fcf8e3;
+}
+
+.form-control {
+	width: 25% !important;
+}
+#buttonReserve, #buttonConsult {
+	float: left;
+}
+.wrapper {
+	padding-left: 0px !important;
 }

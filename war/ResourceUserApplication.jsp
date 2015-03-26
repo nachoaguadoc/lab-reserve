@@ -20,11 +20,15 @@
 	 <div class="container">
 				<h1>Recursos</h1>
 				<c:if test="${flashMessageSuccess != null }">
-				<div class="alert alert-success alert-dismissible" role="alert">
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <strong>¡Hecho!</strong> ${flashMessageSuccess}
-				</div>
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					  <span class="sr-only">¡Hecho!:</span>
+					${flashMessageSuccess}
+					</div>
 				</c:if>
+				
+
 
 			<div class="top-1">
 				<div class="dropdown ">
@@ -64,7 +68,7 @@
 				</c:forEach>
 			</c:forEach>
 						
-			<div class="container col-md-3 resource" data-toggle="popover" data-html="true" data-trigger="hover" title="Recursos" data-placement="right" data-content="${names}">
+			<div class="container col-md-3 height resource" data-toggle="popover" data-html="true" data-trigger="hover" title="Recursos" data-placement="right" data-content="${names}">
 				<h4><c:out value="${group.name}" /></h4>
 				<hr>
 				<p><c:out value="${group.description}" /></p>
@@ -81,7 +85,7 @@
 		recursos disponibles.</p> 
 		<div class="container row">
 			<c:forEach items="${resources}" var="resource">
-				<div class="container col-md-3 resource">
+				<div class="container col-md-3 height resource">
 					<h4><c:out value="${resource.name}" /></h4>
 					<hr>
 					<p><c:out value="${resource.description}" /></p>

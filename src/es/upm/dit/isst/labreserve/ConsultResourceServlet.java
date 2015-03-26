@@ -50,7 +50,6 @@ public class ConsultResourceServlet extends HttpServlet {
 		consult = resDao.getConsult(resourceID, date);
 		req.getSession().setAttribute("dateSelected", date);
 		req.getSession().setAttribute("consult", consult);
-		System.out.println(consult);
 		RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
         view.forward(req, resp);
 	}

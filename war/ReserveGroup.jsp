@@ -13,14 +13,18 @@
 		<title>Grupo de recursos</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-      <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" media="screen" href="http://silviomoreto.github.io/bootstrap-select/stylesheets/bootstrap-select.css">
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-      <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-      <script src="http://silviomoreto.github.io/bootstrap-select/javascripts/bootstrap-select.js"></script>
-		<link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.css"/ >
 		<script src="js/jquery.datetimepicker.js"></script>
+		<link rel="stylesheet" type="text/css" href="js/jquery.datetimepicker.css"/ >
+
+      	<link href="css/bootstrap.min.css" rel="stylesheet">
+      	<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-select.min.css">
+      	<script src="js/bootstrap-select.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+      
+		<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+	
 		
 	</head>
 	<body class="main2">
@@ -28,10 +32,12 @@
 	<h1>Reserva de grupo de recursos</h1>
 	
 			<c:if test="${flashMessageError != null }">
-	<div class="alert alert-error alert-dismissible" role="alert">
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  <strong>¡Error!</strong> ${flashMessageError}
-	</div>
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+${flashMessageError}
+</div>
 	</c:if>
 	<div class="top-1">
 	
@@ -54,14 +60,10 @@
 			<c:choose>
 				<c:when test="${user != null}">
 					<form action="/reserveGroup?id=${group.id}" method="post" accept-charset="utf-8">
-						<table class="table">
 							<input type="hidden" name="groupID" id="groupID" value="${group.id}" /></td>
-							
-							<div class="input-group">
-							  <span class="input-group-addon" id="sizing-addon2"></span>
-							  
-							  <input type="text" name="initDate" id="initDate" class="form-control" placeholder="Select Date" aria-describedby="sizing-addon2">
-									<select class="selectpicker" data-style="size: auto" id="initTime" name="initTime">
+
+							<span><input type="text" name="initDate" id="initDate" class="form-control col-md-4" placeholder="Select Date"></span>
+									<span><select class="selectpicker col-md-4" id="initTime" name="initTime"></span>
 								 <!-- <option value="00:00">00:00</option>
 									  <option value="01:00">01:00</option>
 									  <option value="02:00">02:00</option>
@@ -90,7 +92,7 @@
 									</select>                			
 		                			<!-- <input id="finalDate" type="text" name="finalDate"> -->
 		                			
-		                			<select id="finalTime" name="finalTime" class="selectpicker">
+		                			<select id="finalTime" name="finalTime" class="selectpicker col-md-4">
 									  <!-- <option value="00:00">00:00</option>
 									  <option value="01:00">01:00</option>
 									  <option value="02:00">02:00</option>
@@ -116,11 +118,13 @@
 									  <option value="22:00">22:00</option>
 								<!--  <option value="23:00">23:00</option> -->
 									</select>
-							<td colspan="2" align="center"><input class="btn btn-default btn-round btn-border-w" type="submit"
-									value="Reservar" /> </td>
-							</div>
+									<br><br>
+							<div class="wrapper col-md-3">
+							<input id="buttonReserve" class="btn btn-default btn-round btn-border-w" type="submit"
+									value="Reservar" />
+								</div>
 							
-     						</table>
+		
 					</form>
 				</c:when>
 				<c:otherwise>
@@ -139,16 +143,17 @@
 	</body>
 </html>
 <script>
-jQuery('#initDate').datetimepicker({ 
+var date = new Date();
+date.setDate(date.getDate());
+jQuery('#initDate').datepicker({ 
 			timepicker:false,
-			 format: 'd/m/y'
+			autoclose: true,
+			startDate: date,
+			format: 'd/m/yy'
 });
-
 jQuery('#finalDate').datetimepicker({ 
 	timepicker:false,
 	format: 'd-m-y'			 
 });
-
-$('.selectpicker').selectpicker();
 
 </script>
