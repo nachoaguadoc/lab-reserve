@@ -15,10 +15,13 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.ConfigDAO;
+import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.GroupDAO;
 import es.upm.dit.isst.labreserve.dao.GroupDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Group;
 import es.upm.dit.isst.labreserve.model.Resource;
 
@@ -28,8 +31,11 @@ public class MainServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		ResourceDAO dao = ResourceDAOImpl.getInstance();
+		
+		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
 		GroupDAO groupDAO = GroupDAOImpl.getInstance();
+		ConfigDAO configDAO = ConfigDAOImpl.getInstance();
+		
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
@@ -40,14 +46,19 @@ public class MainServlet extends HttpServlet {
 		if (user != null){
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
-		    resources = dao.listResources();
+		    resources = resourceDAO.listResources();
 		}
 		List<Group> groups = groupDAO.listGroups();
+		
+		Config config = configDAO.getConfig("global");
+		
 		req.getSession().setAttribute("groups", new ArrayList<Group>(groups));
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("resources", new ArrayList<Resource>(resources));
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
+		
+		//Contador para mensajes Flash
 	    Object counter = req.getSession().getAttribute("Count");
 		if (counter == null) {
 			req.getSession().setAttribute("Count", 2);
@@ -66,17 +77,20 @@ public class MainServlet extends HttpServlet {
 		    	req.getSession().setAttribute("Count", 2);
 
 			}
-		}
-
-
-
-		
+		}	
 		
 		try {
 			boolean admin = userService.isUserAdmin();
 			if (admin) {
-				RequestDispatcher view = req.getRequestDispatcher("ResourceAdminApplication.jsp");
-		        view.forward(req, resp);
+				if (config == null){
+					RequestDispatcher view = req.getRequestDispatcher("SetConfig.jsp");
+			        view.forward(req, resp);
+				} else {
+					req.getSession().setAttribute("config", config);
+					RequestDispatcher view = req.getRequestDispatcher("ResourceAdminApplication.jsp");
+			        view.forward(req, resp);
+				}
+
 			}
 			else {
 				RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");

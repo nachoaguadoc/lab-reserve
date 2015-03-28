@@ -127,6 +127,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/consult</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>SetConfigServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.SetConfigServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SetConfigServlet</servlet-name>
+		<url-pattern>/config</url-pattern>
+	</servlet-mapping>
+	
+	
 	
 <security-constraint>
 	<web-resource-collection>
