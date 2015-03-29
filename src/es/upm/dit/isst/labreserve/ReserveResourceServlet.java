@@ -75,7 +75,7 @@ public class ReserveResourceServlet extends HttpServlet {
 			}
 			finalTimes.add(hour);
 		}
-		List<String> list = Arrays.asList("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
+		List<String> list = Arrays.asList("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
 		
 		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
@@ -111,9 +111,12 @@ public class ReserveResourceServlet extends HttpServlet {
 //		String finalDate = checkNull(req.getParameter("finalDate"));
 		String initHour = checkNull(req.getParameter("initTime"));
 		String finalHour = checkNull(req.getParameter("finalTime"));
-		ReserveDAO r = ReserveDAOImpl.getInstance();
-		
-		if (reserveDAO.isResourceReserved(resourceID, date, initHour, finalHour) ){
+		if (date == ""){
+			req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
+			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+	        view.forward(req, resp);
+		}
+		else if (reserveDAO.isResourceReserved(resourceID, date, initHour, finalHour) ){
 			System.out.println("Resource busy");
 			req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");

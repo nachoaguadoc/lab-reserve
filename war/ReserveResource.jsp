@@ -98,7 +98,7 @@ ${flashMessageError}
 
 					  
 					  <input type="text" name="consultDate" id="consultDate" class="form-control max-width ol-md-4" placeholder="Select Date" value="${dateSelected}">
-					<br><br><br>
+					<br>
 					<div class="wrapper">
 					<input class="btn btn-default btn-round btn-border-w" id="buttonConsult" type="submit"
 							value="Consultar" />
@@ -112,54 +112,23 @@ ${flashMessageError}
 				<table class="table table-bordered">
 				<tbody>
 					<c:set var="counter" value="1"/>
-					<c:forEach items="${list}" var="hour" varStatus="status">
+					<c:forEach items="${list}" var="hour" varStatus="i">
 
 							<c:if test="${!consult[hour]}">
-								
-								<td class="free">${hour}</td>								
+								<c:if test="${fn:length(list) > i.count}" >
+									<td class="free">${hour} - ${list[i.count]}</td>
+								</c:if>								
 							</c:if>
 							<c:if test="${consult[hour]}">
-								<td class="busy">${hour }</td>								
-							</c:if>
+								<c:if test="${fn:length(list) > i.count}" >
+									<td class="busy">${hour} - ${list[i.count]}</td>
+								</c:if>										</c:if>
 							<c:if test="${counter % 4 == 0 }">
 								</tr>
 								<tr>
 							</c:if>
 							<c:set var="counter" value="${counter + 1}"/>
 					</c:forEach>
-<!-- 				    <tr>
-				      <td class="free">01:00</td>
-				      <td class="busy">02:00</td>
-				      <td class="disabled">03:00</td>
-				      <td>04:00</td>
-				    </tr>
-				    <tr>
-				      <td>05:00</td>
-				      <td>06:00</td>
-				      <td>07:00</td>
-				      <td>08:00</td>
-				    </tr>
-				    <tr>
-				      <td>09:00</td>
-				      <td>10:00</td>
-				      <td>11:00</td>
-				      <td>12:00</td>
-				    </tr>      <tr>
-				      <td>13:00</td>
-				      <td>14:00</td>
-				      <td>15:00</td>
-				      <td>16:00</td>
-				    </tr>      <tr>
-				      <td>17:00</td>
-				      <td>18:00</td>
-				      <td>19:00</td>
-				      <td>20:00</td>
-				    </tr>      <tr>
-				      <td>21:00</td>
-				      <td>22:00</td>
-				      <td>23:00</td>
-				      <td>00:00</td>
-				    </tr> -->
 				  </tbody>
 			  </table>
 			</c:if>
