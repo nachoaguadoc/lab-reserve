@@ -62,7 +62,7 @@ ${flashMessageError}
 					<form action="/reserveGroup?id=${group.id}" method="post" accept-charset="utf-8">
 							<input type="hidden" name="groupID" id="groupID" value="${group.id}" /></td>
 
-							<span><input type="text" name="initDate" id="initDate" class="form-control col-md-4" placeholder="Select Date"></span>
+							<span><input type="text" name="initDate" id="initDate" class="form-control max-width col-md-4" placeholder="Select Date"></span>
 									<span><select class="selectpicker col-md-4" id="initTime" name="initTime"></span>
 								 <!-- <option value="00:00">00:00</option>
 									  <option value="01:00">01:00</option>

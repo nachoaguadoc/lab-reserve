@@ -153,7 +153,7 @@ color: #222;
 	background-color: #fcf8e3;
 }
 
-.form-control {
+.max-width{
 	width: 25% !important;
 }
 #buttonReserve, #buttonConsult {
@@ -162,3 +162,8 @@ color: #222;
 .wrapper {
 	padding-left: 0px !important;
 }
+
+label, #webmaster{
+	margin-left: 15px;
+}
+

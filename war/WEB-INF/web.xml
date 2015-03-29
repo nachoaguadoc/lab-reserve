@@ -144,12 +144,28 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/new</url-pattern>
 	</web-resource-collection>
 	<web-resource-collection>
-		<web-resource-name>CreateResource</web-resource-name>
+		<web-resource-name>ModifyResource</web-resource-name>
 		<url-pattern>/modify</url-pattern>
 	</web-resource-collection>
 	<web-resource-collection>
-		<web-resource-name>CreateResource</web-resource-name>
+		<web-resource-name>RemoveResource</web-resource-name>
 		<url-pattern>/remove</url-pattern>
+	</web-resource-collection>
+		<web-resource-collection>
+		<web-resource-name>CreateGroup</web-resource-name>
+		<url-pattern>/createGroup</url-pattern>
+	</web-resource-collection>
+	<web-resource-collection>
+		<web-resource-name>ModifyGroup</web-resource-name>
+		<url-pattern>/modifyGroup</url-pattern>
+	</web-resource-collection>
+	<web-resource-collection>
+		<web-resource-name>RemoveGroup</web-resource-name>
+		<url-pattern>/removeGroup</url-pattern>
+	</web-resource-collection>
+	<web-resource-collection>
+		<web-resource-name>SetConfig</web-resource-name>
+		<url-pattern>/config</url-pattern>
 	</web-resource-collection>
 	 <auth-constraint>
 	<role-name>admin</role-name>

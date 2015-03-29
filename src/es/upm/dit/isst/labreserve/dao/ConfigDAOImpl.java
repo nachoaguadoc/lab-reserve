@@ -26,20 +26,22 @@ public class ConfigDAOImpl implements ConfigDAO {
 	}
 
 	@Override
-	public void add(String type, String webmaster, String sessionTime) {
+	public void add(String type, String webmaster, String sessionTime, String opening, String closing) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Config config = new Config(type, webmaster, sessionTime);
+			Config config = new Config(type, webmaster, sessionTime, opening, closing);
 			em.persist(config);
 			em.close();
 		}
 	}
 	@Override
-	public void update (String type, String webmaster, String sessionTime) {
+	public void update (String type, String webmaster, String sessionTime, String opening, String closing) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Config config = em.find(Config.class, type);
 		config.setWebmaster(webmaster);
 		config.setSessionTime(sessionTime);
+		config.setOpening(opening);
+		config.setClosing(closing);
 		em.merge(config);
 		em.close();
 	}

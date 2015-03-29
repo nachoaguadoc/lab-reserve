@@ -65,61 +65,17 @@ ${flashMessageError}
 							<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" />
 							
 							  
-							  <span><input type="text" name="initDate" id="initDate" class="form-control col-md-4" placeholder="Select Date"></span>
+							  <span><input type="text" name="initDate" id="initDate" class="form-control max-width col-md-4" placeholder="Select Date"></span>
 									<span><select class="selectpicker col-md-4" id="initTime" name="initTime"></span>
-								 <!-- <option value="00:00">00:00</option>
-									  <option value="01:00">01:00</option>
-									  <option value="02:00">02:00</option>
-									  <option value="03:00">03:00</option>
-									  <option value="04:00">04:00</option>
-									  <option value="05:00">05:00</option>
-									  <option value="06:00">06:00</option> -->
-									  <option value="07:00">07:00</option>
-									  <option value="08:00">08:00</option>
-									  <option value="09:00">09:00</option>
-									  <option value="10:00">10:00</option>
-									  <option value="11:00">11:00</option>
-									  <option value="12:00">12:00</option>
-									  <option value="13:00">13:00</option>
-									  <option value="14:00">14:00</option>
-									  <option value="15:00">15:00</option>
-									  <option value="16:00">16:00</option>
-									  <option value="17:00">17:00</option>
-									  <option value="18:00">18:00</option>
-									  <option value="19:00">19:00</option>
-									  <option value="20:00">20:00</option>
-									  <option value="21:00">21:00</option>
-									  <!--<option value="22:00">22:00</option>
-									  <option value="23:00">23:00</option> -->
-		
+										<c:forEach items="${initTimes}" var="initHour" varStatus="status">
+											<option value="${initHour}">${initHour}</option>
+										</c:forEach>
 									</select>                			
 		                			<!-- <input id="finalDate" type="text" name="finalDate"> -->
-		                			
 		                			<select id="finalTime" name="finalTime" class="selectpicker col-md-4">
-									  <!-- <option value="00:00">00:00</option>
-									  <option value="01:00">01:00</option>
-									  <option value="02:00">02:00</option>
-									  <option value="03:00">03:00</option>
-									  <option value="04:00">04:00</option>
-									  <option value="05:00">05:00</option>
-									  <option value="06:00">06:00</option>
-									  <option value="07:00">07:00</option> -->
-									  <option value="08:00">08:00</option>
-									  <option value="09:00">09:00</option>
-									  <option value="10:00">10:00</option>
-									  <option value="11:00">11:00</option>
-									  <option value="12:00">12:00</option>
-									  <option value="13:00">13:00</option>
-									  <option value="14:00">14:00</option>
-									  <option value="15:00">15:00</option>
-									  <option value="16:00">16:00</option>
-									  <option value="17:00">17:00</option>
-									  <option value="18:00">18:00</option>
-									  <option value="19:00">19:00</option>
-									  <option value="20:00">20:00</option>
-									  <option value="21:00">21:00</option>
-									  <option value="22:00">22:00</option>
-								<!--  <option value="23:00">23:00</option> -->
+										<c:forEach items="${finalTimes}" var="finalHour" varStatus="status">
+											<option value="${finalHour}">${finalHour}</option>
+										</c:forEach>
 									</select>
 									<br><br>
 							<div class="wrapper col-md-3">
@@ -141,7 +97,7 @@ ${flashMessageError}
 					
 
 					  
-					  <input type="text" name="consultDate" id="consultDate" class="form-control col-md-4" placeholder="Select Date" value="${dateSelected}">
+					  <input type="text" name="consultDate" id="consultDate" class="form-control max-width ol-md-4" placeholder="Select Date" value="${dateSelected}">
 					<br><br><br>
 					<div class="wrapper">
 					<input class="btn btn-default btn-round btn-border-w" id="buttonConsult" type="submit"
@@ -235,3 +191,32 @@ jQuery('#finalDate').datetimepicker({
 
 
 </script>
+
+
+
+
+
+<!-- <option value="00:00">00:00</option>
+  <option value="01:00">01:00</option>
+  <option value="02:00">02:00</option>
+  <option value="03:00">03:00</option>
+  <option value="04:00">04:00</option>
+  <option value="05:00">05:00</option>
+  <option value="06:00">06:00</option>
+  <option value="07:00">07:00</option>
+  <option value="08:00">08:00</option>
+  <option value="09:00">09:00</option>
+  <option value="10:00">10:00</option>
+  <option value="11:00">11:00</option>
+  <option value="12:00">12:00</option>
+  <option value="13:00">13:00</option>
+  <option value="14:00">14:00</option>
+  <option value="15:00">15:00</option>
+  <option value="16:00">16:00</option>
+  <option value="17:00">17:00</option>
+  <option value="18:00">18:00</option>
+  <option value="19:00">19:00</option>
+  <option value="20:00">20:00</option>
+  <option value="21:00">21:00</option>
+  <option value="22:00">22:00</option>
+  <option value="23:00">23:00</option> -->

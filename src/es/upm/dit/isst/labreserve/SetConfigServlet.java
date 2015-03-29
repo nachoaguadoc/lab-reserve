@@ -72,11 +72,14 @@ public class SetConfigServlet extends HttpServlet {
 	    
 		String webmaster = checkNull(req.getParameter("webmaster"));
 		String sessionTime = checkNull(req.getParameter("sessionTime"));
+		String opening = checkNull(req.getParameter("opening"));
+		String closing = checkNull(req.getParameter("closing"));
+
 		
 		if (dao.getConfig("global") != null ){
-			dao.update("global", webmaster, sessionTime);
+			dao.update("global", webmaster, sessionTime, opening, closing);
 		} else {
-			dao.add("global", webmaster, sessionTime);
+			dao.add("global", webmaster, sessionTime, opening, closing);
 		}
 		req.getSession().setAttribute("flashMessageSuccess", "¡Parámetros de configuración fijados!");
 		resp.sendRedirect("/main");

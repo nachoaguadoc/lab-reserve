@@ -9,9 +9,9 @@ public interface ConfigDAO {
 	
 	public List<Config> listConfig();
 	
-	public void add (String type, String webmaster, String sessionTime);
+	public void add (String type, String webmaster, String sessionTime, String opening, String closing);
 	
-	public void update (String type, String webmaster, String sessionTime);
+	public void update (String type, String webmaster, String sessionTime, String opensing, String closing);
 
 	public void updateWebmaster (String type, String webmaster);
 

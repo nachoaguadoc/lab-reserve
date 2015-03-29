@@ -15,12 +15,16 @@ public class Config implements Serializable{
 	private String type;
 	private String webmaster;
 	private String sessionTime; 
-
-	public Config(String type, String webmaster, String sessionTime) {
+	private String opening;
+	private String closing;
+	
+	
+	public Config(String type, String webmaster, String sessionTime, String opening, String closing) {
 		this.type = type;
 		this.webmaster = webmaster;
 		this.sessionTime = sessionTime;
-
+		this.opening = opening;
+		this.closing = closing;
 	}
 	
 	public String getType() {
@@ -45,4 +49,19 @@ public class Config implements Serializable{
 		this.sessionTime = sessionTime;
 	}
 
+	public String getOpening() {
+		return opening;
+	}
+
+	public void  setOpening (String opening) {
+		this.opening = opening;
+	}
+	
+	public String getClosing() {
+		return closing;
+	}
+
+	public void  setClosing (String closing) {
+		this.closing = closing;
+	}
 } 
