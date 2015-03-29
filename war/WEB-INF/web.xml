@@ -80,6 +80,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>CheckReservesResource</servlet-name>
 		<url-pattern>/myreserves</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>AdminReservesResource</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.AdminReservesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminReservesResource</servlet-name>
+		<url-pattern>/reserves</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>CreateGroupServlet</servlet-name>
