@@ -20,12 +20,15 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.ConfigDAO;
+import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.GroupDAO;
 import es.upm.dit.isst.labreserve.dao.GroupDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Group;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
@@ -35,7 +38,8 @@ public class ReserveGroupServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		GroupDAO dao = GroupDAOImpl.getInstance();		
+		GroupDAO groupDAO = GroupDAOImpl.getInstance();		
+		ConfigDAO configDAO = ConfigDAOImpl.getInstance();
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
@@ -46,11 +50,36 @@ public class ReserveGroupServlet extends HttpServlet {
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
 		}
+		
+		Config config = configDAO.getConfig("global");
+		List<String> initTimes = new ArrayList<String>();
+		List<String> finalTimes = new ArrayList<String>();
+
+		for (int i = Integer.parseInt(config.getOpening()); i < Integer.parseInt(config.getClosing()); i++){
+			String hour;
+			if (i < 10) {  
+				hour = "0" + Integer.toString(i) + ":00";
+			} else {
+				hour = Integer.toString(i) + ":00";
+			}
+			initTimes.add(hour);
+		}
+		for (int i = Integer.parseInt(config.getOpening())+1; i <= Integer.parseInt(config.getClosing()); i++){
+			String hour;
+			if (i < 10) {  
+				hour = "0" + Integer.toString(i) + ":00";
+			} else {
+				hour = Integer.toString(i) + ":00";
+			}
+			finalTimes.add(hour);
+		}
 	    Long id = Long.parseLong(req.getParameter("id"));
-		Group group = dao.getGroup(id);
+		Group group = groupDAO.getGroup(id);
 		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("group", group);
+		req.getSession().setAttribute("initTimes", initTimes);
+		req.getSession().setAttribute("finalTimes", finalTimes);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		RequestDispatcher view = req.getRequestDispatcher("ReserveGroup.jsp");
