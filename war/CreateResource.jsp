@@ -40,7 +40,7 @@
 		
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/new" method="post" accept-charset="utf-8" class="form">
+					<form action="/new" method="post" accept-charset="utf-8" class="form" onSubmit="return valida()">
 						<div class="form-group">
 							
 								<label for="name">Nombre</label>
@@ -67,3 +67,21 @@
 	</div>
 	</body>
 </html>
+<script>
+function valida(){
+	// dejar return para desactivar validación en el cliente
+	//return;
+	if($("#name").val()==''){
+		alert("Nombre de grupo en blanco")
+		return false;
+	}
+	if($("#description").val()==''){
+		alert("Descripción en blanco")
+		return false;
+	}
+	if($("#state").val()==''){
+		alert("Estado del recurso en blanco")
+		return false;
+	}	
+}
+</script>

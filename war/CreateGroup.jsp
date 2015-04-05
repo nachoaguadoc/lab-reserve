@@ -40,7 +40,7 @@
 		
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/createGroup" method="post" accept-charset="utf-8" class="form">
+					<form action="/createGroup" method="post" accept-charset="utf-8" class="form" onSubmit="return valida()">
 						<div class="form-group">
 							
 								<label for="name">Nombre</label>
@@ -73,3 +73,22 @@
 	</div>
 	</body>
 </html>
+<script>
+function valida(){
+	// dejar return para desactivar validación en el cliente
+	//return;
+	if($("#name").val()==''){
+		alert("Nombre de grupo en blanco")
+		return false;
+	}
+	if($("#description").val()==''){
+		alert("Descripción en blanco")
+		return false;
+	}
+	
+	if($("[name=resources]:checked").length <= 0){
+		alert("Seleccione al menos un recurso");
+		return false;
+	}
+}
+</script>
