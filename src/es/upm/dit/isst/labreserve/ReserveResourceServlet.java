@@ -3,8 +3,8 @@ package es.upm.dit.isst.labreserve;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -111,21 +111,42 @@ public class ReserveResourceServlet extends HttpServlet {
 //		String finalDate = checkNull(req.getParameter("finalDate"));
 		String initHour = checkNull(req.getParameter("initTime"));
 		String finalHour = checkNull(req.getParameter("finalTime"));
-		if (date == ""){
-			req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
+		
+		DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
+		java.util.Date horaini, horafin;
+		try{
+			horaini = dateFormat.parse(initHour);
+			horafin = dateFormat.parse(finalHour);
+			if(horaini.compareTo(horafin) >= 0){
+				req.getSession().setAttribute("flashMessageError", "Hora de sesión incorrecta");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+			    view.forward(req, resp);
+			    return;
+			}
+			
+		}catch(Exception parseException){
+			req.getSession().setAttribute("flashMessageError", "Hora de sesión incorrecta");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
-	        view.forward(req, resp);
+		    view.forward(req, resp);
+		    return;
 		}
-		else if (reserveDAO.isResourceReserved(resourceID, date, initHour, finalHour) ){
-			System.out.println("Resource busy");
-			req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
-			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
-	        view.forward(req, resp);
-		} else {
-			reserveDAO.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
-			req.getSession().setAttribute("flashMessageSuccess", "Â¡Recurso reservado!");
-			resp.sendRedirect("/main");
-		}
+			
+			if (date == ""){
+				req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+		        view.forward(req, resp);
+			}
+			else if (reserveDAO.isResourceReserved(resourceID, date, initHour, finalHour) ){
+				System.out.println("Resource busy");
+				req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+		        view.forward(req, resp);
+			} else {
+				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, initHour, finalHour );
+				req.getSession().setAttribute("flashMessageSuccess", "Â¡Recurso reservado!");
+				resp.sendRedirect("/main");
+			}
+		
 	}
 	private String checkNull(String s) {
 		if (s == null) {

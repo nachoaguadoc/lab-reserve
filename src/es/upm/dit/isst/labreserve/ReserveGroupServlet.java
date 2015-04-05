@@ -104,6 +104,32 @@ public class ReserveGroupServlet extends HttpServlet {
 		ReserveDAO reserveDao = ReserveDAOImpl.getInstance();
 		ResourceDAO resourceDao = ResourceDAOImpl.getInstance();
 
+		DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
+		java.util.Date horaini, horafin;
+		try{
+			horaini = dateFormat.parse(initHour);
+			horafin = dateFormat.parse(finalHour);
+			
+			if(horaini.compareTo(horafin) >= 0){
+				req.getSession().setAttribute("flashMessageError", "Hora de sesión incorrecta");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveGroup.jsp");
+			    view.forward(req, resp);
+			    return;
+			}
+			}catch(Exception parseException){
+				req.getSession().setAttribute("flashMessageError", "Hora de sesión incorrecta");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveGroup.jsp");
+			    view.forward(req, resp);
+			    return;
+			}
+		
+		if (date == ""){
+			req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
+			RequestDispatcher view = req.getRequestDispatcher("ReserveGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
 		List<Long> resources = dao.getGroup(groupID).getResources();
 		boolean reserved = true;
 		for (Long id : resources ) {
