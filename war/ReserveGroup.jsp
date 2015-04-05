@@ -59,7 +59,7 @@ ${flashMessageError}
 		<br><br><br>
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/reserveGroup?id=${group.id}" method="post" accept-charset="utf-8">
+					<form action="/reserveGroup?id=${group.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
 							<input type="hidden" name="groupID" id="groupID" value="${group.id}" /></td>
 
 							<span><input type="text" name="initDate" id="initDate" class="form-control max-width col-md-4" placeholder="Select Date"></span>
@@ -98,6 +98,24 @@ ${flashMessageError}
 	</div>
 	</body>
 </html>
+
+<script>
+function valida(){
+	// dejar return para desactivar validación en el cliente
+	//return;
+	if($("#initDate").val()==''){
+		alert("Fecha de reserva en blanco")
+		return false;
+	}
+	
+    if($("#initTime").val()>$("#finalTime").val())
+    {
+      alert($("#initTime").val() + " -"+ $("#finalTime").val() + " no es una sesión correcta");
+ 	   return false;
+    }
+}
+</script>
+
 <script>
 var date = new Date();
 date.setDate(date.getDate());

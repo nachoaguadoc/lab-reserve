@@ -61,7 +61,7 @@ ${flashMessageError}
 			<c:choose>
 				<c:when test="${user != null}">
 				
-					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8">
+					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
 							<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" />
 							
 							  
@@ -137,6 +137,22 @@ ${flashMessageError}
 	</div>
 	</body>
 </html>
+<script>
+function valida(){
+	// dejar return para desactivar validación en el cliente
+	//return;
+	if($("#initDate").val()==''){
+		alert("Fecha de reserva en blanco")
+		return false;
+	}
+
+    if($("#initTime").val()>$("#finalTime").val())
+    {
+      alert($("#initTime").val() + " -"+ $("#finalTime").val() + " no es una sesión correcta");
+ 	   return false;
+    }
+}
+</script>
 <script>
 var date = new Date();
 date.setDate(date.getDate());
