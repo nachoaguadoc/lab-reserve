@@ -28,17 +28,7 @@
 	<body class="main2">
 	
 		<div class="container">
-				<h1>Fijar parámetros</h1>
-				
-				<c:if test="${flashMessageError != null }">
-<div class="alert alert-danger alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-${flashMessageError}
-</div>
-	</c:if>
-								
+				<h1>Fijar parámetros</h1>				
 			<div class="top-1">
 				<div class="dropdown ">
 			    <a class="dropdown-toggle" 
@@ -59,7 +49,7 @@ ${flashMessageError}
 		
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/config" method="post" accept-charset="utf-8" class="form" onSubmit="return valida()">
+					<form action="/config" method="post" accept-charset="utf-8" class="form">
 						<div class="form-group">
 							
 								<label for="name">Correo del administrador</label>
@@ -83,56 +73,58 @@ ${flashMessageError}
 								<label>Horario de la instalación</label>
 									<br>						    
 							 	<span><select class="selectpicker col-md-4" id="opening" name="opening"></span>
-									  <option value="01:00">01:00</option>
-									  <option value="02:00">02:00</option>
-									  <option value="03:00">03:00</option>
-									  <option value="04:00">04:00</option>
-									  <option value="05:00">05:00</option>
-									  <option value="06:00">06:00</option>
-									  <option value="07:00">07:00</option>
-									  <option value="08:00">08:00</option>
-									  <option value="09:00">09:00</option>
-									  <option value="10:00">10:00</option>
-									  <option value="11:00">11:00</option>
-									  <option value="12:00">12:00</option>
-									  <option value="13:00">13:00</option>
-									  <option value="14:00">14:00</option>
-									  <option value="15:00">15:00</option>
-									  <option value="16:00">16:00</option>
-									  <option value="17:00">17:00</option>
-									  <option value="18:00">18:00</option>
-									  <option value="19:00">19:00</option>
-									  <option value="20:00">20:00</option>
-									  <option value="21:00">21:00</option>
-									  <option value="22:00">22:00</option>
-									  <option value="23:00">23:00</option>
+									  <option value="01">01:00</option>
+									  <option value="02">02:00</option>
+									  <option value="03">03:00</option>
+									  <option value="04">04:00</option>
+									  <option value="05">05:00</option>
+									  <option value="06">06:00</option>
+									  <option value="07">07:00</option>
+									  <option value="08">08:00</option>
+									  <option value="09">09:00</option>
+									  <option value="10">10:00</option>
+									  <option value="11">11:00</option>
+									  <option value="12">12:00</option>
+									  <option value="13">13:00</option>
+									  <option value="14">14:00</option>
+									  <option value="15">15:00</option>
+									  <option value="16">16:00</option>
+									  <option value="17">17:00</option>
+									  <option value="18">18:00</option>
+									  <option value="19">19:00</option>
+									  <option value="20">20:00</option>
+									  <option value="21">21:00</option>
+									  <option value="22">22:00</option>
+									  <option value="23">23:00</option>
+									  <option value="24">24:00</option>
 									</select>  
 									
 									<span><select class="selectpicker col-md-4" id="closing" name="closing"></span>
 							    
-									  <option value="01:00">01:00</option>
-									  <option value="02:00">02:00</option>
-									  <option value="03:00">03:00</option>
-									  <option value="04:00">04:00</option>
-									  <option value="05:00">05:00</option>
-									  <option value="06:00">06:00</option>
-									  <option value="07:00">07:00</option>
-									  <option value="08:00">08:00</option>
-									  <option value="09:00">09:00</option>
-									  <option value="10:00">10:00</option>
-									  <option value="11:00">11:00</option>
-									  <option value="12:00">12:00</option>
-									  <option value="13:00">13:00</option>
-									  <option value="14:00">14:00</option>
-									  <option value="15:00">15:00</option>
-									  <option value="16:00">16:00</option>
-									  <option value="17:00">17:00</option>
-									  <option value="18:00">18:00</option>
-									  <option value="19:00">19:00</option>
-									  <option value="20:00">20:00</option>
-									  <option value="21:00">21:00</option>
-									  <option value="22:00">22:00</option>
-									  <option value="23:00">23:00</option>
+									  <option value="01">01:00</option>
+									  <option value="02">02:00</option>
+									  <option value="03">03:00</option>
+									  <option value="04">04:00</option>
+									  <option value="05">05:00</option>
+									  <option value="06">06:00</option>
+									  <option value="07">07:00</option>
+									  <option value="08">08:00</option>
+									  <option value="09">09:00</option>
+									  <option value="10">10:00</option>
+									  <option value="11">11:00</option>
+									  <option value="12">12:00</option>
+									  <option value="13">13:00</option>
+									  <option value="14">14:00</option>
+									  <option value="15">15:00</option>
+									  <option value="16">16:00</option>
+									  <option value="17">17:00</option>
+									  <option value="18">18:00</option>
+									  <option value="19">19:00</option>
+									  <option value="20">20:00</option>
+									  <option value="21">21:00</option>
+									  <option value="22">22:00</option>
+									  <option value="23">23:00</option>
+									  <option value="24">24:00</option>
 									</select>  
 																    <br><br><br>
 									                	
@@ -148,19 +140,3 @@ ${flashMessageError}
 	</div>
 	</body>
 </html>
-<script>
-function valida(){
-	// dejar return para desactivar validación en el cliente
-	//return;
-	if($("#webmaster").val()==''){
-		alert("Correo del administrador en blanco")
-		return false;
-	}
-
-    if($("#opening").val()>=$("#closing").val())
-    {
-      alert($("#opening").val() + " -"+ $("#closing").val() + " no es un horario correcto");
- 	   return false;
-    }
-}
-</script>

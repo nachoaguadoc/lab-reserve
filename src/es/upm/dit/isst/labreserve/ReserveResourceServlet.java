@@ -114,13 +114,6 @@ public class ReserveResourceServlet extends HttpServlet {
 		
 		DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
 		java.util.Date horaini, horafin;
-		
-		if (date == ""){
-			req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
-			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
-	        view.forward(req, resp);
-		}
-		
 		try{
 			horaini = dateFormat.parse(initHour);
 			horafin = dateFormat.parse(finalHour);
@@ -137,7 +130,13 @@ public class ReserveResourceServlet extends HttpServlet {
 		    view.forward(req, resp);
 		    return;
 		}
-			if (reserveDAO.isResourceReserved(resourceID, date, initHour, finalHour) ){
+			
+			if (date == ""){
+				req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+		        view.forward(req, resp);
+			}
+			else if (reserveDAO.isResourceReserved(resourceID, date, initHour, finalHour) ){
 				System.out.println("Resource busy");
 				req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
 				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");

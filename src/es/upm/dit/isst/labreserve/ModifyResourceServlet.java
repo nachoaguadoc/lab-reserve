@@ -23,7 +23,7 @@ public class ModifyResourceServlet extends HttpServlet {
 	private static final Long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException, ServletException {
+			throws IOException {
 		System.out.println("Updating resource ");
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -35,27 +35,6 @@ public class ModifyResourceServlet extends HttpServlet {
 		String state = checkNull(req.getParameter("state"));
 		String description = checkNull(req.getParameter("description"));
 
-		if (name == ""){
-			req.getSession().setAttribute("flashMessageError", "Nombre en blanco");
-			RequestDispatcher view = req.getRequestDispatcher("ModifyResource.jsp");
-	        view.forward(req, resp);
-	        return;
-		}
-		
-		if (state == ""){
-			req.getSession().setAttribute("flashMessageError", "Estado en blanco");
-			RequestDispatcher view = req.getRequestDispatcher("ModifyResource.jsp");
-	        view.forward(req, resp);
-	        return;
-		}
-
-		
-		if (description == ""){
-			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
-			RequestDispatcher view = req.getRequestDispatcher("ModifyResource.jsp");
-	        view.forward(req, resp);
-	        return;
-		}
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		dao.update(id, name, state, description);

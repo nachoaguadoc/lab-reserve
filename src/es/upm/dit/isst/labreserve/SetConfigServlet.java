@@ -74,40 +74,14 @@ public class SetConfigServlet extends HttpServlet {
 		String sessionTime = checkNull(req.getParameter("sessionTime"));
 		String opening = checkNull(req.getParameter("opening"));
 		String closing = checkNull(req.getParameter("closing"));
-		
-		DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
-		java.util.Date horaini, horafin;
-		
-		if (webmaster == ""){
-			req.getSession().setAttribute("flashMessageError", "Correo del administrador en blanco");
-			RequestDispatcher view = req.getRequestDispatcher("SetConfig.jsp");
-	        view.forward(req, resp);
-	        return;
-		}
-		
-		try{
-			horaini = dateFormat.parse(opening);
-			horafin = dateFormat.parse(closing);
-			if(horaini.compareTo(horafin) >= 0){
-				req.getSession().setAttribute("flashMessageError", "Horario incorrecto");
-				RequestDispatcher view = req.getRequestDispatcher("SetConfig.jsp");
-			    view.forward(req, resp);
-			    return;
-			}
-			
-		}catch(Exception parseException){
-			req.getSession().setAttribute("flashMessageError", "Horario incorrecto");
-			RequestDispatcher view = req.getRequestDispatcher("SetConfig.jsp");
-		    view.forward(req, resp);
-		    return;
-		}
+
 		
 		if (dao.getConfig("global") != null ){
 			dao.update("global", webmaster, sessionTime, opening, closing);
 		} else {
 			dao.add("global", webmaster, sessionTime, opening, closing);
 		}
-		req.getSession().setAttribute("flashMessageSuccess", "¡Parámetros de configuración fijados!");
+		req.getSession().setAttribute("flashMessageSuccess", "Â¡ParÃ¡metros de configuraciÃ³n fijados!");
 		resp.sendRedirect("/main");
 	}
 	private String checkNull(String s) {

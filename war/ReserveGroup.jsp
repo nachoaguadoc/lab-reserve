@@ -102,7 +102,7 @@ ${flashMessageError}
 <script>
 function valida(){
 	// dejar return para desactivar validación en el cliente
-	return;
+	//return;
 	if($("#initDate").val()==''){
 		alert("Fecha de reserva en blanco")
 		return false;
