@@ -17,6 +17,15 @@
 	
 		 <div class="container">
 				<h1> Modificar Grupo</h1>
+						
+				<c:if test="${flashMessageError != null }">
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+${flashMessageError}
+</div>
+	</c:if>
 				
 			<div class="top-1">
 				<div class="dropdown ">
@@ -36,7 +45,7 @@
 		<div class="container row col-md-6 col-md-offset-3">
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/modify?id=${resource.id}" method="post" accept-charset="utf-8">
+					<form action="/modify?id=${resource.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
 						<div class="form-group">
 							
 								<label for="name">Nombre</label>
@@ -81,3 +90,22 @@
 	</div>
 	</body>
 </html>
+<script>
+function valida(){
+	// dejar return para desactivar validación en el cliente
+	return;
+	if($("#name").val()==''){
+		alert("Nombre de grupo en blanco")
+		return false;
+	}
+	if($("#description").val()==''){
+		alert("Descripción en blanco")
+		return false;
+	}
+	
+	if($("[name=resources]:checked").length <= 0){
+		alert("Seleccione al menos un recurso");
+		return false;
+	}
+}
+</script>

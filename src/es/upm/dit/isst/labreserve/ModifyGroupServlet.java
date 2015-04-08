@@ -27,21 +27,41 @@ public class ModifyGroupServlet extends HttpServlet {
 	private static final Long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+			throws IOException, ServletException {
 		System.out.println("Updating resource ");
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
 		}
-	    Long id = Long.parseLong(req.getParameter("id"));
 		String name = checkNull(req.getParameter("name"));
-		String state = checkNull(req.getParameter("state"));
+		String[] resources = req.getParameterValues("resources");
 		String description = checkNull(req.getParameter("description"));
-
+		List<Long> resourcesId = new ArrayList<Long>();
+		
+		if (name == ""){
+			req.getSession().setAttribute("flashMessageError", "Nombre en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
+		if (description == ""){
+			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
+		if (resources == null || resources.length <=0){
+			req.getSession().setAttribute("flashMessageError", "Seleccione al menos un recurso");
+			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
 
 		GroupDAO dao = GroupDAOImpl.getInstance();
-		//dao.update(id, name, state, description);
+		//dao.update(name, resourcesId, description);
 		req.getSession().setAttribute("flashMessageSuccess", "Â¡Grupo de recursos modificado!");
 		resp.sendRedirect("/main");
 	}
