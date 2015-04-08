@@ -140,13 +140,13 @@ ${flashMessageError}
 <script>
 function valida(){
 	// dejar return para desactivar validación en el cliente
-	//return;
+	return;
 	if($("#initDate").val()==''){
 		alert("Fecha de reserva en blanco")
 		return false;
 	}
 
-    if($("#initTime").val()>$("#finalTime").val())
+    if($("#initTime").val()>=$("#finalTime").val())
     {
       alert($("#initTime").val() + " -"+ $("#finalTime").val() + " no es una sesión correcta");
  	   return false;
