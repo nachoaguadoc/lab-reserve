@@ -25,7 +25,7 @@ public class CreateGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+			throws IOException, ServletException {
 		System.out.println("Creating new group ");
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -37,6 +37,29 @@ public class CreateGroupServlet extends HttpServlet {
 		String[] resources = req.getParameterValues("resources");
 		String description = checkNull(req.getParameter("description"));
 		List<Long> resourcesId = new ArrayList<Long>();
+		
+		if (name == ""){
+			req.getSession().setAttribute("flashMessageError", "Nombre en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
+		if (description == ""){
+			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
+		if (resources == null || resources.length <=0){
+			req.getSession().setAttribute("flashMessageError", "Seleccione al menos un recurso");
+			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+			
+		
 		for (String res : resources) {
 			Long resId = Long.parseLong(res);
 			resourcesId.add(resId);

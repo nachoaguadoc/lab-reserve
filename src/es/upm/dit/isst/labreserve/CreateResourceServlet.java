@@ -23,7 +23,7 @@ public class CreateResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+			throws IOException, ServletException {
 		System.out.println("Creating new resource ");
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -34,6 +34,28 @@ public class CreateResourceServlet extends HttpServlet {
 		String name = checkNull(req.getParameter("name"));
 		String state = checkNull(req.getParameter("state"));
 		String description = checkNull(req.getParameter("description"));
+
+		if (name == ""){
+			req.getSession().setAttribute("flashMessageError", "Nombre en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateResource.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
+		if (state == ""){
+			req.getSession().setAttribute("flashMessageError", "Estado en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateResource.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+
+		
+		if (description == ""){
+			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
+			RequestDispatcher view = req.getRequestDispatcher("CreateResource.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
 
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
