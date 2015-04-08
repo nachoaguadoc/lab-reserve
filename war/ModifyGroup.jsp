@@ -45,7 +45,7 @@ ${flashMessageError}
 		<div class="container row col-md-6 col-md-offset-3">
 			<c:choose>
 				<c:when test="${user != null}">
-					<form action="/modify?id=${resource.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
+					<form action="/modifyGroup?id=${group.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
 						<div class="form-group">
 							
 								<label for="name">Nombre</label>

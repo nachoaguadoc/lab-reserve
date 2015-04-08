@@ -37,6 +37,7 @@ public class ModifyGroupServlet extends HttpServlet {
 		String name = checkNull(req.getParameter("name"));
 		String[] resources = req.getParameterValues("resources");
 		String description = checkNull(req.getParameter("description"));
+	    Long id = Long.parseLong(req.getParameter("id"));
 		List<Long> resourcesId = new ArrayList<Long>();
 		
 		if (name == ""){
@@ -47,7 +48,7 @@ public class ModifyGroupServlet extends HttpServlet {
 		}
 		
 		if (description == ""){
-			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
+			req.getSession().setAttribute("flashMessageError", "Descripcion en blanco");
 			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
 	        view.forward(req, resp);
 	        return;
@@ -59,9 +60,14 @@ public class ModifyGroupServlet extends HttpServlet {
 	        view.forward(req, resp);
 	        return;
 		}
+		
+		for (String res : resources) {
+			Long resId = Long.parseLong(res);
+			resourcesId.add(resId);
+		}
 
 		GroupDAO dao = GroupDAOImpl.getInstance();
-		//dao.update(name, resourcesId, description);
+		dao.update(id, name, resourcesId, description);
 		req.getSession().setAttribute("flashMessageSuccess", "Â¡Grupo de recursos modificado!");
 		resp.sendRedirect("/main");
 	}
