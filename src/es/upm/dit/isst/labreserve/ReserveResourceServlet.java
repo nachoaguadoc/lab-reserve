@@ -119,6 +119,7 @@ public class ReserveResourceServlet extends HttpServlet {
 			req.getSession().setAttribute("flashMessageError", "Fecha incorrecta");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 	        view.forward(req, resp);
+	        return;
 		}
 		
 		try{
