@@ -94,6 +94,12 @@ public class CreateGroupServlet extends HttpServlet {
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		req.getSession().setAttribute("flashMessageError", null);
 
+		if(resources.isEmpty()){
+			RequestDispatcher view = req.getRequestDispatcher("ResourceAdminApplication.jsp");
+	        view.forward(req, resp);
+	        return;
+		}
+		
 		RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
         view.forward(req, resp);
 		

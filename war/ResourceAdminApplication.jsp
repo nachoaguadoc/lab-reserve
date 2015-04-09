@@ -47,8 +47,15 @@
 		<p>Hay un total de  <c:out value="${fn:length(groups)}" />
 		Grupos de recursos.</p> 
 	    <span class="new">
-		<a href="/createGroup" class="btn btn-default btn-round btn-border-w"> Añadir grupo </a>
+			<c:if test="${fn:length(resources) != 0 }">
+				<a href="/createGroup" class="btn btn-default btn-round btn-border-w"> Añadir grupo </a>
+			</c:if>
+			
+			<c:if test="${fn:length(resources) == 0 }">
+				<a href="" class="btn btn-default btn-round btn-border-w disabled" data-toggle="tooltip" data-original-title="Debe haber al menos 1 recurso"> Añadir grupo </a>
+			</c:if> 	
 		</span>	
+		
 		<div class="pre-container row groups">
 	 
 		<c:forEach items="${groups}" var="group">
@@ -64,6 +71,9 @@
 			</c:forEach>
 						
 			<div class="container col-md-3 height resource" data-toggle="popover" data-html="true" data-trigger="hover" title="Recursos" data-placement="right" data-content="${names}">
+				
+				
+				
 				<h4><c:out value="${group.name}" /></h4>
 				<hr>
 				<p><c:out value="${group.description}" /></p>
