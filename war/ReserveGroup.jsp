@@ -39,6 +39,13 @@
 ${flashMessageError}
 </div>
 	</c:if>
+	
+		<div class="alert alert-danger alert-dismissible" role="alert" id="alerta" hidden>
+ 			<span class="glyphicon glyphicon-exclamation-sign"></span>
+			<span id="efecha" class="errores">Error: Fecha de reserva en blanco</span>
+			<span id="esesion" class="errores">Error: Horario de sesión incorrecto</span>
+</div>
+	
 	<div class="top-1">
 	
 		<div class="dropdown ">
@@ -102,17 +109,23 @@ ${flashMessageError}
 <script>
 function valida(){
 	// dejar return para desactivar validación en el cliente
-	return;
-	if($("#initDate").val()==''){
-		alert("Fecha de reserva en blanco")
-		return false;
-	}
+	//return;
 	
-    if($("#initTime").val()>$("#finalTime").val())
+	$("#alerta").hide();
+	$("span.errores").hide();
+	
+	if($("#initDate").val()==''){
+		$("#alerta").show();
+		$("#efecha").show();	
+		return false;
+	};
+
+    if($("#initTime").val()>=$("#finalTime").val())
     {
-      alert($("#initTime").val() + " -"+ $("#finalTime").val() + " no es una sesión correcta");
+    	$("#alerta").show();
+   		$("#esesion").show();
  	   return false;
-    }
+    };
 }
 </script>
 

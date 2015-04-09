@@ -38,6 +38,12 @@
 ${flashMessageError}
 </div>
 	</c:if>
+	
+			<div class="alert alert-danger alert-dismissible" role="alert" id="alerta" hidden>
+  				<span class="glyphicon glyphicon-exclamation-sign"></span>
+				<span id="ewebmaster" class="errores">Error: Correo del administrador en blanco</span>
+				<span id="esesion" class="errores">Error: Horario incorrecto</span>
+			</div>
 								
 			<div class="top-1">
 				<div class="dropdown ">
@@ -152,14 +158,20 @@ ${flashMessageError}
 function valida(){
 	// dejar return para desactivar validación en el cliente
 	//return;
+	
+	$("#alerta").hide();
+	$("span.errores").hide();
+		
 	if($("#webmaster").val()==''){
-		alert("Correo del administrador en blanco")
+		$("#alerta").show();
+		$("#ewebmaster").show();
 		return false;
 	}
 
     if($("#opening").val()>=$("#closing").val())
     {
-      alert($("#opening").val() + " -"+ $("#closing").val() + " no es un horario correcto");
+    	$("#alerta").show();
+		$("#esesion").show();
  	   return false;
     }
 }

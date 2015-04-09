@@ -29,6 +29,13 @@
 ${flashMessageError}
 </div>
 	</c:if>
+		
+		<div class="alert alert-danger alert-dismissible" role="alert" id="alerta" hidden>
+ 	 		<span class="glyphicon glyphicon-exclamation-sign"></span>
+			<span id="ename" class="errores">Error: Nombre de grupo en blanco</span>
+			<span id="edescription" class="errores">Error: Descripción en blanco</span>
+			<span id="erecursos" class="errores">Error: Seleccione al menos un recurso</span>
+		</div>
 				
 			<div class="top-1">
 				<div class="dropdown ">
@@ -86,18 +93,25 @@ ${flashMessageError}
 <script>
 function valida(){
 	// dejar return para desactivar validación en el cliente
-	return;
+	//return;
+	
+	$("#alerta").hide();
+	$("span.errores").hide();	
+	
 	if($("#name").val()==''){
-		alert("Nombre de grupo en blanco")
+		$("#alerta").show();
+		$("#ename").show();
 		return false;
 	}
 	if($("#description").val()==''){
-		alert("Descripción en blanco")
+		$("#alerta").show();
+		$("#edescription").show();
 		return false;
 	}
 	
 	if($("[name=resources]:checked").length <= 0){
-		alert("Seleccione al menos un recurso");
+		$("#alerta").show();
+		$("#erecursos").show();
 		return false;
 	}
 }
