@@ -56,7 +56,7 @@
 				</a>
 					<ul class="dropdown-menu">
 					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
-					
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/signup" />"> Perfil </a></li>						
 				    </ul>
 				</div>
 			</div>
@@ -79,24 +79,36 @@
 								<br><br><br><br>
 								
 								<label for="name">Nombre y apellidos de usuario (opcional)</label>
-								<input type="text" class="form-control col-md-4" name="name" id="name" placeholder="Nombre y apellidos"/>
+								<input value="${appUser.name}" type="text" class="form-control col-md-4" name="name" id="name" placeholder="Nombre y apellidos"/>
 								<br><br><br><br>
 								
 								<label for="priority">Rol del usuario</label>
 									<br>
 						
-								<span><select class="selectpicker col-md-4" id="priority" name="priority"></span>
+								<span><select class="selectpicker col-md-4" id="priority" name="priority" onchange="checkPriority()"></span>
 							 	  <option value="1">Alumno</option>
 								  <option value="2">Profesor</option>
 								  <option value="3">Administrador</option>
 								  <option value="4">Dios</option>
 								  <option value="5">Chuck Norris</option>
 
-								</select>     
-						    	
-						    	<br><br><br>
-									                	
+								</select>
+								
+								<div id="descriptionDiv" style="display: none;">	    	
+							    	<br><br>
+							    	
+							    	<label  for="description">Descripción</label>
+									<textarea class="form-control" rows="3" name="description"
+											id="description" placeholder="Mensaje opcional al administrador de la instalación"></textarea>
+									
+									<br><br><br>
+									          	
+								</div>
+								<br><br>
+
 								<input type="submit" value="Fijar" class="btn btn-rounded btn-border-w" />
+
+								${request}
 						</div>
 					</form>
 				</c:when>
@@ -123,6 +135,15 @@ oldPriority = priorityDiv.getAttribute("data-oldpriority");
 
 if (oldPriority != null){
 	$("#priority").val(oldPriority);
+}
+
+function checkPriority() {
+	
+	if ($("#priority").val() != "1"){
+		$("#descriptionDiv").show();
+	} else {
+		$("#descriptionDiv").hide();
+	}
 }
 /*
 function valida(){

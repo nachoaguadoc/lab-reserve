@@ -10,9 +10,9 @@ public interface AppUserDAO {
 	public List<AppUser> listUsers();
 	
 	public void add (String id, String email, int priority, String name);
-	
+		
 	public void update (String id, int priority, String name);
-
+	
 	public AppUser getUser(String id);
 	
 	public void remove (String id);

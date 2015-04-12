@@ -55,6 +55,7 @@ ${flashMessageError}
 		</a>
 			<ul class="dropdown-menu">
 			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>			
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/signup" />"> Perfil </a></li>						
 		    </ul>
 		</div>
 	</div>

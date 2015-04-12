@@ -42,8 +42,9 @@ ${flashMessageError}
 					<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-			   			<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>			
-				    </ul>
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/config" />"> Configuración </a></li>
+					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/requests" />"> Peticiones </a></li>				    </ul>
 				</div>
 			</div>	
 			<a style="float: right;" href="<c:url value="/main" />">Home</a>

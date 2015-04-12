@@ -144,7 +144,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/config</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>SignUpServlet</servlet-name>
 		<servlet-class>es.upm.dit.isst.labreserve.SignUpServlet</servlet-class>
 	</servlet>
@@ -153,6 +153,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/signup</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>CheckRequestsServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.CheckRequestsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckRequestsServlet</servlet-name>
+		<url-pattern>/requests</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DecideRequestServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.DecideRequestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DecideRequestServlet</servlet-name>
+		<url-pattern>/request</url-pattern>
+	</servlet-mapping>
 	
 	
 <security-constraint>
