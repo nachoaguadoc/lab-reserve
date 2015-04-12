@@ -69,6 +69,7 @@
 				<c:when test="${user != null}">
 					<form action="/signup" method="post" accept-charset="utf-8" class="form">
 						<div class="form-group">
+								<input type="hidden" name="userId" value="${user.userId}">
 							
 								<label for="id">ID del usuario:</label>
 								<div class="form-control col-md-4" name="id" id="id">${user.userId}</div>
@@ -86,11 +87,11 @@
 									<br>
 						
 								<span><select class="selectpicker col-md-4" id="priority" name="priority" onchange="checkPriority()"></span>
-							 	  <option value="1">Alumno</option>
-								  <option value="2">Profesor</option>
-								  <option value="3">Administrador</option>
-								  <option value="4">Dios</option>
-								  <option value="5">Chuck Norris</option>
+							 	  <option value="1">1 - Alumno</option>
+								  <option value="2">2 - Profesor</option>
+								  <option value="3">3 - Administrador</option>
+								  <option value="4">4 - Dios</option>
+								  <option value="5">5 - Chuck Norris</option>
 
 								</select>
 								
@@ -108,7 +109,12 @@
 
 								<input type="submit" value="Fijar" class="btn btn-rounded btn-border-w" />
 
-								${request}
+								<c:if test="${requestState != null}">
+									<div class="alert alert-success alert" role="alert" id="alerta" hidden>
+						  				<span class="glyphicon glyphicon-exclamation-sign"></span>
+										<span>La petición ha sido enviada al administrador. Espere respuesta</span>
+									</div>
+								</c:if>
 						</div>
 					</form>
 				</c:when>

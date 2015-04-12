@@ -58,8 +58,14 @@ public class SignUpServlet extends HttpServlet {
 		    urlLinktext = "Logout";
 		    appUser = dao.getUser(user.getUserId());
 		    request = requestDAO.getRequest(user.getUserId());
-		    oldName = appUser.getName();
-		    oldPriority = appUser.getPriority();
+		    if (appUser != null){
+			    oldName = appUser.getName();
+			    oldPriority = appUser.getPriority();
+		    } else {
+			    oldName = "";
+			    oldPriority = 0;
+		    }
+
 		}
 		
 		
@@ -86,49 +92,61 @@ public class SignUpServlet extends HttpServlet {
 			throws IOException, ServletException {
 		AppUserDAO dao = AppUserDAOImpl.getInstance();
 		RequestDAO reqDAO = RequestDAOImpl.getInstance();
-		
+		UserService userService = UserServiceFactory.getUserService();
+
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
-			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
 		}
+		String userId = req.getParameter("userId");
 		int oldPriority;
-		if (dao.getUser(user.getUserId()) != null) {
-			oldPriority = dao.getUser(user.getUserId()).getPriority();
+		if (dao.getUser(userId) != null) {
+			oldPriority = dao.getUser(userId).getPriority();
 		} else {
 			oldPriority = 1;
 		}
 		int priority = Integer.parseInt(req.getParameter("priority"));
-		String userId = user.getUserId();
 		String email = user.getEmail();
 		String name = checkNull(req.getParameter("name"));
 		String desc = checkNull(req.getParameter("description"));
 		Date date = new Date();
 		
-		if (priority != 1 && priority != oldPriority){
-			
-			if (reqDAO.getRequest(userId) != null) {
-				reqDAO.update(userId, email, priority, desc, date);
+		if (userService.isUserAdmin()){
+			if (dao.getUser(userId) != null ){
+				dao.update(userId, priority, name);
 			} else {
-				reqDAO.add(userId, email, priority, desc, date);
-			}
-			
-			if (dao.getUser(user.getUserId()) != null ){
-				dao.update(user.getUserId(), oldPriority, name);
-			} else {
-				//Se le pone prioridad 1 hasta que el administrador acepte su petición
-				dao.add(user.getUserId(), user.getEmail(), 1, name);
-			}
-			req.getSession().setAttribute("flashMessageSuccess", "Petición enviada al administrador");
-
-		} else {
-			if (dao.getUser(user.getUserId()) != null ){
-				dao.update(user.getUserId(), priority, name);
-			} else {
-				dao.add(user.getUserId(), user.getEmail(), priority, name);
+				dao.add(userId, user.getEmail(), priority, name);
 			}
 			req.getSession().setAttribute("flashMessageSuccess", "Usuario actualizado");
+			resp.sendRedirect("/main");
 
+		}
+		else {
+			if (priority != 1 && priority != oldPriority){
+				
+				if (reqDAO.getRequest(userId) != null) {
+					reqDAO.update(userId, email, priority, desc, date);
+				} else {
+					reqDAO.add(userId, email, priority, desc, date);
+				}
+				
+				if (dao.getUser(userId) != null ){
+					dao.update(userId, oldPriority, name);
+				} else {
+					//Se le pone prioridad 1 hasta que el administrador acepte su petición
+					dao.add(userId, user.getEmail(), 1, name);
+				}
+				req.getSession().setAttribute("flashMessageSuccess", "Petición enviada al administrador");
+	
+			} else {
+				if (dao.getUser(userId) != null ){
+					dao.update(userId, priority, name);
+				} else {
+					dao.add(userId, user.getEmail(), priority, name);
+				}
+				req.getSession().setAttribute("flashMessageSuccess", "Usuario actualizado");
+	
+			}
 		}
 		
 		resp.sendRedirect("/main");

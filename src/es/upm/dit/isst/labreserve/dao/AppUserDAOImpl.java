@@ -3,9 +3,11 @@ package es.upm.dit.isst.labreserve.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Config;
+import es.upm.dit.isst.labreserve.model.Request;
 
 public class AppUserDAOImpl implements AppUserDAO {
 	
@@ -22,8 +24,11 @@ public class AppUserDAOImpl implements AppUserDAO {
 	
 	@Override
 	public List<AppUser> listUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = EMFService.get().createEntityManager();
+		// read the existing entries
+		Query q = em.createQuery("select m from AppUser m");
+		List<AppUser> users = q.getResultList();
+		return users;
 	}
 
 	@Override

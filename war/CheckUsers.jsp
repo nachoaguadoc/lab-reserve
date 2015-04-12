@@ -10,7 +10,7 @@
 
 <html>
 	<head>
-		<title>Peticiones</title>
+		<title>Usuarios</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -30,7 +30,7 @@
 	<body class="main2">
 	 <div class="container">
 			<div>
-				<h1>Peticiones</h1>
+				<h1>Usuarios</h1>
 				<c:if test="${flashMessageSuccess != null }">
 				<div class="alert alert-success alert-dismissible" role="alert">
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -55,33 +55,36 @@
 			<a style="float: right;" href="<c:url value="/main" />">Home</a>
 			
 	
-		<p>You have a total number of <c:out value="${fn:length(requests)}" />
-		Requests.</p> 
+		<p>Hay un total de <c:out value="${fn:length(users)}" />
+		Usuarios usando la instalación.</p> 
 		<div class="container row">
 			<table class="table">
 				<thead>
 					<tr>
 						<th>ID</th>
 						<th>Email</th>
-						<th>Prioridad</th>
-						<th>Comentario</th>
-						<th>Decisión</th>
+						<th>Rol</th>
+						<th>Nuevo rol</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requests}" var="request">
+					<c:forEach items="${users}" var="appUser">
 						<tr>
-							<th>${request.userId}</th>
-							<th>${request.email}</th>
-							<th>${request.priority}</th>
-							<th>${request.desc}</th>
+							<th>${appUser.id}</th>
+							<th>${appUser.email}</th>
+							<th>${appUser.priority}</th>
 							<th>
-								<form action="/request?id=${request.userId}" method="post" accept-charset="utf-8">
-									<select id="decision" name="decision" class="selectpicker col-md-6">
-										<option value="accept">Aceptar</option>
-										<option value="deny">Denegar</option>
+								<form action="/signup" method="post" accept-charset="utf-8">
+									<input type="hidden" name="userId" value="${appUser.id}">
+									<span><select class="selectpicker col-md-4" id="priority" name="priority"></span>
+								 	  <option value="1">1 - Alumno</option>
+									  <option value="2">2 - Profesor</option>
+									  <option value="3">3 - Administrador</option>
+									  <option value="4">4 - Dios</option>
+									  <option value="5">5 - Chuck Norris</option>
+	
 									</select>
-									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Decidir" />
+									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Cambiar" />
 								</form>
 							</th>
 						</tr>

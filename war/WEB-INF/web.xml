@@ -171,6 +171,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/request</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>CheckUsersServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.CheckUsersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckUsersServlet</servlet-name>
+		<url-pattern>/users</url-pattern>
+	</servlet-mapping>
+	
 	
 <security-constraint>
 	<web-resource-collection>
@@ -200,6 +209,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<web-resource-collection>
 		<web-resource-name>SetConfig</web-resource-name>
 		<url-pattern>/config</url-pattern>
+	</web-resource-collection>
+	<web-resource-collection>
+		<web-resource-name>CheckRequests</web-resource-name>
+		<url-pattern>/requests</url-pattern>
+	</web-resource-collection>
+	<web-resource-collection>
+		<web-resource-name>CheckUsers</web-resource-name>
+		<url-pattern>/users</url-pattern>
 	</web-resource-collection>
 	 <auth-constraint>
 	<role-name>admin</role-name>

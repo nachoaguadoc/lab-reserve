@@ -101,8 +101,7 @@ public class MainServlet extends HttpServlet {
 			}
 			else {
 				if (user != null && appUser == null){
-					RequestDispatcher view = req.getRequestDispatcher("NewUser.jsp");
-			        view.forward(req, resp);
+					resp.sendRedirect("/signup");
 				} else {
 					req.getSession().setAttribute("appUser", appUser);
 					RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
