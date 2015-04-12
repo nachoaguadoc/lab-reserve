@@ -144,6 +144,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/config</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>SignUpServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.SignUpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SignUpServlet</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	
 	
 	
 <security-constraint>

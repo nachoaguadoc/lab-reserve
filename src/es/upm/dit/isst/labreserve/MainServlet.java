@@ -15,12 +15,15 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ConfigDAO;
 import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.GroupDAO;
 import es.upm.dit.isst.labreserve.dao.GroupDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Group;
 import es.upm.dit.isst.labreserve.model.Resource;
@@ -35,10 +38,12 @@ public class MainServlet extends HttpServlet {
 		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
 		GroupDAO groupDAO = GroupDAOImpl.getInstance();
 		ConfigDAO configDAO = ConfigDAOImpl.getInstance();
-		
+		AppUserDAO appUserDAO = AppUserDAOImpl.getInstance();
+
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-
+		AppUser appUser = null;
+		
 		String url = userService.createLoginURL(req.getRequestURI());
 		String urlLinktext = "Login";
 		List<Resource> resources = new ArrayList<Resource>();
@@ -47,7 +52,9 @@ public class MainServlet extends HttpServlet {
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
 		    resources = resourceDAO.listResources();
+			appUser = appUserDAO.getUser(user.getUserId());
 		}
+		
 		List<Group> groups = groupDAO.listGroups();
 		
 		Config config = configDAO.getConfig("global");
@@ -93,8 +100,14 @@ public class MainServlet extends HttpServlet {
 
 			}
 			else {
-				RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
-		        view.forward(req, resp);
+				if (user != null && appUser == null){
+					RequestDispatcher view = req.getRequestDispatcher("NewUser.jsp");
+			        view.forward(req, resp);
+				} else {
+					req.getSession().setAttribute("appUser", appUser);
+					RequestDispatcher view = req.getRequestDispatcher("ResourceUserApplication.jsp");
+			        view.forward(req, resp);
+				}
 			}
 		} catch (IllegalStateException e){
 			System.out.println("User is not logged in");
