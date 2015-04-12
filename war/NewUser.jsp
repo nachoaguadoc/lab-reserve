@@ -29,8 +29,8 @@
 	
 		<div class="container">
 				<h1>Datos del usuario</h1>
-				<div id="oldPriority" data-oldpriority="${appUser.priority}" />
-				<div id="oldName" data-oldname="${appUser.name}" />
+				<div id="oldPriority" data-oldpriority="${oldPriority}" />
+				<div id="oldName" data-oldname="${oldName}" />
 				
 				<c:if test="${flashMessageError != null }">
 					<div class="alert alert-danger alert-dismissible" role="alert">

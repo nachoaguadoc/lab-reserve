@@ -51,19 +51,25 @@ public class SignUpServlet extends HttpServlet {
 		String urlLinktext = "Login";
 		AppUser appUser= null;
 		Request request = null;
-		
+		String oldName = "";
+		int oldPriority = 0;
 		if (user != null){
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
 		    appUser = dao.getUser(user.getUserId());
 		    request = requestDAO.getRequest(user.getUserId());
+		    oldName = appUser.getName();
+		    oldPriority = appUser.getPriority();
 		}
 		
+		
 		if (request != null) {
-			req.getSession().setAttribute("request", "Su petición se está procesando");
+			req.getSession().setAttribute("requestState", "Su petición se está procesando");
 		} else  {
-			req.getSession().setAttribute("request", null);
+			req.getSession().setAttribute("requestState", null);
 		}
+		req.getSession().setAttribute("oldName", oldName);
+		req.getSession().setAttribute("oldPriority", oldPriority);
 		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("appUser", appUser);
@@ -86,7 +92,12 @@ public class SignUpServlet extends HttpServlet {
 			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
 		}
-		int oldPriority = dao.getUser(user.getUserId()).getPriority();
+		int oldPriority;
+		if (dao.getUser(user.getUserId()) != null) {
+			oldPriority = dao.getUser(user.getUserId()).getPriority();
+		} else {
+			oldPriority = 1;
+		}
 		int priority = Integer.parseInt(req.getParameter("priority"));
 		String userId = user.getUserId();
 		String email = user.getEmail();
