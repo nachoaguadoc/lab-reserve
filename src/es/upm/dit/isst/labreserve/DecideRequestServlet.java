@@ -55,13 +55,17 @@ public class DecideRequestServlet extends HttpServlet {
 		int priority = request.getPriority();
 		String decision = checkNull(req.getParameter("decision"));
 		String oldName = checkNull(dao.getUser(userId).getName());
-
+	
 		if (decision.equals("accept")){
-			if (dao.getUser(user.getUserId()) != null ){
-				dao.update(user.getUserId(), priority, oldName);
+			if (dao.getUser(userId) != null ){
+				dao.update(userId, priority, oldName);
 			} else {
-				dao.add(user.getUserId(), user.getEmail(), priority, oldName);
+
+				dao.add(userId, user.getEmail(), priority, oldName);
 			}
+		} else {
+
+			dao.update(userId, priority, oldName);
 		}
 		
 		reqDAO.remove(userId);
