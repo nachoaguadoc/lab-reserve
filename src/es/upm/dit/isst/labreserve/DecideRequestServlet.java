@@ -63,9 +63,13 @@ public class DecideRequestServlet extends HttpServlet {
 
 				dao.add(userId, user.getEmail(), priority, oldName);
 			}
+			req.getSession().setAttribute("flashMessageSuccess", "Usuario actualizado");
+
 		} else {
 
 			dao.update(userId, priority, oldName);
+			req.getSession().setAttribute("flashMessageSuccess", "Petición denegada");
+
 		}
 		
 		reqDAO.remove(userId);

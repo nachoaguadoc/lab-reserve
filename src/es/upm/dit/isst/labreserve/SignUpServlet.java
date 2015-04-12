@@ -105,7 +105,8 @@ public class SignUpServlet extends HttpServlet {
 		String desc = checkNull(req.getParameter("description"));
 		Date date = new Date();
 		
-		if (priority != 1){
+		if (priority != 1 && priority != oldPriority){
+			
 			if (reqDAO.getRequest(userId) != null) {
 				reqDAO.update(userId, email, priority, desc, date);
 			} else {
@@ -117,16 +118,19 @@ public class SignUpServlet extends HttpServlet {
 			} else {
 				//Se le pone prioridad 1 hasta que el administrador acepte su petición
 				dao.add(user.getUserId(), user.getEmail(), 1, name);
-			}			
+			}
+			req.getSession().setAttribute("flashMessageSuccess", "Petición enviada al administrador");
+
 		} else {
 			if (dao.getUser(user.getUserId()) != null ){
 				dao.update(user.getUserId(), priority, name);
 			} else {
 				dao.add(user.getUserId(), user.getEmail(), priority, name);
 			}
+			req.getSession().setAttribute("flashMessageSuccess", "Usuario actualizado");
+
 		}
 		
-		req.getSession().setAttribute("flashMessageSuccess", "¡Usuario creado!");
 		resp.sendRedirect("/main");
 	}
 	private String checkNull(String s) {

@@ -126,14 +126,14 @@ public class ReserveResourceServlet extends HttpServlet {
 			horaini = dateFormat.parse(initHour);
 			horafin = dateFormat.parse(finalHour);
 			if(horaini.compareTo(horafin) >= 0){
-				req.getSession().setAttribute("flashMessageError", "Hora de sesión incorrecta");
+				req.getSession().setAttribute("flashMessageError", "Hora de sesiÃ³n incorrecta");
 				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 			    view.forward(req, resp);
 			    return;
 			}
 			
 		}catch(Exception parseException){
-			req.getSession().setAttribute("flashMessageError", "Hora de sesión incorrecta");
+			req.getSession().setAttribute("flashMessageError", "Hora de sesiÃ³n incorrecta");
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 		    view.forward(req, resp);
 		    return;
