@@ -29,6 +29,7 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
 public class SignUpServlet extends HttpServlet {
@@ -44,14 +45,18 @@ public class SignUpServlet extends HttpServlet {
 		
 		String url = userService.createLoginURL(req.getRequestURI());
 		String urlLinktext = "Login";
-		            
+		AppUser appUser= null;
+		
 		if (user != null){
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
+		    appUser = dao.getUser(user.getUserId());
+		    
 		}
 				
 		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
+		req.getSession().setAttribute("appUser", appUser);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		req.getSession().setAttribute("dateSelected", null);
@@ -74,13 +79,13 @@ public class SignUpServlet extends HttpServlet {
 
 	    
 		int priority = Integer.parseInt(req.getParameter("priority"));
-
+		String name = checkNull(req.getParameter("name"));
 
 		
 		if (dao.getUser(user.getUserId()) != null ){
-			dao.update(user.getUserId(), priority);
+			dao.update(user.getUserId(), priority, name);
 		} else {
-			dao.add(user.getUserId(), user.getEmail(), priority);
+			dao.add(user.getUserId(), user.getEmail(), priority, name);
 		}
 		req.getSession().setAttribute("flashMessageSuccess", "¡Usuario creado!");
 		resp.sendRedirect("/main");

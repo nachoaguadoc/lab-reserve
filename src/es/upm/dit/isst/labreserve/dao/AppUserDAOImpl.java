@@ -27,20 +27,21 @@ public class AppUserDAOImpl implements AppUserDAO {
 	}
 
 	@Override
-	public void add(String id, String email, int priority) {
+	public void add(String id, String email, int priority, String name) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			AppUser user = new AppUser(id, email, priority);
+			AppUser user = new AppUser(id, email, priority, name);
 			em.persist(user);
 			em.close();
 		}
 	}
 
 	@Override
-	public void update(String id, int priority) {
+	public void update(String id, int priority, String name) {
 		EntityManager em = EMFService.get().createEntityManager();
 		AppUser user = em.find(AppUser.class, id);
 		user.setPriority(priority);
+		user.setName(name);
 		em.merge(user);
 		em.close();
 	}

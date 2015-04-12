@@ -29,6 +29,8 @@
 	
 		<div class="container">
 				<h1>Datos del usuario</h1>
+				<div id="oldPriority" data-oldpriority="${appUser.priority}" />
+				<div id="oldName" data-oldname="${appUser.name}" />
 				
 				<c:if test="${flashMessageError != null }">
 					<div class="alert alert-danger alert-dismissible" role="alert">
@@ -76,21 +78,23 @@
 								<div class="form-control col-md-4" name="email" id="email">${user.email}</div>
 								<br><br><br><br>
 								
-								<label for="priority">Prioridad del usuario</label>
+								<label for="name">Nombre y apellidos de usuario (opcional)</label>
+								<input type="text" class="form-control col-md-4" name="name" id="name" placeholder="Nombre y apellidos"/>
+								<br><br><br><br>
+								
+								<label for="priority">Rol del usuario</label>
 									<br>
 						
-									<span><select class="selectpicker col-md-4" id="priority" name="priority"></span>
-								 	  <option value="1">1</option>
-									  <option value="2">2</option>
-									  <option value="3">3</option>
-									  <option value="4">4</option>
-									  <option value="5">5</option>
-									  <option value="6">6</option>
-									  <option value="7">7</option>
+								<span><select class="selectpicker col-md-4" id="priority" name="priority"></span>
+							 	  <option value="1">Alumno</option>
+								  <option value="2">Profesor</option>
+								  <option value="3">Administrador</option>
+								  <option value="4">Dios</option>
+								  <option value="5">Chuck Norris</option>
 
-									</select>     
-							    	
-							    	<br><br><br>
+								</select>     
+						    	
+						    	<br><br><br>
 									                	
 								<input type="submit" value="Fijar" class="btn btn-rounded btn-border-w" />
 						</div>
@@ -105,6 +109,21 @@
 	</body>
 </html>
 <script>
+
+var nameDiv = document.getElementById("oldName"), oldName;
+oldName = nameDiv.getAttribute("data-oldname");
+
+if (oldName != null){
+	$("#name").val(oldName);
+}
+
+var priorityDiv = document.getElementById("oldPriority"), oldPriority;
+oldPriority = priorityDiv.getAttribute("data-oldpriority");
+
+
+if (oldPriority != null){
+	$("#priority").val(oldPriority);
+}
 /*
 function valida(){
 	// dejar return para desactivar validación en el cliente
