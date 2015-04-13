@@ -57,6 +57,7 @@
 						<th> Fecha</th>
 						<th> Horas</th>
 						<th> Cambios</th>
+						<th> Cancelar </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -66,11 +67,9 @@
 							<th>${reserve.date}</th>
 							<th>${reserve.initHour} - ${reserve.finalHour}</th>
 							<th>
-								<form action="/update?id=${reserve.id}" method="post" accept-charset="utf-8">
-									<input type="hidden" name="resourceID" id="resourceID" value="${reserve.resourceID}" /></td>	
-		                			<input type="hidden" name="resourceName" id="resourceName" value="${reserve.resourceName}" /></td>
-									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Cambiar" />
-								</form>
+								<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/update?id=${reserve.id}" />">Cambiar</a>
+							</th>
+							<th>		
 								<form action="/cancel?id=${reserve.id}" method="post" accept-charset="utf-8">
 									<input type="hidden" name="resourceID" id="resourceID" value="${reserve.resourceID}" /></td>	
                 					<input type="hidden" name="resourceName" id="resourceName" value="${reserve.resourceName}" /></td>

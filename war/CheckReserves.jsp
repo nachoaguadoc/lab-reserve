@@ -49,22 +49,37 @@
 		Reserves.</p> 
 		<div class="container row">
 		
-			<c:forEach items="${reserves}" var="reserve">
-				<a><div class="container col-md-2 reserve height">
-					<p>Resource: <c:out value="${reserve.resourceName}" /></p>
-					<p>Date: <c:out value="${reserve.date}" /></p>
-					<p>Init time: <c:out value="${reserve.initHour}" /></p>
-					<p>Final time: <c:out value="${reserve.finalHour}" /></p>
-					<div class="buttons"></div>
-					<span>
-						<a class="btn btn-default" href="<c:url value="/update?id=${reserve.id}" />">Cambiar</a>
-					</span>
-					<span>
-						<a class="btn btn-default" href="<c:url value="/cancel?id=${reserve.id}" />">Cancelar</a>
-					</span>
-					</div>
-				</div></a>
-			</c:forEach>
+		<table class="table table-hover">
+				<thead>
+					<tr>
+						<th> Recurso</th>
+						<th> Fecha</th>
+						<th> Horas</th>
+						<th> Cambios</th>
+						<th> Cancelar </th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${reserves}" var="reserve">
+						<tr>
+							<th>${reserve.resourceName}</th>
+							<th>${reserve.date}</th>
+							<th>${reserve.initHour} - ${reserve.finalHour}</th>
+							<th>
+								<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/update?id=${reserve.id}" />">Cambiar</a>
+							</th>
+							<th>		
+								<form action="/cancel?id=${reserve.id}" method="post" accept-charset="utf-8">
+									<input type="hidden" name="resourceID" id="resourceID" value="${reserve.resourceID}" /></td>	
+                					<input type="hidden" name="resourceName" id="resourceName" value="${reserve.resourceName}" /></td>
+									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Cancelar" />
+								</form>
+							</th>
+						</tr>
+					</c:forEach>
+				</tbody>
+				
+			</table>
 			</div>
 		</div>
 	</body>
