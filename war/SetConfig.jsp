@@ -29,7 +29,9 @@
 	
 		<div class="container">
 				<h1>Fijar parámetros</h1>
-				
+				<div id="oldOpening" data-oldopening="${opening}" />
+				<div id="oldClosing" data-oldclosing="${closing}" />
+				<div id="oldWebmaster" data-oldwebmaster="${webmaster}" />
 				<c:if test="${flashMessageError != null }">
 <div class="alert alert-danger alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -157,6 +159,30 @@ ${flashMessageError}
 	</body>
 </html>
 <script>
+
+var openingDiv = document.getElementById("oldOpening"), oldOpening;
+oldOpening = openingDiv.getAttribute("data-oldopening");
+
+if (oldOpening != null){
+	$("#opening").val(oldOpening);
+}
+
+var closingDiv = document.getElementById("oldClosing"), oldClosing;
+oldClosing = closingDiv.getAttribute("data-oldclosing");
+
+if (oldClosing != null){
+	$("#closing").val(oldClosing);
+}
+
+var webmasterDiv = document.getElementById("oldWebmaster"), oldWebmaster;
+oldWebmaster = webmasterDiv.getAttribute("data-oldwebmaster");
+
+if (oldWebmaster != null){
+	$("#webmaster").val(oldWebmaster);
+}
+
+console.log(oldOpening, oldClosing, oldWebmaster);
+
 function valida(){
 	// dejar return para desactivar validación en el cliente
 	//return;

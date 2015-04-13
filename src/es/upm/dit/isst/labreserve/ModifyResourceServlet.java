@@ -51,7 +51,7 @@ public class ModifyResourceServlet extends HttpServlet {
 
 		
 		if (description == ""){
-			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
+			req.getSession().setAttribute("flashMessageError", "DescripciÃ³n en blanco");
 			RequestDispatcher view = req.getRequestDispatcher("ModifyResource.jsp");
 	        view.forward(req, resp);
 	        return;

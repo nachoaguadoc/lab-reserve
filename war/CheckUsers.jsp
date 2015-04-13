@@ -58,13 +58,13 @@
 		<p>Hay un total de <c:out value="${fn:length(users)}" />
 		Usuarios usando la instalación.</p> 
 		<div class="container row">
-			<table class="table">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>ID</th>
 						<th>Email</th>
-						<th>Rol</th>
-						<th>Nuevo rol</th>
+						<th>Rol Actual</th>
+						<th>Nuevo Rol</th>
 					</tr>
 				</thead>
 				<tbody>

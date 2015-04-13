@@ -27,6 +27,7 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
 public class SetConfigServlet extends HttpServlet {
@@ -36,6 +37,7 @@ public class SetConfigServlet extends HttpServlet {
 			throws IOException, ServletException {
 	
 		ConfigDAO dao = ConfigDAOImpl.getInstance();
+		Config config = dao.getConfig("global");
 		
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
@@ -47,13 +49,17 @@ public class SetConfigServlet extends HttpServlet {
 		    url = userService.createLogoutURL(req.getRequestURI());
 		    urlLinktext = "Logout";
 		}
-				
+		String opening = config.getOpening();
+		String closing = config.getClosing();
+		String webmaster = config.getWebmaster();
+		req.getSession().setAttribute("opening", opening);
+		req.getSession().setAttribute("closing", closing);
+		req.getSession().setAttribute("webmaster", webmaster);
 		req.getSession().setAttribute("flashMessageError", null);
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("url", url);
 		req.getSession().setAttribute("urlLinktext", urlLinktext);
 		req.getSession().setAttribute("dateSelected", null);
-
 
 		RequestDispatcher view = req.getRequestDispatcher("SetConfig.jsp");
         view.forward(req, resp);
@@ -107,7 +113,7 @@ public class SetConfigServlet extends HttpServlet {
 		} else {
 			dao.add("global", webmaster, sessionTime, opening, closing);
 		}
-		req.getSession().setAttribute("flashMessageSuccess", "¡Parámetros de configuración fijados!");
+		req.getSession().setAttribute("flashMessageSuccess", "Â¡ParÃ¡metros de configuraciÃ³n fijados!");
 		resp.sendRedirect("/main");
 	}
 	private String checkNull(String s) {

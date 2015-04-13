@@ -46,7 +46,7 @@ public class CreateGroupServlet extends HttpServlet {
 		}
 		
 		if (description == ""){
-			req.getSession().setAttribute("flashMessageError", "Descripción en blanco");
+			req.getSession().setAttribute("flashMessageError", "DescripciÃ³n en blanco");
 			RequestDispatcher view = req.getRequestDispatcher("CreateGroup.jsp");
 	        view.forward(req, resp);
 	        return;
