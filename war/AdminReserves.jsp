@@ -49,21 +49,41 @@
 		Reserves.</p> 
 		<div class="container row">
 		
-			<c:forEach items="${reserves}" var="reserve">
-				<a><div class="container col-md-2 reserve height">
-					<p class="glyphicon glyphicon-user line"><span class="user"><c:out value=" ${reserve.author }" /></span> </p>
-					<p class="glyphicon glyphicon-calendar line"><c:out value=" ${reserve.date}" /></p>
-					<p class="glyphicon glyphicon-time line"><c:out value=" ${reserve.initHour} - ${reserve.finalHour}" /></p>
-					<div class="buttons">
-					<span>
-						<a class="btn btn-default" href="<c:url value="/update?id=${reserve.id}" />">Cambiar</a>
-					</span>
-					<span>
-						<a class="btn btn-default" href="<c:url value="/cancel?id=${reserve.id}" />">Cancelar</a>
-					</span>
-					</div>
-				</div></a>
-			</c:forEach>
+		
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th> Author</th>
+						<th> Fecha</th>
+						<th> Horas</th>
+						<th> Cambios</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${reserves}" var="reserve">
+						<tr>
+							<th>${reserve.author}</th>
+							<th>${reserve.date}</th>
+							<th>${reserve.initHour} - ${reserve.finalHour}</th>
+							<th>
+								<form action="/update?id=${reserve.id}" method="post" accept-charset="utf-8">
+									<input type="hidden" name="resourceID" id="resourceID" value="${reserve.resourceID}" /></td>	
+		                			<input type="hidden" name="resourceName" id="resourceName" value="${reserve.resourceName}" /></td>
+									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Cambiar" />
+								</form>
+								<form action="/cancel?id=${reserve.id}" method="post" accept-charset="utf-8">
+									<input type="hidden" name="resourceID" id="resourceID" value="${reserve.resourceID}" /></td>	
+                					<input type="hidden" name="resourceName" id="resourceName" value="${reserve.resourceName}" /></td>
+									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Cancelar" />
+								</form>
+							</th>
+						</tr>
+					</c:forEach>
+				</tbody>
+				
+			</table>
+		
+			
 			</div>
 		</div>
 	</body>

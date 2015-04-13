@@ -48,7 +48,7 @@ public class AdminReservesServlet extends HttpServlet {
 	    String id = req.getParameter("id");
 	    Resource resource = resourceDAO.getResource(Long.parseLong(id));
 	    
-		List<Reserve> reserves = reserveDAO.listReserves();
+		List<Reserve> reserves = reserveDAO.listResourceReserves(Long.parseLong(id));
 		req.getSession().setAttribute("reserves", new ArrayList<Reserve>(reserves));
 		req.getSession().setAttribute("resource", resource);
 		req.getSession().setAttribute("user", user);

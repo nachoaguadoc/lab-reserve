@@ -81,8 +81,6 @@ public class SetConfigServlet extends HttpServlet {
 		String opening = checkNull(req.getParameter("opening"));
 		String closing = checkNull(req.getParameter("closing"));
 		
-		DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
-		java.util.Date horaini, horafin;
 		
 		if (webmaster == ""){
 			req.getSession().setAttribute("flashMessageError", "Correo del administrador en blanco");
@@ -92,9 +90,8 @@ public class SetConfigServlet extends HttpServlet {
 		}
 		
 		try{
-			horaini = dateFormat.parse(opening);
-			horafin = dateFormat.parse(closing);
-			if(horaini.compareTo(horafin) >= 0){
+
+			if(Integer.parseInt(closing) <= Integer.parseInt(opening)){
 				req.getSession().setAttribute("flashMessageError", "Horario incorrecto");
 				RequestDispatcher view = req.getRequestDispatcher("SetConfig.jsp");
 			    view.forward(req, resp);
