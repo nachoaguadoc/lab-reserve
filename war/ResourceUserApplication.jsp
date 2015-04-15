@@ -86,7 +86,7 @@
 					<p><c:out value="${resource.description}" /></p>
 					<h5><c:out value="${resource.state}" /></h5>
 					<span>
-						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/reserve?id=${resource.id}" />">Reservar</a>
+						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/resource?id=${resource.id}" />">Reservar</a>
 					</span>
 				</div>
 			</c:forEach>

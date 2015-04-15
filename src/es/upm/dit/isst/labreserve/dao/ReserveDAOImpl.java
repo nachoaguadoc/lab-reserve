@@ -145,12 +145,42 @@ public class ReserveDAOImpl implements ReserveDAO {
 	}
 	
 	@Override
-	public HashMap<String, Boolean> getConsult(Long id, String date){
+	public HashMap<String, Boolean> getConsultByDay(Long id, String date){
 		HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
 		List<String> hours = Arrays.asList("01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
 		for (int i = 0; i<hours.size()-1; i++){
 			boolean res = isResourceReserved(id, date, hours.get(i), hours.get(i+1));
 			consult.put(hours.get(i), res);
+		}
+		return consult;
+	}
+	
+	@Override
+	public HashMap<String, Boolean> getConsultByWeek(Long id, List<String> days, List<String> hours){
+		HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
+		for (int j=0; j<days.size(); j++){
+			Boolean isBusy = false;
+			
+			if (isResourceReserved(id, days.get(j), hours.get(0), hours.get(1))){
+				isBusy = true;
+			}
+			
+			consult.put(days.get(j), isBusy);
+		}
+		return consult;
+	}
+	
+	@Override
+	public HashMap<String, Boolean> getConsultByMonth(Long id, List<String> days, List<String> hours){
+		HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
+		for (int j=0; j<days.size()-1; j++){
+			Boolean isBusy = false;
+			for (int i = 0; i<hours.size()-1; i++){
+				if (isResourceReserved(id, days.get(j), hours.get(i), hours.get(i+1))){
+					isBusy = true;
+				}
+			}
+			consult.put(days.get(j), isBusy);
 		}
 		return consult;
 	}

@@ -63,13 +63,22 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/modify</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>ReserveResource</servlet-name>
 		<servlet-class>es.upm.dit.isst.labreserve.ReserveResourceServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ReserveResource</servlet-name>
 		<url-pattern>/reserve</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CheckResource</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.CheckResourceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckResource</servlet-name>
+		<url-pattern>/resource</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -125,15 +134,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/removeGroup</url-pattern>
 	</servlet-mapping>
 
-
-	<servlet>
-		<servlet-name>ConsultResourceServlet</servlet-name>
-		<servlet-class>es.upm.dit.isst.labreserve.ConsultResourceServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ConsultResourceServlet</servlet-name>
-		<url-pattern>/consult</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>SetConfigServlet</servlet-name>

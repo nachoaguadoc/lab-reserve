@@ -25,6 +25,11 @@ public interface ReserveDAO {
 
 	public boolean isResourceReserved(Long id, String date, String initHour, String finalHour);
 	
-	public HashMap<String, Boolean> getConsult(Long id, String date);
+	public HashMap<String, Boolean> getConsultByDay(Long id, String date);
+	
+	public HashMap<String, Boolean> getConsultByWeek(Long id,List<String> days, List<String> hours);
+
+	public HashMap<String, Boolean> getConsultByMonth(Long id, List<String> days, List<String> hours);
+
 
 }
