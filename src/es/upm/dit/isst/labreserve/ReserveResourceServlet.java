@@ -60,10 +60,23 @@ public class ReserveResourceServlet extends HttpServlet {
 			resp.sendRedirect("/main");
 
 	    } else {
-	    	String date = checkNull(req.getParameter("initDate"));
-			String initHour = checkNull(req.getParameter("initTime"));
-			String finalHour = checkNull(req.getParameter("finalTime"));
-			
+	    	String date = checkNull(req.getParameter("resDate"));
+			String[] hours = req.getParameterValues("resHours");
+			for (String hour: hours){
+				String initHour = hour;
+				int lastHour = (Integer.parseInt(initHour.split(":")[0]) + 1);
+				String finalHour = "";
+				if (lastHour < 10 ){
+					finalHour ="0" + Integer.toString(lastHour) + ":00";
+				} else {
+					finalHour = Integer.toString(lastHour) + ":00";
+				}
+
+				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour);
+			}
+			resp.sendRedirect("/main");
+
+			/**
 			DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
 			java.util.Date horaini, horafin;
 			
@@ -101,6 +114,7 @@ public class ReserveResourceServlet extends HttpServlet {
 				req.getSession().setAttribute("flashMessageSuccess", "¡Recurso reservado!");
 				resp.sendRedirect("/main");
 			}
+			**/
 	    }
 	    
 		

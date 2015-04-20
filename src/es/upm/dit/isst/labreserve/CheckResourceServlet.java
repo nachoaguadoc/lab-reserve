@@ -116,15 +116,15 @@ public class CheckResourceServlet extends HttpServlet {
 
 		
 		if (type.equals("day")){
-			String initTime = checkNull(req.getParameter("initTime"));
-			String finalTime = checkNull(req.getParameter("finalTime"));
+
 			String date = checkNull(req.getParameter("consultDate"));
 
 			HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
 			consult = resDao.getConsultByDay(resourceID, date);
 			req.getSession().setAttribute("dateSelected", date);
 			req.getSession().setAttribute("type", "day");
-			req.getSession().setAttribute("consult", consult);
+			req.getSession().setAttribute("consult", consult);			
+			req.getSession().setAttribute("resourceID", resourceID);
 			RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
 	        view.forward(req, resp);
 	        

@@ -64,39 +64,7 @@ ${flashMessageError}
 		
 		
 		<br><br><br>
-			<c:choose>
-				<c:when test="${user != null}">
-				
-					<form action="/reserve?id=${resource.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
-							<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" />
-							
-							  
-							  <span><input type="text" name="initDate" id="initDate" class="form-control max-width col-md-4" placeholder="Select Date"></span>
-									<span><select class="selectpicker col-md-4" id="initTime" name="initTime"></span>
-										<c:forEach items="${initTimes}" var="initHour" varStatus="status">
-											<option value="${initHour}">${initHour}</option>
-										</c:forEach>
-									</select>                			
-		                			<!-- <input id="finalDate" type="text" name="finalDate"> -->
-		                			<select id="finalTime" name="finalTime" class="selectpicker col-md-4">
-										<c:forEach items="${finalTimes}" var="finalHour" varStatus="status">
-											<option value="${finalHour}">${finalHour}</option>
-										</c:forEach>
-									</select>
-									<br><br>
-							<div class="wrapper col-md-3">
-							<input id="buttonReserve" class="btn btn-default btn-round btn-border-w" type="submit"
-									value="Reservar" />
-								</div>
-						</form>
-						<br><br><br>
-				</c:when>
-				<c:otherwise>
-	
-	Please login with your Google account
-				</c:otherwise>
-			</c:choose>
-			<br><br>
+		
 			<!-- Consultar las reservas en un día concreto -->
 			<form action="/resource?id=${resource.id}" method="post" accept-charset="utf-8">
 					<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" />
@@ -110,6 +78,7 @@ ${flashMessageError}
 				    <div id="daily">
 						<input type="text" name="consultDate" id="consultDate" class="form-control max-width col-md-4" placeholder="Select Date" value="${dateSelected}">
 					</div>
+					
 					<div id="monthly" style="display:none">
 						<select class="selectpicker col-md-2" id="month" name="month">
 								<option value="1">Enero</option>
@@ -155,17 +124,22 @@ ${flashMessageError}
 			</form>
 			<br><br>
 			<div id="oldType" data-oldtype="${type}" />
-			<c:if test="${type == 'day'}">				
+			<c:if test="${type == 'day'}">
+							
 				<h2>Horas libres el ${dateSelected}</h2>
 				<table class="table table-bordered">
 				<tbody>
 				<form action="/reserve?id=${resource.id}" method="POST">
+					<input type="hidden" name="resourceID" id="resourceID" value="${resourceID}" />
+						<input type="hidden" name="resType" id="resType" value="${type}" />
+						<input type="hidden" name="resDate" id="resDate" value="${dateSelected}" />
+
 					<c:set var="counter" value="1"/>
 					<c:forEach items="${list}" var="hour" varStatus="i">
 
 							<c:if test="${!consult[hour]}">
 								<c:if test="${fn:length(list) > i.count}" >
-									<td class="free">${hour} - ${list[i.count]} <input type="checkbox" name="${hour}" value="${hour }">
+									<td class="free">${hour} - ${list[i.count]} <input type="checkbox" name="resHours" value="${hour }">
 									</td>
 								</c:if>								
 							</c:if>
@@ -215,7 +189,7 @@ ${flashMessageError}
 						<input type="hidden" name="finishingHour" id="finishingHour" value="${oldFinal}" />
 						<input type="hidden" name="resType" id="resType" value="${type}" />
 						<input type="hidden" name="resMonth" id="resMonth" value="${oldMonth}" />
-						<input type="hidden" name="resType" id="resType" value="${oldYear}" />
+						<input type="hidden" name="resYear" id="resYear" value="${oldYear}" />
 						<input type="hidden" name="resourceID" id="resourceID" value="${resourceID}" />
 
 					<c:set var="counter" value="1"/>
