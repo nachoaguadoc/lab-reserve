@@ -18,8 +18,11 @@ import es.upm.dit.isst.labreserve.dao.AppUserDAO;
 import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
+import es.upm.dit.isst.labreserve.dao.ResourceDAO;
+import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Reserve;
+import es.upm.dit.isst.labreserve.model.Resource;
 
 public class CancelReserveServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
@@ -31,14 +34,20 @@ public class CancelReserveServlet extends HttpServlet {
     String id = req.getParameter("id");
     ReserveDAO dao = ReserveDAOImpl.getInstance();
     AppUserDAO userDAO = AppUserDAOImpl.getInstance();
+    ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
     
+
     Reserve reserve = dao.getReserve(Long.parseLong(id));
     AppUser userRes = userDAO.getUser(reserve.getAuthor());
+    Long resourceID = reserve.getResourceID();
+    Resource resource = resourceDAO.getResource(resourceID);
+
     String date = reserve.getDate();
     String initHour = reserve.getInitHour();
     String finalHour = reserve.getFinalHour();
     String emailTo = userRes.getEmail();
     String name = userRes.getName();
+    String resourceName = resource.getName();
     if (name == null || name.equals("")){
     	name = "usuario";
     }
@@ -46,7 +55,7 @@ public class CancelReserveServlet extends HttpServlet {
 	  Properties props = new Properties();
 	  Session session = Session.getDefaultInstance(props, null);
 
-	  String msgBody = "Estimado " + name + ":" + "\n\n" + "Su reserva con fecha " + date + " de " + initHour + " a " + finalHour + "  ha sido cancelada." +  "\n\n" + "Si usted no la ha cancelado, por favor, realice una nueva reserva." + "\n\n" + "Disculpe las molestias." + "\n\n" +  "LabReserve Team";
+	  String msgBody = "Estimado " + name + ":" + "\n\n" + "Su reserva con fecha " + date + " de " + initHour + " a " + finalHour + " del recurso '" + resourceName + "' ha sido cancelada." +  "\n\n" + "Si usted no la ha cancelado, por favor, realice una nueva reserva." + "\n\n" + "Disculpe las molestias." + "\n\n" +  "LabReserve Team";
 
 	  try {
 	      Message msg = new MimeMessage(session);
