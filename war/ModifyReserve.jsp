@@ -102,7 +102,7 @@ ${flashMessageError}
 				</c:otherwise>
 			</c:choose>
 			<br><br>
-			<!-- Consultar las reservas en un día concreto -->
+			<!-- Consultar las reservas en un día concreto 
 			<form action="/consult?id=${resource.id}" method="post" accept-charset="utf-8">
 					<input type="hidden" name="resourceID" id="resourceID" value="${resource.id}" />
 					
@@ -143,7 +143,7 @@ ${flashMessageError}
 				  </tbody>
 			  </table>
 			</c:if>
-			
+			-->
 			</div>
 	</div>
 	</body>
