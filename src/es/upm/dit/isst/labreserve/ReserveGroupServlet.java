@@ -28,10 +28,13 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Group;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
+import es.upm.dit.isst.labreserve.model.Movimiento;
 
 public class ReserveGroupServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
@@ -103,6 +106,7 @@ public class ReserveGroupServlet extends HttpServlet {
 		String finalHour = checkNull(req.getParameter("finalTime"));
 		ReserveDAO reserveDao = ReserveDAOImpl.getInstance();
 		ResourceDAO resourceDao = ResourceDAOImpl.getInstance();
+		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
 
 		DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	
 		java.util.Date horaini, horafin;
@@ -140,6 +144,7 @@ public class ReserveGroupServlet extends HttpServlet {
 
 			} else {
 				reserveDao.add(user.getUserId(), res.getName(), id, date, initHour, finalHour );
+				movimientoDAO.add(id, date, 1);
 			}
 			
 		}

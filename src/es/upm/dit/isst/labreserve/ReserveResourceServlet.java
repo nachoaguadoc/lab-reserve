@@ -27,9 +27,12 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
+import es.upm.dit.isst.labreserve.model.Movimiento;
 public class ReserveResourceServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
 
@@ -38,6 +41,7 @@ public class ReserveResourceServlet extends HttpServlet {
 			throws IOException, ServletException {
 		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
 		ReserveDAO reserveDAO = ReserveDAOImpl.getInstance();
+		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
 
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -56,6 +60,7 @@ public class ReserveResourceServlet extends HttpServlet {
 			String[] days = req.getParameterValues("resDays");
 			for (int i=0; i<days.length; i++){
 				reserveDAO.add(user.getUserId(), resourceName, resourceID, days[i], initHour, finalHour);
+				movimientoDAO.add(resourceID, days[i], 1);
 			}
 			resp.sendRedirect("/main");
 
@@ -73,6 +78,7 @@ public class ReserveResourceServlet extends HttpServlet {
 				}
 
 				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour);
+				movimientoDAO.add(resourceID, date, 1);
 			}
 			resp.sendRedirect("/main");
 

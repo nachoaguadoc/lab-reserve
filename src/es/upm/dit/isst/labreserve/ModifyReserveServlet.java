@@ -21,9 +21,12 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
+import es.upm.dit.isst.labreserve.model.Movimiento;
 
 public class ModifyReserveServlet extends HttpServlet {
 
@@ -34,6 +37,7 @@ public class ModifyReserveServlet extends HttpServlet {
 		System.out.println("Updating resource ");
 		ReserveDAO dao = ReserveDAOImpl.getInstance();
 		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
+		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
 
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -56,7 +60,9 @@ public class ModifyReserveServlet extends HttpServlet {
 			RequestDispatcher view = req.getRequestDispatcher("ModifyReserve.jsp");
 	        view.forward(req, resp);
 		} else {
+			movimientoDAO.add(resourceID, dao.getReserve(id).getDate(), 2);
 			dao.update(id, resourceName, resourceID,  date, initHour, finalHour);
+			movimientoDAO.add(resourceID, date, 1);
 			req.getSession().setAttribute("flashMessageSuccess", "¡Reserva modificada!");
 			resp.sendRedirect("/main");
 		}

@@ -20,9 +20,12 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
 import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
+import es.upm.dit.isst.labreserve.model.Movimiento;
 
 public class CancelReserveServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
@@ -35,6 +38,7 @@ public class CancelReserveServlet extends HttpServlet {
     ReserveDAO dao = ReserveDAOImpl.getInstance();
     AppUserDAO userDAO = AppUserDAOImpl.getInstance();
     ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
+    MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
     
 
     Reserve reserve = dao.getReserve(Long.parseLong(id));
@@ -66,6 +70,7 @@ public class CancelReserveServlet extends HttpServlet {
 	      msg.setText(msgBody);
 	      Transport.send(msg);
 	      dao.remove(Long.parseLong(id));
+	      movimientoDAO.add(resourceID, date, 2);
 
 	  	req.getSession().setAttribute("flashMessageSuccess", "¡Reserva cancelada!");
 	    resp.sendRedirect("/main");
