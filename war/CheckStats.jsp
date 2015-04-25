@@ -114,7 +114,7 @@ ${flashMessageError}
 Zona donde se muestran las estadísticas
 -->
 <c:if test="${lista != null}">
-<p>Numero de movimientos = ${fn:length(string1)}</p>
+<p>Numero de movimientos = ${fn:length(lista)}</p>
 </c:if>
 
 	</div>

@@ -16,6 +16,8 @@ public interface MovimientoDAO {
 	
 	public List<Movimiento> listMovimientos(String initdate, String finaldate);
 	
+	public List<Movimiento> listMovimientos(String date, int tipo);
+
 	public Movimiento getMovimiento(Long id);
 	
 	public void update(Long id, Long resourceid, String date, int tipo);

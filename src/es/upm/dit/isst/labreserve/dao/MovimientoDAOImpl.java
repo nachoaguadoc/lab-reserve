@@ -58,6 +58,16 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 		List<Movimiento> movimientos = q.getResultList();
 		return movimientos;
 	}
+	
+	@Override
+	public List<Movimiento> listMovimientos(String date, int tipo) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select m from Movimiento m where m.date = :date and m.tipo = :tipo");
+		q.setParameter("date", date);
+		q.setParameter("tipo", tipo);
+		List<Movimiento> movimientos = q.getResultList();
+		return movimientos;	}
+
 
 	@Override
 	public Movimiento getMovimiento(Long id) {
