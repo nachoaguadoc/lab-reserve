@@ -99,7 +99,7 @@ public class CheckStatsServlet extends HttpServlet {
 	    	List<Movimiento> movimientos = movimientoDAO.listMovimientos(date);
 	    	List<Movimiento> movtotal = movimientoDAO.listMovimientos();
 	    	System.out.println("movimientos dia " + date +  " = " + movimientos.size() + " de un total = " + movtotal.size());
-	    	req.setAttribute("lista", movimientos);
+	    	req.getSession().setAttribute("lista", new ArrayList(movimientos));
 			resp.sendRedirect("/stats");
 	    }
 	}
