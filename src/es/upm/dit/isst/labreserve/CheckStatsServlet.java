@@ -97,7 +97,9 @@ public class CheckStatsServlet extends HttpServlet {
 	    } else {
 	    	String date = checkNull(req.getParameter("consultDate"));
 	    	List<Movimiento> movimientos = movimientoDAO.listMovimientos(date);
-	    	req.setAttribute("movimientos", movimientos);
+	    	List<Movimiento> movtotal = movimientoDAO.listMovimientos();
+	    	System.out.println("movimientos dia " + date +  " = " + movimientos.size() + " de un total = " + movtotal.size());
+	    	req.setAttribute("lista", movimientos);
 			resp.sendRedirect("/stats");
 	    }
 	}

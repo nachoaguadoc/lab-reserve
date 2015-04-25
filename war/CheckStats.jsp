@@ -41,8 +41,7 @@ ${flashMessageError}
 
 			<div class="alert alert-danger alert-dismissible" role="alert" id="alerta" hidden>
   				<span class="glyphicon glyphicon-exclamation-sign"></span>
-				<span id="efecha" class="errores">Error: Fecha de reserva en blanco</span>
-				<span id="esesion" class="errores">Error: Horario de sesión incorrecto</span>
+				<span id="eDate" class="errores">Error: Día de consulta en blanco</span>
 			</div>
 
 	<div class="top-1">
@@ -114,8 +113,8 @@ ${flashMessageError}
 <!--
 Zona donde se muestran las estadísticas
 -->
-<c:if test="${movimientos != null}">
-<p>Numero de movimientos = ${fn:length(movimientos)}</p>
+<c:if test="${lista != null}">
+<p>Numero de movimientos = ${fn:length(string1)}</p>
 </c:if>
 
 	</div>
@@ -144,18 +143,15 @@ function valida(){
 	$("#alerta").hide();
 	$("span.errores").hide();
 	
-	if($("#initDate").val()==''){
-		$("#alerta").show();
-		$("#efecha").show();	
-		return false;
+	if ($("#type").val() == "day"){
+		if($("#consultDate").val()==''){
+			$("#alerta").show();
+			$("#eDate").show();
+		}
+		
+	} else if ($("#type").val() =="month"){
+	//por ahora nada
 	};
-
-    if($("#initTime").val()>=$("#finalTime").val())
-    {
-    	$("#alerta").show();
-   		$("#esesion").show();
- 	   return false;
-    };
 }
 </script>
 <script>
@@ -170,7 +166,7 @@ jQuery('#initDate').datepicker({
 jQuery('#consultDate').datepicker({ 
 	timepicker:false,
 	autoclose:true,
-	startDate: date,
+	startDate: '1/1/15',
 	 format: 'd/m/yy'
 });
 

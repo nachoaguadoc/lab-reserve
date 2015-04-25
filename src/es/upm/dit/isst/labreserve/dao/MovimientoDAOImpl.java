@@ -45,8 +45,9 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 
 	@Override
 	public List<Movimiento> listMovimientos(String initdate, String finaldate) {
-		// TODO Auto-generated method stub
+		//no se como poner el buscador del query
 		return null;
+
 	}
 
 	@Override
