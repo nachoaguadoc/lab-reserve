@@ -37,6 +37,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/remove</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>RemoveAllTest</servlet-name>
+		<servlet-class>es.upm.dit.isst.labreserve.RemoveAllTest</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveAllTest</servlet-name>
+		<url-pattern>/removeall</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>CancelReserve</servlet-name>
 		<servlet-class>es.upm.dit.isst.labreserve.CancelReserveServlet</servlet-class>

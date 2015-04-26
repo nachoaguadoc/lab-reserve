@@ -15,6 +15,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ConfigDAO;
 import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
@@ -23,6 +25,7 @@ import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
 import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
+import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
@@ -38,6 +41,7 @@ public class ModifyReserveServlet extends HttpServlet {
 		ReserveDAO dao = ReserveDAOImpl.getInstance();
 		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
 		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
+		AppUserDAO userDAO = AppUserDAOImpl.getInstance();
 
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
@@ -51,9 +55,10 @@ public class ModifyReserveServlet extends HttpServlet {
 	    Long resourceID = Long.parseLong(req.getParameter("resourceID"));
 	    String resourceName = resourceDAO.getResource(resourceID).getName();
 	    Long id = Long.parseLong(req.getParameter("id"));
+	    AppUser appUser= userDAO.getUser(user.getUserId());
 
 	    
-		if (dao.isResourceReserved(resourceID, date, initHour, finalHour) ){
+		if (dao.isResourceReserved(resourceID, date, initHour, finalHour, appUser.getPriority()) ){
 			System.out.println("Resource busy");
 			req.getSession().setAttribute("flashMessageError", "Recurso Ocupado");
 
@@ -61,7 +66,7 @@ public class ModifyReserveServlet extends HttpServlet {
 	        view.forward(req, resp);
 		} else {
 			movimientoDAO.add(resourceID, resourceName, dao.getReserve(id).getDate(), 2);
-			dao.update(id, resourceName, resourceID,  date, initHour, finalHour);
+			dao.update(id, resourceName, resourceID,  date, initHour, finalHour, appUser);
 			movimientoDAO.add(resourceID, resourceName, date, 1);
 			req.getSession().setAttribute("flashMessageSuccess", "¡Reserva modificada!");
 			resp.sendRedirect("/main");

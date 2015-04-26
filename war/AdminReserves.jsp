@@ -56,6 +56,7 @@
 						<th> Author</th>
 						<th> Fecha</th>
 						<th> Horas</th>
+						<th> Priodidad </th>
 						<th> Cambios</th>
 						<th> Cancelar </th>
 					</tr>
@@ -66,6 +67,7 @@
 							<th>${reserve.author}</th>
 							<th>${reserve.date}</th>
 							<th>${reserve.initHour} - ${reserve.finalHour}</th>
+							<th>${reserve.priority } </th>
 							<th>
 								<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/update?id=${reserve.id}" />">Cambiar</a>
 							</th>

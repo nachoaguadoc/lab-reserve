@@ -20,6 +20,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ConfigDAO;
 import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
@@ -101,7 +103,7 @@ public class CheckResourceServlet extends HttpServlet {
 			throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		ReserveDAO resDao = ReserveDAOImpl.getInstance();
-
+		AppUserDAO userDAO = AppUserDAOImpl.getInstance();
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
@@ -113,14 +115,14 @@ public class CheckResourceServlet extends HttpServlet {
 		String type = req.getParameter("type");
 		String month = req.getParameter("month");
 		String year = req.getParameter("year");
-
+		int priority = userDAO.getUser(user.getUserId()).getPriority();
 		
 		if (type.equals("day")){
 
 			String date = checkNull(req.getParameter("consultDate"));
 
 			HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
-			consult = resDao.getConsultByDay(resourceID, date);
+			consult = resDao.getConsultByDay(resourceID, date, priority);
 			req.getSession().setAttribute("dateSelected", date);
 			req.getSession().setAttribute("type", "day");
 			req.getSession().setAttribute("consult", consult);			
@@ -163,7 +165,7 @@ public class CheckResourceServlet extends HttpServlet {
 			}
 
 			
-			consult = resDao.getConsultByWeek(resourceID, days, hours);
+			consult = resDao.getConsultByWeek(resourceID, days, hours, priority);
 			req.getSession().setAttribute("dateSelected", date);
 			req.getSession().setAttribute("monthNumber", month);
 			req.getSession().setAttribute("oldMonth", month);

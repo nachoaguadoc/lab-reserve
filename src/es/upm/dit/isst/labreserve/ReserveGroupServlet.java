@@ -20,6 +20,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ConfigDAO;
 import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.GroupDAO;
@@ -30,6 +32,7 @@ import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
 import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
+import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Group;
 import es.upm.dit.isst.labreserve.model.Reserve;
@@ -46,6 +49,7 @@ public class ReserveGroupServlet extends HttpServlet {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
+		
 		String url = userService.createLoginURL(req.getRequestURI());
 		String urlLinktext = "Login";
 		            
@@ -93,6 +97,8 @@ public class ReserveGroupServlet extends HttpServlet {
 			throws IOException, ServletException {
 		GroupDAO dao = GroupDAOImpl.getInstance();
 		User user = (User) req.getAttribute("user");
+		AppUserDAO userDAO = AppUserDAOImpl.getInstance();
+
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
@@ -136,14 +142,17 @@ public class ReserveGroupServlet extends HttpServlet {
 		
 		List<Long> resources = dao.getGroup(groupID).getResources();
 		boolean reserved = true;
+	    
+	    AppUser appUser = userDAO.getUser(user.getUserId());
+	    int priority = appUser.getPriority();
 		for (Long id : resources ) {
 			Resource res = resourceDao.getResource(id);
-			if (reserveDao.isResourceReserved(id, date, initHour, finalHour) ){
+			if (reserveDao.isResourceReserved(id, date, initHour, finalHour, priority) ){
 				System.out.println("Resource busy");
 				reserved = false;
 
 			} else {
-				reserveDao.add(user.getUserId(), res.getName(), id, date, initHour, finalHour );
+				reserveDao.add(user.getUserId(), res.getName(), id, date, initHour, finalHour, appUser );
 				movimientoDAO.add(id, res.getName(), date, 1);
 			}
 			

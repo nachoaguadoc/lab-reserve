@@ -32,7 +32,7 @@ public class CancelReserveServlet extends HttpServlet {
 
   public void doPost(HttpServletRequest req, HttpServletResponse resp)
   throws IOException {
-		System.out.println("Canceling reserve ");
+	System.out.println("Canceling reserve ");
 
     String id = req.getParameter("id");
     ReserveDAO dao = ReserveDAOImpl.getInstance();
@@ -40,48 +40,28 @@ public class CancelReserveServlet extends HttpServlet {
     ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
     MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
     
-
-    Reserve reserve = dao.getReserve(Long.parseLong(id));
-    AppUser userRes = userDAO.getUser(reserve.getAuthor());
-    Long resourceID = reserve.getResourceID();
-    Resource resource = resourceDAO.getResource(resourceID);
-
-    String date = reserve.getDate();
-    String initHour = reserve.getInitHour();
-    String finalHour = reserve.getFinalHour();
-    String emailTo = userRes.getEmail();
-    String name = userRes.getName();
-    String resourceName = resource.getName();
-    if (name == null || name.equals("")){
-    	name = "usuario";
-    }
+	Reserve reserve = dao.getReserve(Long.parseLong(id));
+	AppUser userRes = userDAO.getUser(reserve.getAuthor());
+	Long resourceID = reserve.getResourceID();
+	Resource resource = resourceDAO.getResource(resourceID);
+	
+	String date = reserve.getDate();
+	String initHour = reserve.getInitHour();
+	String finalHour = reserve.getFinalHour();
+	String name = userRes.getName();
+	String resourceName = resource.getName();
+	if (name == null || name.equals("")){
+		name = "usuario";
+	}
 	  
-	  Properties props = new Properties();
-	  Session session = Session.getDefaultInstance(props, null);
-
-	  String msgBody = "Estimado " + name + ":" + "\n\n" + "Su reserva con fecha " + date + " de " + initHour + " a " + finalHour + " del recurso '" + resourceName + "' ha sido cancelada." +  "\n\n" + "Si usted no la ha cancelado, por favor, realice una nueva reserva." + "\n\n" + "Disculpe las molestias." + "\n\n" +  "LabReserve Team";
-
-	  try {
-	      Message msg = new MimeMessage(session);
-	      msg.setFrom(new InternetAddress("labreserve2015@gmail.com", "LabReserve Notification"));
-	      msg.addRecipient(Message.RecipientType.TO,
-	       new InternetAddress(emailTo, name));
-	      msg.setSubject("Reserva cancelada");
-	      msg.setText(msgBody);
-	      Transport.send(msg);
-	      dao.remove(Long.parseLong(id));
-	      movimientoDAO.add(resourceID, resourceName, date, 2);
-
-	  	req.getSession().setAttribute("flashMessageSuccess", "¡Reserva cancelada!");
-	    resp.sendRedirect("/main");
-
-	  } catch (AddressException e) {
-	      // ...
-	  } catch (MessagingException e) {
-	      // ...
-	  }
-    
-
+	Properties props = new Properties();
+	Session session = Session.getDefaultInstance(props, null);
+	String to = userRes.getEmail();
+	String body = "Estimado " + name + ":" + "\n\n" + "Su reserva con fecha " + date + " de " + initHour + " a " + finalHour + " del recurso '" + resourceName + "' ha sido cancelada." +  "\n\n" + "Si usted no la ha cancelado, por favor, realice una nueva reserva." + "\n\n" + "Disculpe las molestias." + "\n\n" +  "LabReserve Team";
+	dao.remove(Long.parseLong(id), to, body, name);
+	movimientoDAO.add(resourceID, resourceName, date, 2);
+	req.getSession().setAttribute("flashMessageSuccess", "¡Reserva cancelada!");
+	resp.sendRedirect("/main");
 
   }
 } 

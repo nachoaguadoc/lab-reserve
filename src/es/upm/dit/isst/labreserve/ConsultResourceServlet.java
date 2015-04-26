@@ -21,6 +21,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
@@ -34,6 +36,8 @@ public class ConsultResourceServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
+		AppUserDAO userDAO = AppUserDAOImpl.getInstance();
+
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
@@ -43,11 +47,12 @@ public class ConsultResourceServlet extends HttpServlet {
 
 	    
 		String date = checkNull(req.getParameter("consultDate"));
+		int priority = userDAO.getUser(user.getUserId()).getPriority();
 
 		ReserveDAO resDao = ReserveDAOImpl.getInstance();
 		
 		HashMap<String, Boolean> consult = new HashMap<String, Boolean>();
-		consult = resDao.getConsultByDay(resourceID, date);
+		consult = resDao.getConsultByDay(resourceID, date, priority);
 		req.getSession().setAttribute("dateSelected", date);
 		req.getSession().setAttribute("consult", consult);
 		RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");

@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
+import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +23,8 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ConfigDAO;
 import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
@@ -29,6 +33,7 @@ import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
 import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
+import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
@@ -39,10 +44,14 @@ public class ReserveResourceServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+
 		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
 		ReserveDAO reserveDAO = ReserveDAOImpl.getInstance();
 		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
-
+		AppUserDAO userDAO = AppUserDAOImpl.getInstance();
+		
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
 			UserService userService = UserServiceFactory.getUserService();
@@ -50,6 +59,9 @@ public class ReserveResourceServlet extends HttpServlet {
 		}
 	    Long resourceID = Long.parseLong(req.getParameter("resourceID"));
 	    String resourceName = resourceDAO.getResource(resourceID).getName();
+	    
+	    AppUser appUser = userDAO.getUser(user.getUserId());
+	    int priority = appUser.getPriority();
 	    
 	    String type = req.getParameter("resType");
 	    if (type.equals("month")){
@@ -59,7 +71,7 @@ public class ReserveResourceServlet extends HttpServlet {
 			String year = checkNull(req.getParameter("resYear"));
 			String[] days = req.getParameterValues("resDays");
 			for (int i=0; i<days.length; i++){
-				reserveDAO.add(user.getUserId(), resourceName, resourceID, days[i], initHour, finalHour);
+				reserveDAO.add(user.getUserId(), resourceName, resourceID, days[i], initHour, finalHour, appUser);
 				movimientoDAO.add(resourceID, resourceName, days[i], 1);
 			}
 			resp.sendRedirect("/main");
@@ -77,7 +89,7 @@ public class ReserveResourceServlet extends HttpServlet {
 					finalHour = Integer.toString(lastHour) + ":00";
 				}
 
-				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour);
+				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour, appUser);
 				movimientoDAO.add(resourceID, resourceName, date, 1);
 			}
 			resp.sendRedirect("/main");
