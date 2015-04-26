@@ -45,6 +45,11 @@ public class CancelReserveServlet extends HttpServlet {
 	Long resourceID = reserve.getResourceID();
 	Resource resource = resourceDAO.getResource(resourceID);
 	
+	if (resource == null){
+		dao.remove(Long.parseLong(id), "", "", "");
+		resp.sendRedirect("/main");
+	}
+	
 	String date = reserve.getDate();
 	String initHour = reserve.getInitHour();
 	String finalHour = reserve.getFinalHour();

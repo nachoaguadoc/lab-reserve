@@ -10,7 +10,7 @@
 
 <html>
 	<head>
-		<title>Resources</title>
+		<title>Recurso</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>

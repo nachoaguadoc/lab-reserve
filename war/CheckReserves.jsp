@@ -10,7 +10,7 @@
 
 <html>
 	<head>
-		<title>Resources</title>
+		<title>Mis reservas</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>

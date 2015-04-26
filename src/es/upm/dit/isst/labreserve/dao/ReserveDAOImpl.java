@@ -277,6 +277,9 @@ public Reserve isOverReserving(Long resourceID, String date, String initHour, St
 	}
 	
 	public void sendEmail(String to, String body, String name) {
+		if (name == null || name.equals("")){
+			name = "usuario";
+		}
 		
 		  Properties props = new Properties();
 		  Session session = Session.getDefaultInstance(props, null);

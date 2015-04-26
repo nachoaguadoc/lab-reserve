@@ -70,29 +70,49 @@ public class ReserveResourceServlet extends HttpServlet {
 			String month = checkNull(req.getParameter("resMonth"));
 			String year = checkNull(req.getParameter("resYear"));
 			String[] days = req.getParameterValues("resDays");
-			for (int i=0; i<days.length; i++){
-				reserveDAO.add(user.getUserId(), resourceName, resourceID, days[i], initHour, finalHour, appUser);
-				movimientoDAO.add(resourceID, resourceName, days[i], 1);
-			}
-			resp.sendRedirect("/main");
+			if (days == null){
+				req.getSession().setAttribute("flashMessageError", "Debe seleccionar al menos un día");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+		        view.forward(req, resp);
+		        return;			
+		     } else {
+				for (int i=0; i<days.length; i++){
+					reserveDAO.add(user.getUserId(), resourceName, resourceID, days[i], initHour, finalHour, appUser);
+					movimientoDAO.add(resourceID, resourceName, days[i], 1);
+				}
+				req.getSession().setAttribute("flashMessageSuccess", "¡Recurso reservado!");
+
+				resp.sendRedirect("/main");
+		     }
 
 	    } else {
 	    	String date = checkNull(req.getParameter("resDate"));
 			String[] hours = req.getParameterValues("resHours");
-			for (String hour: hours){
-				String initHour = hour;
-				int lastHour = (Integer.parseInt(initHour.split(":")[0]) + 1);
-				String finalHour = "";
-				if (lastHour < 10 ){
-					finalHour ="0" + Integer.toString(lastHour) + ":00";
-				} else {
-					finalHour = Integer.toString(lastHour) + ":00";
-				}
+			System.out.print(hours);
 
-				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour, appUser);
-				movimientoDAO.add(resourceID, resourceName, date, 1);
+			if (hours == null){
+				req.getSession().setAttribute("flashMessageError", "Debe seleccionar al menos una hora");
+				RequestDispatcher view = req.getRequestDispatcher("ReserveResource.jsp");
+		        view.forward(req, resp);
+		        return;			
+			} else {
+				for (String hour: hours){
+					String initHour = hour;
+					int lastHour = (Integer.parseInt(initHour.split(":")[0]) + 1);
+					String finalHour = "";
+					if (lastHour < 10 ){
+						finalHour ="0" + Integer.toString(lastHour) + ":00";
+					} else {
+						finalHour = Integer.toString(lastHour) + ":00";
+					}
+	
+					reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour, appUser);
+					movimientoDAO.add(resourceID, resourceName, date, 1);
+				}
+				req.getSession().setAttribute("flashMessageSuccess", "¡Recurso reservado!");
+
+				resp.sendRedirect("/main");
 			}
-			resp.sendRedirect("/main");
 
 			/**
 			DateFormat dateFormat = new SimpleDateFormat ("hh:mm");	

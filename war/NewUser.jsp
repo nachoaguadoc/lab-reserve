@@ -9,7 +9,7 @@
 
 <html>
 	<head>
-		<title>Nuevo usuario </title>
+		<title>Usuario</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta charset="utf-8">
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
