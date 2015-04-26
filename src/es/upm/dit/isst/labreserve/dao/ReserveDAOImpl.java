@@ -59,8 +59,8 @@ public class ReserveDAOImpl implements ReserveDAO {
 				em.close();
 			} else {
 				Long id = isOverReserving.getId();
-				String body = "Estimado " + user.getName() + ":" + "\n\n" + "Su reserva con fecha " + date + " de " + initHour + " a " + finalHour + " del recurso '" + resourceName + "' ha sido cancelada." +  "\n\n" + "Si usted no la ha cancelado, por favor, realice una nueva reserva." + "\n\n" + "Disculpe las molestias." + "\n\n" +  "LabReserve Team";
-				remove(id, isOverReserving.getEmail(), body, user.getName());
+				String body = "Estimado usuario:" + "\n\n" + "Su reserva con fecha " + date + " de " + initHour + " a " + finalHour + " del recurso '" + resourceName + "' ha sido cancelada." +  "\n\n" + "Si usted no la ha cancelado, por favor, realice una nueva reserva." + "\n\n" + "Disculpe las molestias." + "\n\n" +  "LabReserve Team";
+				remove(id, isOverReserving.getEmail(), body, "usuario");
 				Reserve reserve = new Reserve(author, user.getEmail(), resourceName, resourceID, date, initHour, finalHour, user.getPriority());
 				em.persist(reserve);
 				em.close();
@@ -280,7 +280,6 @@ public Reserve isOverReserving(Long resourceID, String date, String initHour, St
 		if (name == null || name.equals("")){
 			name = "usuario";
 		}
-		
 		  Properties props = new Properties();
 		  Session session = Session.getDefaultInstance(props, null);
 		try {
