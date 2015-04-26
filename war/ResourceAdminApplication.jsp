@@ -74,12 +74,10 @@
 			</c:forEach>
 						
 			<div class="container col-md-3 height resource" data-toggle="popover" data-html="true" data-trigger="hover" title="Recursos" data-placement="right" data-content="${names}">
-				
-				
-				
+
 				<h4><c:out value="${group.name}" /></h4>
 				<hr>
-				<p><c:out value="${group.description}" /></p>
+				<p title="${group.description}"><c:out value="${group.description}" /></p>
 				<span>
 					<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/removeGroup?id=${group.id}" />">Borrar</a>
 				</span>
@@ -104,10 +102,9 @@
 			<div class="container row">
 			<c:forEach items="${resources}" var="resource">
 				<div class="container col-md-3 height resource" >
-					<h4><a data-toggle="tooltip" data-placement="left" data-original-title="Listado de reservas" href="<c:url value="/reserves?id=${resource.id}" />" class="glyphicon glyphicon-th-list"></a><c:out value="  ${resource.name}" /></h4>
-					
+					<h4><a data-toggle="tooltip" data-placement="left" data-original-title="Listado de reservas" href="<c:url value="/reserves?id=${resource.id}" />" class="glyphicon glyphicon-th-list"></a><c:out value="  ${resource.name}" /></h4>					
 					<hr>
-					<p><c:out value="${resource.description}" /></p>
+					<p title="${resource.description}"><c:out value="${resource.description}" /></p>
 					<h5><c:out value="${resource.state}" /></h5>
 					<span>
 						<a class="btn btn-default btn-round btn-border-w" href="<c:url value="/remove?id=${resource.id}" />">Borrar</a>
@@ -128,8 +125,6 @@
 </html>
 
 <script>
-
-
 jQuery(function () {
 	  jQuery('[data-toggle="popover"]').popover()
 	})

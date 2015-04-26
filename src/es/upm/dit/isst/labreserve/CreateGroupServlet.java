@@ -66,7 +66,7 @@ public class CreateGroupServlet extends HttpServlet {
 		}
 		GroupDAO dao = GroupDAOImpl.getInstance();
 		dao.add(name, resourcesId, description);
-		req.getSession().setAttribute("flashMessageSuccess", "Â¡Grupo de recursos creado!");
+		req.getSession().setAttribute("flashMessageSuccess", "¡Grupo de recursos creado!");
 		resp.sendRedirect("/main");
 	}
 	
