@@ -10,14 +10,18 @@ public interface MovimientoDAO {
 	
 	public List<Movimiento> listMovimientos();
 	
-	public void add (Long resourceid, String date, int movimiento);
+	public void add (Long resourceid, String resourcename, String date, int movimiento);
 	
 	public List<Movimiento> listMovimientos(String date);
 	
-	public List<Movimiento> listMovimientos(String initdate, String finaldate);
+	public List<Movimiento> listMovimientosbyYear(String date);
+	
+	public List<Movimiento> listMovimientos(String mes, String año);
 	
 	public List<Movimiento> listMovimientos(String date, int tipo);
-
+	
+	public List<Movimiento> listMovimientos(Long resourceid);
+	
 	public Movimiento getMovimiento(Long id);
 	
 	public void update(Long id, Long resourceid, String date, int tipo);

@@ -70,7 +70,7 @@ public class CancelReserveServlet extends HttpServlet {
 	      msg.setText(msgBody);
 	      Transport.send(msg);
 	      dao.remove(Long.parseLong(id));
-	      movimientoDAO.add(resourceID, date, 2);
+	      movimientoDAO.add(resourceID, resourceName, date, 2);
 
 	  	req.getSession().setAttribute("flashMessageSuccess", "¡Reserva cancelada!");
 	    resp.sendRedirect("/main");

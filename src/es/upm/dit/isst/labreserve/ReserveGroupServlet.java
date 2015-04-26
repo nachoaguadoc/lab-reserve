@@ -144,7 +144,7 @@ public class ReserveGroupServlet extends HttpServlet {
 
 			} else {
 				reserveDao.add(user.getUserId(), res.getName(), id, date, initHour, finalHour );
-				movimientoDAO.add(id, date, 1);
+				movimientoDAO.add(id, res.getName(), date, 1);
 			}
 			
 		}

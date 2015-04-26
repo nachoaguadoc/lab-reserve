@@ -60,7 +60,7 @@ public class ReserveResourceServlet extends HttpServlet {
 			String[] days = req.getParameterValues("resDays");
 			for (int i=0; i<days.length; i++){
 				reserveDAO.add(user.getUserId(), resourceName, resourceID, days[i], initHour, finalHour);
-				movimientoDAO.add(resourceID, days[i], 1);
+				movimientoDAO.add(resourceID, resourceName, days[i], 1);
 			}
 			resp.sendRedirect("/main");
 
@@ -78,7 +78,7 @@ public class ReserveResourceServlet extends HttpServlet {
 				}
 
 				reserveDAO.add(user.getUserId(), resourceName, resourceID, date, hour, finalHour);
-				movimientoDAO.add(resourceID, date, 1);
+				movimientoDAO.add(resourceID, resourceName, date, 1);
 			}
 			resp.sendRedirect("/main");
 

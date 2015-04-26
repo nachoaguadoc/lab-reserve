@@ -31,10 +31,13 @@ import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ResourceDAO;
 import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
 import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Request;
 import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
+import es.upm.dit.isst.labreserve.model.Movimiento;
 public class SignUpServlet extends HttpServlet {
   private static final Long serialVersionUID = 1L;
 
@@ -92,13 +95,42 @@ public class SignUpServlet extends HttpServlet {
 			throws IOException, ServletException {
 		AppUserDAO dao = AppUserDAOImpl.getInstance();
 		RequestDAO reqDAO = RequestDAOImpl.getInstance();
+		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
 		UserService userService = UserServiceFactory.getUserService();
+		Date datehoy = Calendar.getInstance().getTime();
+		System.out.println("la fecha de hoy es:"+ datehoy);
+		SimpleDateFormat paramov = new SimpleDateFormat("dd/MM/yyyy");
+		String fechahoy = paramov.format(datehoy);
+		String ndia, nmes, naÒo;
+		String[] trozos=fechahoy.split("/");
+		if(trozos[0].length()==2 && trozos[0].startsWith("0")){
+				ndia=(trozos[0].substring(1));
+		}else{
+			ndia=trozos[0];
+		}
+		if(trozos[1].length()==2 && trozos[1].startsWith("0")){
+				nmes=(trozos[1].substring(1));
+		}else{
+			nmes=trozos[1];
+		}
+		if(trozos[2].length()==2){
+			naÒo=trozos[2];
+		}else{
+			naÒo=(trozos[2].substring(2));
+		}
+		fechahoy=(ndia+"/"+nmes+"/"+naÒo);
 
 		User user = (User) req.getAttribute("user");
 		if (user == null) {
 			user = userService.getCurrentUser();
 		}
 		String userId = req.getParameter("userId");
+		Long longID;
+		if(userId.length()>18){
+			longID = Long.parseLong(userId.substring(0, 18));
+		}else{
+			longID = Long.parseLong(userId);
+		}
 		int oldPriority;
 		if (dao.getUser(userId) != null) {
 			oldPriority = dao.getUser(userId).getPriority();
@@ -116,6 +148,8 @@ public class SignUpServlet extends HttpServlet {
 				dao.update(userId, priority, name);
 			} else {
 				dao.add(userId, user.getEmail(), priority, name);
+				movimientoDAO.add(longID, user.getEmail(), fechahoy, 3);
+				
 			}
 			req.getSession().setAttribute("flashMessageSuccess", "Usuario actualizado");
 			resp.sendRedirect("/main");
@@ -135,6 +169,8 @@ public class SignUpServlet extends HttpServlet {
 				} else {
 					//Se le pone prioridad 1 hasta que el administrador acepte su petici√≥n
 					dao.add(userId, user.getEmail(), 1, name);
+					dao.add(userId, user.getEmail(), priority, name);
+					movimientoDAO.add(longID, user.getEmail(), fechahoy, 3);
 				}
 				req.getSession().setAttribute("flashMessageSuccess", "Petici√≥n enviada al administrador");
 	
@@ -143,6 +179,7 @@ public class SignUpServlet extends HttpServlet {
 					dao.update(userId, priority, name);
 				} else {
 					dao.add(userId, user.getEmail(), priority, name);
+					movimientoDAO.add(longID, user.getEmail(), fechahoy, 3);
 				}
 				req.getSession().setAttribute("flashMessageSuccess", "Usuario actualizado");
 	

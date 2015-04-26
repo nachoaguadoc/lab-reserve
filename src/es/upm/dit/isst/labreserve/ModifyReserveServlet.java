@@ -60,9 +60,9 @@ public class ModifyReserveServlet extends HttpServlet {
 			RequestDispatcher view = req.getRequestDispatcher("ModifyReserve.jsp");
 	        view.forward(req, resp);
 		} else {
-			movimientoDAO.add(resourceID, dao.getReserve(id).getDate(), 2);
+			movimientoDAO.add(resourceID, resourceName, dao.getReserve(id).getDate(), 2);
 			dao.update(id, resourceName, resourceID,  date, initHour, finalHour);
-			movimientoDAO.add(resourceID, date, 1);
+			movimientoDAO.add(resourceID, resourceName, date, 1);
 			req.getSession().setAttribute("flashMessageSuccess", "¡Reserva modificada!");
 			resp.sendRedirect("/main");
 		}

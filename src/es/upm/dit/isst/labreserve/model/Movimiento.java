@@ -14,12 +14,14 @@ public class Movimiento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Long resourceid;
+	private String resourcename;
 	private String date;
-	private int tipo; //1 reserva 2 cancelacion 3 reserva adjudicada a otro usuario
+	private int tipo; //1 reserva 2 cancelacion 3 registrado nuevo usuario
 
 
-	public Movimiento (Long resourceid, String date, int tipo) {
+	public Movimiento (Long resourceid, String resourcename, String date, int tipo) {
 		this.resourceid = resourceid;
+		this.resourcename = resourcename;
 		this.date = date;
 		this.tipo = tipo;
 	}
@@ -50,6 +52,14 @@ public class Movimiento implements Serializable {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getResourcename() {
+		return resourcename;
+	}
+
+	public void setResourcename(String resourcename) {
+		this.resourcename = resourcename;
 	}
 
 	
