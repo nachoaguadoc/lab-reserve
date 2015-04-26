@@ -101,7 +101,7 @@ public class SignUpServlet extends HttpServlet {
 		System.out.println("la fecha de hoy es:"+ datehoy);
 		SimpleDateFormat paramov = new SimpleDateFormat("dd/MM/yyyy");
 		String fechahoy = paramov.format(datehoy);
-		String ndia, nmes, naño;
+		String ndia, nmes, nyear;
 		String[] trozos=fechahoy.split("/");
 		if(trozos[0].length()==2 && trozos[0].startsWith("0")){
 				ndia=(trozos[0].substring(1));
@@ -114,11 +114,11 @@ public class SignUpServlet extends HttpServlet {
 			nmes=trozos[1];
 		}
 		if(trozos[2].length()==2){
-			naño=trozos[2];
+			nyear=trozos[2];
 		}else{
-			naño=(trozos[2].substring(2));
+			nyear=(trozos[2].substring(2));
 		}
-		fechahoy=(ndia+"/"+nmes+"/"+naño);
+		fechahoy=(ndia+"/"+nmes+"/"+nyear);
 
 		User user = (User) req.getAttribute("user");
 		if (user == null) {

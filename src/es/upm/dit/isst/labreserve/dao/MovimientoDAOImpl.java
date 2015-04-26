@@ -48,7 +48,7 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 
 
 	@Override
-	public List<Movimiento> listMovimientos(String mes, String año) {
+	public List<Movimiento> listMovimientos(String mes, String year) {
 		EntityManager em = EMFService.get().createEntityManager();
 		// read the existing entries
 		Query q = em.createQuery("select m from Movimiento m");
@@ -59,7 +59,7 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		List<Movimiento> resultado = new ArrayList<Movimiento>();
 				
-		ini = ("01/" + mes+ "/" + año);	
+		ini = ("01/" + mes+ "/" + year);	
 		try {
 			System.out.println("traduzco :" + ini);
 		dateini = dateFormat.parse(ini);
@@ -71,7 +71,7 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 		for(Movimiento m: movimientos){
 			System.out.println("traduzco :" + m.getDate());
 			String fecha= m.getDate();
-			String ndia, nmes, naño;
+			String ndia, nmes, nyear;
 			String[] trozos=fecha.split("/");
 			if(trozos[0].length()==2){
 				ndia=trozos[0];
@@ -84,11 +84,11 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 				nmes=("0" + trozos[1]);
 			}
 			if(trozos[2].length()==4){
-				naño=trozos[2];
+				nyear=trozos[2];
 			}else{
-				naño=("20" + trozos[2]);
+				nyear=("20" + trozos[2]);
 			}
-			fecha=(ndia+"/"+nmes+"/"+naño);
+			fecha=(ndia+"/"+nmes+"/"+nyear);
 			date = dateFormat.parse(fecha);
 			cal.setTime(date);
 			date=cal.getTime();
@@ -189,7 +189,7 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 		for(Movimiento m: movimientos){
 			System.out.println("traduzco :" + m.getDate());
 			String fecha= m.getDate();
-			String ndia, nmes, naño;
+			String ndia, nmes, nyear;
 			String[] trozos=fecha.split("/");
 			System.out.println("trozo0 :" + trozos[0] + " 1: " + trozos[1] + " 2: " + trozos[2]);
 			if(trozos[0].length()==2){
@@ -203,11 +203,11 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 				nmes=("0" + trozos[1]);
 			}
 			if(trozos[2].length()==4){
-				naño=trozos[2];
+				nyear=trozos[2];
 			}else{
-				naño=("20" + trozos[2]);
+				nyear=("20" + trozos[2]);
 			}
-			fecha=(ndia+"/"+nmes+"/"+naño);
+			fecha=(ndia+"/"+nmes+"/"+nyear);
 			System.out.println("traduzco :" + fecha);
 			date = dateFormat.parse(fecha);
 			cal.setTime(date);

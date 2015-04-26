@@ -16,7 +16,7 @@ public interface MovimientoDAO {
 	
 	public List<Movimiento> listMovimientosbyYear(String date);
 	
-	public List<Movimiento> listMovimientos(String mes, String año);
+	public List<Movimiento> listMovimientos(String mes, String year);
 	
 	public List<Movimiento> listMovimientos(String date, int tipo);
 	
