@@ -17,4 +17,6 @@ public interface RequestDAO {
 	
 	public void remove (String userId);
 	
+	public void removeAll ();
+
 }

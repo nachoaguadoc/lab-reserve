@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import es.upm.dit.isst.labreserve.model.Group;
+import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
 
 public class GroupDAOImpl implements GroupDAO {
@@ -65,6 +66,13 @@ public class GroupDAOImpl implements GroupDAO {
 		} finally {
 			em.close();
 		}
+	}
+	
+	@Override
+	public void removeAll() {
+		EntityManager em = EMFService.get().createEntityManager();
+		em.createQuery("DELETE FROM " + Group.class.getName() + " m").executeUpdate(); 	    
+	    em.close();
 	}
 
 }

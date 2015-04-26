@@ -14,10 +14,20 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.labreserve.dao.AppUserDAO;
+import es.upm.dit.isst.labreserve.dao.AppUserDAOImpl;
+import es.upm.dit.isst.labreserve.dao.ConfigDAO;
+import es.upm.dit.isst.labreserve.dao.ConfigDAOImpl;
+import es.upm.dit.isst.labreserve.dao.GroupDAO;
+import es.upm.dit.isst.labreserve.dao.GroupDAOImpl;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAO;
+import es.upm.dit.isst.labreserve.dao.MovimientoDAOImpl;
 import es.upm.dit.isst.labreserve.dao.RequestDAO;
 import es.upm.dit.isst.labreserve.dao.RequestDAOImpl;
 import es.upm.dit.isst.labreserve.dao.ReserveDAO;
 import es.upm.dit.isst.labreserve.dao.ReserveDAOImpl;
+import es.upm.dit.isst.labreserve.dao.ResourceDAO;
+import es.upm.dit.isst.labreserve.dao.ResourceDAOImpl;
 import es.upm.dit.isst.labreserve.model.Request;
 
 
@@ -26,8 +36,23 @@ public class RemoveAllTest extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-		ReserveDAO dao = ReserveDAOImpl.getInstance();
-		dao.removeAll();
+		ReserveDAO reserveDAO = ReserveDAOImpl.getInstance();
+		ResourceDAO resourceDAO = ResourceDAOImpl.getInstance();
+		AppUserDAO userDAO = AppUserDAOImpl.getInstance();
+		GroupDAO groupDAO = GroupDAOImpl.getInstance();
+		RequestDAO requestDAO = RequestDAOImpl.getInstance();
+		ConfigDAO configDAO = ConfigDAOImpl.getInstance();
+		MovimientoDAO movimientoDAO = MovimientoDAOImpl.getInstance();
+		
+		reserveDAO.removeAll();
+		resourceDAO.removeAll();
+		userDAO.removeAll();
+		groupDAO.removeAll();
+		requestDAO.removeAll();
+		movimientoDAO.removeAll();
+		configDAO.remove("global");
+		
+		
 		resp.sendRedirect("/main");
 		
 		RequestDispatcher view = req.getRequestDispatcher("CheckRequests.jsp");

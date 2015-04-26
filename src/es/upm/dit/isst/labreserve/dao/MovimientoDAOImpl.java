@@ -152,6 +152,13 @@ public class MovimientoDAOImpl implements MovimientoDAO {
 			em.close();
 		}
 	}
+	
+	@Override
+	public void removeAll() {
+		EntityManager em = EMFService.get().createEntityManager();
+		em.createQuery("DELETE FROM " + Movimiento.class.getName() + " m").executeUpdate(); 	    
+	    em.close();
+	}
 
 	@Override
 	public List<Movimiento> listMovimientos(Long resourceid) {

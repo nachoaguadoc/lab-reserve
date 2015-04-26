@@ -28,4 +28,6 @@ public interface MovimientoDAO {
 	
 	public void remove (Long id);
 	
+	public void removeAll ();
+
 }

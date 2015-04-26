@@ -79,10 +79,8 @@
 									<span><select class="selectpicker col-md-4" id="priority" name="priority"></span>
 								 	  <option value="1">1 - Alumno</option>
 									  <option value="2">2 - Profesor</option>
-									  <option value="3">3 - Administrador</option>
-									  <option value="4">4 - Dios</option>
-									  <option value="5">5 - Chuck Norris</option>
-	
+									  <option value="3">3 - Coordinador</option>
+									  <option value="4">4 - Director</option>
 									</select>
 									<input class="btn btn-default btn-round btn-border-w" type="submit" value="Cambiar" />
 								</form>

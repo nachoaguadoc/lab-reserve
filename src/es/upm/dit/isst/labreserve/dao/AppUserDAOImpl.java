@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import es.upm.dit.isst.labreserve.model.AppUser;
 import es.upm.dit.isst.labreserve.model.Config;
 import es.upm.dit.isst.labreserve.model.Request;
+import es.upm.dit.isst.labreserve.model.Reserve;
 
 public class AppUserDAOImpl implements AppUserDAO {
 	
@@ -67,5 +68,11 @@ public class AppUserDAOImpl implements AppUserDAO {
 		} finally {
 			em.close();
 		}
+	}
+	@Override
+	public void removeAll() {
+		EntityManager em = EMFService.get().createEntityManager();
+		em.createQuery("DELETE FROM " + AppUser.class.getName() + " m").executeUpdate(); 	    
+	    em.close();
 	}
 }

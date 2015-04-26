@@ -15,5 +15,7 @@ public interface GroupDAO {
 	public Group getGroup(Long groupId);
 
 	public void remove (Long id);
-			
+	
+	public void removeAll ();
+
 }

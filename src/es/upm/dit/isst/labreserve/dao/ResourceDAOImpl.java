@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import es.upm.dit.isst.labreserve.model.Reserve;
 import es.upm.dit.isst.labreserve.model.Resource;
 
 public class ResourceDAOImpl implements ResourceDAO {
@@ -67,6 +68,12 @@ public class ResourceDAOImpl implements ResourceDAO {
 		} finally {
 			em.close();
 		}
+	}
+	@Override
+	public void removeAll() {
+		EntityManager em = EMFService.get().createEntityManager();
+		em.createQuery("DELETE FROM " + Resource.class.getName() + " r").executeUpdate(); 	    
+	    em.close();
 	}
 
 	

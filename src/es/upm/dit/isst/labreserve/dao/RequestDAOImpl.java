@@ -73,5 +73,12 @@ public class RequestDAOImpl implements RequestDAO {
 			em.close();
 		}
 	}
+	
+	@Override
+	public void removeAll() {
+		EntityManager em = EMFService.get().createEntityManager();
+		em.createQuery("DELETE FROM " + Request.class.getName() + " m").executeUpdate(); 	    
+	    em.close();
+	}
 
 }

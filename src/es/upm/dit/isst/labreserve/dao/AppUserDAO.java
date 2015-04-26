@@ -17,4 +17,6 @@ public interface AppUserDAO {
 	
 	public void remove (String id);
 	
+	public void removeAll ();
+
 }

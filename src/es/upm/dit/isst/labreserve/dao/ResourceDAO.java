@@ -17,4 +17,6 @@ public interface ResourceDAO {
 
 	public void remove (Long id);
 			
+	public void removeAll ();
+
 }
