@@ -1,0 +1,22 @@
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+public class Prueba {
+
+  public static Test suite() {
+    TestSuite suite = new TestSuite();
+    suite.addTestSuite(Inicio de sesion.class);
+    suite.addTestSuite(crear recurso.class);
+    suite.addTestSuite(realizar reserva.class);
+    suite.addTestSuite(consultar reserva.class);
+    suite.addTestSuite(cancelar reserva.class);
+    suite.addTestSuite(modificar recurso.class);
+    suite.addTestSuite(eliminar recurso.class);
+    suite.addTestSuite(logout.class);
+    return suite;
+  }
+
+  public static void main(String[] args) {
+    junit.textui.TestRunner.run(suite());
+  }
+}
