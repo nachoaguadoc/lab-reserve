@@ -56,41 +56,49 @@ ${flashMessageError}
 		</a>
 			<ul class="dropdown-menu">
 			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>			
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/signup" />"> Perfil </a></li>						
-		  
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/signup" />"> Perfil </a></li>						  
 		    </ul>
+		    <a href="<c:url value="/main" />"><button class="btn btn-default btn-round btn-border-w pull-right" data-toggle="tooltip" data-placement="bottom" title="Home" >
+		    <span class="glyphicon glyphicon-chevron-left">
+		    </span>
+		    	</button></a>
 		</div>
 	</div>
-	<a style="float: right;" href="<c:url value="/main" />">Home</a>
-			
-		
-		
 		<br><br><br>
 			<c:choose>
 				<c:when test="${user != null}">
+				<div class="col-md-12" align="center">
 					<form action="/reserveGroup?id=${group.id}" method="post" accept-charset="utf-8" onSubmit="return valida()">
-							<input type="hidden" name="groupID" id="groupID" value="${group.id}" /></td>
-
-							<span><input type="text" name="initDate" id="initDate" class="form-control max-width col-md-4" placeholder="Select Date"></span>
-							<span><select class="selectpicker col-md-4" id="initTime" name="initTime"></span>
+							<input type="hidden" name="groupID" id="groupID" value="${group.id}" />	
+							<div class="input-group col-md-5">
+							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+							<input type="text" name="initDate" id="initDate" class="form-control" placeholder="Selecciona fecha" aria-describedby="sizing-addon1">
+							
+							</div>
+							
+							<div class="input-group col-md-5"><select class="selectpicker" id="initTime" name="initTime">
 								<c:forEach items="${initTimes}" var="initHour" varStatus="status">
 									<option value="${initHour}">${initHour}</option>
 								</c:forEach>
-							</select>                			
+							</select>
+							</div>                			
                 			<!-- <input id="finalDate" type="text" name="finalDate"> -->
-                			<select id="finalTime" name="finalTime" class="selectpicker col-md-4">
+                			<div class="input-group col-md-5">
+                			<select id="finalTime" name="finalTime" class="selectpicker">
 								<c:forEach items="${finalTimes}" var="finalHour" varStatus="status">
 									<option value="${finalHour}">${finalHour}</option>
 								</c:forEach>
 							</select>
+							</div>
 							<br><br>
-							<div class="wrapper col-md-3">
+							<div class="col-md-5">
 							<input id="buttonReserve" class="btn btn-default btn-round btn-border-w" type="submit"
 									value="Reservar" />
 								</div>
 							
 		
 					</form>
+					</div>
 				</c:when>
 				<c:otherwise>
 	

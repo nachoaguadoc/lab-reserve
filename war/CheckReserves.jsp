@@ -40,16 +40,18 @@
 					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/requests" />"> Peticiones </a></li>					
 					    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/users" />"> Usuarios </a></li>
 				    </ul>
+				    <a href="<c:url value="/main" />"><button class="btn btn-default btn-round btn-border-w pull-right" data-toggle="tooltip" data-placement="bottom" title="Home" >
+		    <span class="glyphicon glyphicon-chevron-left">
+		    </span>
+		    	</button></a>
 				</div>
 			</div>
-			<a style="float: right;" href="<c:url value="/main" />">Home</a>
-			
 	
-		<p>You have a total number of <c:out value="${fn:length(reserves)}" />
-		Reserves.</p> 
+		<p>Tienes un total de <c:out value="${fn:length(reserves)}" />
+		reservas.</p> 
 		<div class="container row">
 		
-		<table class="table table-hover">
+		<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
 						<th> Recurso</th>

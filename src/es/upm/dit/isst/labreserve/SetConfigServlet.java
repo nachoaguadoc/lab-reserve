@@ -73,9 +73,7 @@ public class SetConfigServlet extends HttpServlet {
 			UserService userService = UserServiceFactory.getUserService();
 			user = userService.getCurrentUser();
 		}
-
-
-	    
+		
 		String webmaster = checkNull(req.getParameter("webmaster"));
 		String sessionTime = checkNull(req.getParameter("sessionTime"));
 		String opening = checkNull(req.getParameter("opening"));
@@ -110,7 +108,7 @@ public class SetConfigServlet extends HttpServlet {
 		} else {
 			dao.add("global", webmaster, sessionTime, opening, closing);
 		}
-		req.getSession().setAttribute("flashMessageSuccess", "Â¡ParÃ¡metros de configuraciÃ³n fijados!");
+		req.getSession().setAttribute("flashMessageSuccess", "Parámetros de configuración fijados!");
 		resp.sendRedirect("/main");
 	}
 	private String checkNull(String s) {

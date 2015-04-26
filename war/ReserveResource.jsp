@@ -57,12 +57,12 @@ ${flashMessageError}
 			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/myreserves" />"> Mis reservas </a></li>			
 			    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/signup" />"> Perfil </a></li>						
 		    </ul>
+		    <a href="<c:url value="/main" />"><button class="btn btn-default btn-round btn-border-w pull-right" data-toggle="tooltip" data-placement="bottom" title="Home" >
+		    <span class="glyphicon glyphicon-chevron-left">
+		    </span>
+		    </button></a>
 		</div>
 	</div>
-	<a style="float: right;" href="<c:url value="/main" />">Home</a>
-			
-		
-		
 		<br><br><br>
 		
 			<!-- Consultar las reservas en un día concreto -->
@@ -76,7 +76,11 @@ ${flashMessageError}
 				    <br><br>
 				    
 				    <div id="daily">
-						<input type="text" name="consultDate" id="consultDate" class="form-control max-width col-md-4" placeholder="Select Date" value="${dateSelected}">
+				    <div class="input-group">
+				    <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+						<input type="text" name="consultDate" id="consultDate" class="form-control max-width col-md-4" 
+						placeholder="Selecciona fecha" value="${dateSelected}" aria-describedby="sizing-addon1">
+					</div>
 					</div>
 					
 					<div id="monthly" style="display:none">

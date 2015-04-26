@@ -60,11 +60,13 @@
 				    </ul>
 				</div>
 			</div>
-				<a style="float: right;" href="<c:url value="/main" />">Home</a>
+			<a href="<c:url value="/main" />"><button class="btn btn-default btn-round btn-border-w pull-right" data-toggle="tooltip" data-placement="bottom" title="Home" >
+		    <span class="glyphicon glyphicon-chevron-left">
+		    </span>
+		    </button></a>
 			
 				
 		<div class="container row col-md-6 col-md-offset-3">
-		
 			<c:choose>
 				<c:when test="${user != null}">
 					<form action="/signup" method="post" accept-charset="utf-8" class="form">
@@ -105,7 +107,7 @@
 								</div>
 								<br><br>
 
-								<input type="submit" value="Fijar" class="btn btn-rounded btn-border-w" />
+								<input type="submit" value="Confirmar" class="btn btn-rounded btn-border-w" />
 
 								<c:if test="${requestState != null}">
 									<div class="alert alert-success alert" role="alert" id="alerta" hidden>

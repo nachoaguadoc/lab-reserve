@@ -49,7 +49,10 @@ ${flashMessageError}
 					</ul>
 				</div>
 			</div>	
-			<a style="float: right;" href="<c:url value="/main" />">Home</a>
+			 <a href="<c:url value="/main" />"><button class="btn btn-default btn-round btn-border-w pull-right" data-toggle="tooltip" data-placement="bottom" title="Home" >
+		    <span class="glyphicon glyphicon-chevron-left">
+		    </span>
+		    	</button></a>
 			
 				
 		<div class="container row col-md-6 col-md-offset-3">

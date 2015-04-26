@@ -52,7 +52,10 @@ ${flashMessageError}
 				    </ul>
 				</div>
 			</div>
-				<a style="float: right;" href="<c:url value="/main" />">Home</a>
+				 <a href="<c:url value="/main" />"><button class="btn btn-default btn-round btn-border-w pull-right" data-toggle="tooltip" data-placement="bottom" title="Home" >
+		    <span class="glyphicon glyphicon-chevron-left">
+		    </span>
+		    	</button></a>
 			
 				
 		<div class="container row col-md-6 col-md-offset-3">
@@ -63,18 +66,15 @@ ${flashMessageError}
 						<div class="form-group">
 							
 								<label for="name">Nombre</label>
-								<input type="text" class="form-control" name="name" id="name" placeholder="Nombre del recurso"/>
-					
-						
+								<input type="text" class="form-control" name="name" id="name" placeholder="Nombre del recurso"/>					
 								<label for="description">Descripción</label>
 								<textarea class="form-control" rows="3" name="description"
 										id="description" placeholder="Breve descripción del recurso"></textarea>
-										
 							   <label for="state">Estado</label>
 								<textarea rows="1" class="form-control" name="state"
 										id="state" placeholder="Estado actual"></textarea>
 							    <br>
-								<input type="submit" value="Create" class="btn btn-rounded btn-border-w" />
+								<input type="submit" value="Crear" class="btn btn-rounded btn-border-w" />
 						</div>
 					</form>
 				</c:when>
