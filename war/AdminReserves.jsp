@@ -57,7 +57,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th> Author</th>
+						<th> Autor </th>
 						<th> Fecha</th>
 						<th> Horas</th>
 						<th> Priodidad </th>
@@ -68,7 +68,7 @@
 				<tbody>
 					<c:forEach items="${reserves}" var="reserve">
 						<tr>
-							<th>${reserve.author}</th>
+							<th>${reserve.email}</th>
 							<th>${reserve.date}</th>
 							<th>${reserve.initHour} - ${reserve.finalHour}</th>
 							<th>${reserve.priority } </th>
