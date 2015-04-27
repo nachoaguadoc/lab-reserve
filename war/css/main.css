@@ -190,3 +190,26 @@ label, #webmaster{
 	margin-top: 6px;
 	margin-bottom: 6px;
 }
+
+.borders td {
+	border: 2px solid black !important;
+	cursor: pointer !important;
+	text: center;
+}
+
+.borders td.free:hover  {
+	border: 3px solid black;
+	background-color: #10BA33;
+	
+}
+
+.borders td.busy:hover  {
+	border: 3px solid black;
+	background-color: #E42525;
+
+}
+
+.checked {
+	background-color: #10BA33;
+	font-weight: bold;
+}

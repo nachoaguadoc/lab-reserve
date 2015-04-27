@@ -131,7 +131,7 @@ ${flashMessageError}
 			<c:if test="${type == 'day'}">
 							
 				<h2>Horas libres el ${dateSelected}</h2>
-				<table class="table table-bordered">
+				<table class="table table-bordered borders text-center">
 				<tbody>
 				<form action="/reserve?id=${resource.id}" method="POST">
 					<input type="hidden" name="resourceID" id="resourceID" value="${resourceID}" />
@@ -143,7 +143,7 @@ ${flashMessageError}
 
 							<c:if test="${!consult[hour]}">
 								<c:if test="${fn:length(list) > i.count}" >
-									<td class="free">${hour} - ${list[i.count]} <input type="checkbox" name="resHours" value="${hour }">
+									<td class="free">${hour} - ${list[i.count]} <input type="checkbox" style="display: none;" name="resHours" value="${hour }">
 									</td>
 								</c:if>								
 							</c:if>
@@ -174,7 +174,7 @@ ${flashMessageError}
 				<div id="oldFinal" data-oldfinal="${oldFinal}" />
 				
 				<h2>Horas libres</h2>
-				<table class="table table-bordered">
+				<table class="table table-bordered borders text-center">
 				<thead>
 					<tr>
 						<td>L</td>
@@ -207,7 +207,7 @@ ${flashMessageError}
 
 								<c:if test="${!consult[day]}">
 									<c:if test="${fn:length(month) >= i.count}" >
-										<td class="free">${day} <input type="checkbox" name="resDays" value="${day }"></td>
+										<td class="free">${day} <input class="check" style="display: none;" type="checkbox" name="resDays" value="${day }"></td>
 									</c:if>								
 								</c:if>
 								<c:if test="${consult[day]}">
@@ -237,6 +237,17 @@ ${flashMessageError}
 $(document).ready(function(){
 	console.log($("#type").val());
 	changeType();
+	
+	$('.borders td.free').click(function(){
+		if ($(this).find('input[type=checkbox]').prop('checked')) {
+			$(this).find('input[type=checkbox]').prop('checked',false);
+			$(this).removeClass('checked');
+		} else {
+			$(this).find('input[type=checkbox]').prop('checked',true);
+			$(this).addClass('checked');
+
+		}
+	})
 })
 var typeDiv = document.getElementById("oldType"), oldType;
 oldType = typeDiv.getAttribute("data-oldtype");

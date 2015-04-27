@@ -51,7 +51,7 @@ public class CreateResourceServlet extends HttpServlet {
 
 		
 		if (description == ""){
-			req.getSession().setAttribute("flashMessageError", "Descripciónn en blanco");
+			req.getSession().setAttribute("flashMessageError", "DescripciÃ³n en blanco");
 			RequestDispatcher view = req.getRequestDispatcher("CreateResource.jsp");
 	        view.forward(req, resp);
 	        return;
@@ -60,7 +60,7 @@ public class CreateResourceServlet extends HttpServlet {
 
 		ResourceDAO dao = ResourceDAOImpl.getInstance();
 		dao.add(name, state, description);
-		req.getSession().setAttribute("flashMessageSuccess", "¡Recurso creado!");
+		req.getSession().setAttribute("flashMessageSuccess", "Â¡Recurso creado!");
 		resp.sendRedirect("/main");
 	}
 	

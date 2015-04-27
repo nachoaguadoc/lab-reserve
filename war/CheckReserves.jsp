@@ -51,7 +51,7 @@
 		reservas.</p> 
 		<div class="container row">
 		
-		<table class="table table-bordered table-hover">
+		<table class="table table-hover">
 				<thead>
 					<tr>
 						<th> Recurso</th>
